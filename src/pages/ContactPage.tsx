@@ -26,11 +26,11 @@ export const ContactPage = () => {
                 <div>
                   <h4 className="font-bold text-slate-900 dark:text-white text-lg">Kantor Pusat</h4>
                   <p className="text-slate-600 dark:text-slate-400">
-                    Jl. Lintas Sumatera No. 123
+                    Komp. RSS PEMDA Blok B 2 No. 7
                     <br />
-                    Kec. Ulumusi, Kab. Empat Lawang
+                    RT.02/08 Banjarsari Cipocok Jaya
                     <br />
-                    Sumatera Selatan, Indonesia
+                    Banten, Indonesia
                   </p>
                 </div>
               </div>
@@ -43,7 +43,7 @@ export const ContactPage = () => {
                   <h4 className="font-bold text-slate-900 dark:text-white text-lg">
                     Telepon / WhatsApp
                   </h4>
-                  <p className="text-slate-600 dark:text-slate-400">+62 812 3456 7890</p>
+                  <p className="text-slate-600 dark:text-slate-400">+62 818 0853 0188</p>
                   <p className="text-slate-600 dark:text-slate-400 text-sm">
                     (Senin - Sabtu, 08:00 - 17:00)
                   </p>
@@ -56,7 +56,7 @@ export const ContactPage = () => {
                 </div>
                 <div>
                   <h4 className="font-bold text-slate-900 dark:text-white text-lg">Email</h4>
-                  <p className="text-slate-600 dark:text-slate-400">cs@ulumusi-logistik.com</p>
+                  <p className="text-slate-600 dark:text-slate-400">cv.ulumusi@gmail.com</p>
                 </div>
               </div>
             </div>

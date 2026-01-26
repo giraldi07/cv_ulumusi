@@ -1,5 +1,6 @@
 import { Truck } from 'lucide-react';
 import { useNavigation, PageType } from '../contexts/NavigationContext';
+import { FaFacebookF, FaInstagram, FaWhatsapp } from 'react-icons/fa';
 
 export const Footer = () => {
   const { setCurrentPage } = useNavigation();
@@ -84,13 +85,13 @@ export const Footer = () => {
           <div>
             <h3 className="font-bold text-lg mb-6 text-orange-500">Alamat Kantor</h3>
             <p className="text-slate-400 leading-relaxed mb-4">
-              Jalan Raya Lintas Sumatera
+              Komp. RSS PEMDA Blok B 2 No. 7
               <br />
-              Kecamatan Ulumusi
+              RT.02/08 Banjarsari
               <br />
-              Kabupaten Empat Lawang
+              Cipocok Jaya
               <br />
-              Sumatera Selatan
+              Banten, Indonesia
             </p>
             <div className="flex gap-4 mt-6">
               <a
@@ -98,21 +99,21 @@ export const Footer = () => {
                 className="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center hover:bg-orange-600 transition-colors cursor-pointer text-sm font-bold"
                 aria-label="Instagram"
               >
-                IG
+                <FaInstagram size={20} />
               </a>
               <a
                 href="#"
                 className="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center hover:bg-orange-600 transition-colors cursor-pointer text-sm font-bold"
                 aria-label="Facebook"
               >
-                FB
+                <FaFacebookF size={20} />
               </a>
               <a
                 href="#"
                 className="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center hover:bg-orange-600 transition-colors cursor-pointer text-sm font-bold"
                 aria-label="WhatsApp"
               >
-                WA
+                <FaWhatsapp size={20} />
               </a>
             </div>
           </div>
