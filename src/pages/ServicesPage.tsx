@@ -30,7 +30,7 @@ const services: ServiceDetails[] = [
       'Dokumentasi lengkap & resi resmi'
     ],
     benefits: [
-      'Harga paling hemat dibanding service lain',
+      'Harga paling murah dibanding service lain',
       'Cocok untuk pengiriman barang general',
       'Sistem tracking transparan',
       'Customer service responsif',
