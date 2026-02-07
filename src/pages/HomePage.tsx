@@ -1,3 +1,5 @@
+import { useState } from 'react';
+import { motion } from 'framer-motion';
 import {
   Search,
   Clock,
@@ -8,14 +10,60 @@ import {
   ArrowRight,
   MapPin,
   Award,
+  Users,
+  ThumbsUp,
+  AlertCircle,
 } from 'lucide-react';
 import { Section } from '../components/Section';
 import { ServiceCard } from '../components/ServiceCard';
 import { Button } from '../components/Button';
+import { TrackingResult } from '../components/TrackingResult';
+import { ClientsCarousel } from '../components/ClientsCarousel';
+import { CountUp } from '../components/CountUp';
 import { useNavigation } from '../contexts/NavigationContext';
+import { findShipmentByResi } from '../data/mockShipments';
+import { clients } from '../data/clients';
+import type { Shipment } from '../types/shipment';
 
 export const HomePage = () => {
   const { setCurrentPage } = useNavigation();
+  const [trackingInput, setTrackingInput] = useState('');
+  const [trackingResult, setTrackingResult] = useState<Shipment | null>(null);
+  const [trackingError, setTrackingError] = useState('');
+  const [isSearching, setIsSearching] = useState(false);
+
+  const handleTrackingSearch = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsSearching(true);
+    setTrackingError('');
+    setTrackingResult(null);
+
+    // Simulate API call delay
+    setTimeout(() => {
+      const resiNumber = trackingInput.trim().toUpperCase();
+
+      if (!resiNumber) {
+        setTrackingError('Silakan masukkan nomor resi');
+        setIsSearching(false);
+        return;
+      }
+
+      const shipment = findShipmentByResi(resiNumber);
+
+      if (shipment) {
+        setTrackingResult(shipment);
+      } else {
+        setTrackingError('Nomor resi tidak ditemukan. Silakan periksa kembali nomor resi Anda.');
+      }
+
+      setIsSearching(false);
+    }, 500);
+  };
+
+  const handleCloseTracking = () => {
+    setTrackingResult(null);
+    setTrackingInput('');
+  };
 
   return (
     <>
@@ -48,19 +96,33 @@ export const HomePage = () => {
 
             {/* Tracking & CTA */}
             <div className="space-y-4">
-              <div className="bg-white dark:bg-slate-800 p-2 rounded-2xl shadow-xl shadow-slate-200/50 dark:shadow-black/40 flex flex-col sm:flex-row gap-2 border border-slate-100 dark:border-slate-700 hover:border-orange-300 dark:hover:border-orange-600 transition-all duration-300">
+              <form onSubmit={handleTrackingSearch} className="bg-white dark:bg-slate-800 p-2 rounded-2xl shadow-xl shadow-slate-200/50 dark:shadow-black/40 flex flex-col sm:flex-row gap-2 border border-slate-100 dark:border-slate-700 hover:border-orange-300 dark:hover:border-orange-600 transition-all duration-300">
                 <div className="flex-1 flex items-center px-4 h-14">
                   <Search className="text-slate-400 mr-3" size={20} />
                   <input
                     type="text"
                     placeholder="Lacak nomor resi Anda..."
+                    value={trackingInput}
+                    onChange={(e) => setTrackingInput(e.target.value)}
                     className="w-full bg-transparent border-none focus:outline-none text-slate-900 dark:text-white placeholder-slate-400 text-base"
                   />
                 </div>
-                <button className="h-14 px-8 bg-gradient-to-r from-orange-600 to-red-600 hover:from-orange-700 hover:to-red-700 text-white font-bold rounded-xl transition-all shadow-lg shadow-orange-600/30 hover:shadow-orange-600/50 hover:scale-105">
-                  Lacak
+                <button
+                  type="submit"
+                  disabled={isSearching}
+                  className="h-14 px-8 bg-gradient-to-r from-orange-600 to-red-600 hover:from-orange-700 hover:to-red-700 disabled:from-slate-400 disabled:to-slate-400 text-white font-bold rounded-xl transition-all shadow-lg shadow-orange-600/30 hover:shadow-orange-600/50 hover:scale-105 disabled:cursor-not-allowed disabled:hover:scale-100"
+                >
+                  {isSearching ? 'Mencari...' : 'Lacak'}
                 </button>
-              </div>
+              </form>
+
+              {/* Error Message */}
+              {trackingError && (
+                <div className="flex items-center gap-3 p-4 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-xl">
+                  <AlertCircle className="text-red-600 dark:text-red-400 flex-shrink-0" size={20} />
+                  <p className="text-sm text-red-700 dark:text-red-300">{trackingError}</p>
+                </div>
+              )}
             </div>
 
             {/* Features List */}
@@ -109,78 +171,94 @@ export const HomePage = () => {
       </div>
 
       {/* Divider */}
-      <div className="relative h-0.5 bg-gradient-to-r from-transparent via-orange-400 to-transparent dark:via-orange-600"></div>
+      <div className="relative my-8">
+        <div className="mx-auto w-11/12">
+          <div className="relative">
+            <div className="h-1 rounded-full bg-gradient-to-r from-transparent via-orange-300/60 to-transparent dark:via-orange-600/60 opacity-100 backdrop-blur-sm" />
+            <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+              <div className="w-3/4 h-0.5 bg-gradient-to-r from-transparent via-orange-200/40 to-transparent dark:from-transparent dark:via-orange-600/30 dark:to-transparent rounded-full" />
+            </div>
+          </div>
+        </div>
+      </div>
 
       {/* Trusted Clients Section */}
-      <div className="py-20 md:py-28 bg-gradient-to-b from-slate-900 via-slate-800 to-slate-900 relative overflow-hidden">
-        <div className="absolute inset-0 opacity-5">
-          <div className="absolute top-0 left-1/4 w-96 h-96 bg-orange-500 rounded-full blur-3xl"></div>
-          <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-red-500 rounded-full blur-3xl"></div>
+      <div className="py-16 md:py-24 bg-slate-50 dark:bg-slate-900 relative overflow-hidden">
+        {/* subtle decorative shapes - tuned for light/dark */}
+        <div className="absolute inset-0 pointer-events-none">
+          <div className="hidden md:block absolute -top-10 -left-16 w-80 h-80 rounded-full bg-orange-400/6 dark:bg-orange-500/20 blur-3xl mix-blend-screen" />
+          <div className="hidden md:block absolute -bottom-10 -right-16 w-96 h-96 rounded-full bg-red-400/6 dark:bg-red-500/18 blur-3xl mix-blend-screen" />
         </div>
 
         <Section>
           <div className="relative z-10">
-            <div className="text-center mb-16">
-              <h2 className="text-orange-400 font-bold tracking-widest uppercase text-sm mb-3 flex items-center justify-center gap-2">
-                <span className="w-12 h-1 bg-gradient-to-r from-transparent to-orange-400"></span>
+            <motion.div
+              initial={{ opacity: 0, y: 12 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ duration: 0.6 }}
+              className="text-center mb-12"
+            >
+              <h2 className="text-orange-500 dark:text-orange-400 font-semibold tracking-widest uppercase text-sm mb-3 flex items-center justify-center gap-3">
+                <span className="w-12 h-1 bg-gradient-to-r from-transparent to-orange-400 block"></span>
                 Dipercaya Oleh Ribuan Perusahaan
-                <span className="w-12 h-1 bg-gradient-to-l from-transparent to-orange-400"></span>
+                <span className="w-12 h-1 bg-gradient-to-l from-transparent to-orange-400 block"></span>
               </h2>
-              <h3 className="text-4xl md:text-5xl font-bold text-white mb-4">
+              <h3 className="text-3xl md:text-4xl font-extrabold text-slate-900 dark:text-white mb-3">
                 Mitra Bisnis Kami
               </h3>
-              <p className="text-slate-300 max-w-2xl mx-auto text-lg">
+              <p className="text-slate-600 dark:text-slate-300 max-w-2xl mx-auto text-base md:text-lg">
                 Lebih dari 5000 perusahaan di berbagai industri mempercayai CV. ULUMUSI untuk kebutuhan logistik mereka
               </p>
-            </div>
+            </motion.div>
 
-            {/* Clients Grid */}
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 md:gap-6 mb-16">
-              {[
-                { name: 'PT. Mitra Utama', color: 'from-blue-500 to-blue-600' },
-                { name: 'CV. Indonesia Jaya', color: 'from-green-500 to-green-600' },
-                { name: 'PT. Nusantara Makmur', color: 'from-purple-500 to-purple-600' },
-                { name: 'PT. Bersama Maju', color: 'from-pink-500 to-pink-600' },
-                { name: 'CV. Sukses Bersama', color: 'from-indigo-500 to-indigo-600' },
-                { name: 'PT. Maju Lancar', color: 'from-cyan-500 to-cyan-600' },
-                { name: 'CV. Rumahku Logistik', color: 'from-yellow-500 to-yellow-600' },
-                { name: 'PT. Ceria Ekspres', color: 'from-red-500 to-red-600' },
-                { name: 'CV. Terpercaya Sejati', color: 'from-emerald-500 to-emerald-600' },
-                { name: 'PT. Harmoni Bisnis', color: 'from-violet-500 to-violet-600' },
-                { name: 'CV. Pengembang Usaha', color: 'from-orange-500 to-orange-600' },
-                { name: 'PT. Harapan Multilogistik', color: 'from-teal-500 to-teal-600' },
-              ].map((client, idx) => (
-                <div
-                  key={idx}
-                  className="group bg-white/5 hover:bg-white/15 backdrop-blur-md border border-white/15 hover:border-orange-400/50 rounded-2xl p-6 md:p-8 flex flex-col items-center justify-center cursor-pointer transition-all duration-500 hover:scale-110 hover:shadow-2xl hover:shadow-orange-500/40"
-                >
-                  <div className={`w-16 h-16 md:w-20 md:h-20 bg-gradient-to-br ${client.color} rounded-2xl flex items-center justify-center mb-4 group-hover:scale-125 transition-all duration-500 shadow-lg group-hover:shadow-2xl`}>
-                    <span className="text-white font-bold text-2xl md:text-3xl">
-                      {client.name.charAt(0)}
-                    </span>
-                  </div>
-                  <p className="text-white text-center text-xs md:text-sm font-semibold group-hover:text-orange-300 transition-colors duration-300">
-                    {client.name}
-                  </p>
-                </div>
-              ))}
-            </div>
+            {/* Clients Carousel */}
+            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.6, delay: 0.15 }} className="mb-12">
+              <ClientsCarousel
+                clients={clients}
+                autoPlay={true}
+                autoPlaySpeed={4500}
+              />
+            </motion.div>
 
-            {/* Trust Stats */}
-            <div className="grid md:grid-cols-3 gap-8 py-12 px-8 bg-white/5 backdrop-blur-sm border border-white/10 rounded-3xl">
-              {[
-                { number: '5000+', label: 'Klien Aktif' },
-                { number: '99.2%', label: 'Kepuasan Pelanggan' },
-                { number: '34', label: 'Provinsi Jangkauan' },
-              ].map((stat, idx) => (
-                <div key={idx} className="text-center transform hover:scale-110 transition-transform duration-300">
-                  <p className="text-4xl md:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-red-400 mb-2">
-                    {stat.number}
-                  </p>
-                  <p className="text-slate-300 text-base md:text-lg">{stat.label}</p>
+            {/* Trust Stats - simplified & animated */}
+            <motion.div
+              initial={{ opacity: 0, y: 8 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.3 }}
+              className="grid md:grid-cols-3 gap-6 py-10 px-6 md:px-10 bg-white/5 dark:bg-white/2 backdrop-blur-md border border-white/10 dark:border-white/6 rounded-3xl"
+            >
+              <div className="flex flex-col items-center gap-3 py-6">
+                <div className="p-3 bg-white/5 dark:bg-white/6 rounded-full">
+                  <Users className="text-orange-400" size={28} />
                 </div>
-              ))}
-            </div>
+                <div className="text-3xl md:text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-red-400">
+                  <CountUp end={5000} duration={2.2} />+
+                </div>
+                <div className="text-sm text-slate-600 dark:text-slate-300">Klien Aktif</div>
+              </div>
+
+              <div className="flex flex-col items-center gap-3 py-6">
+                <div className="p-3 bg-white/5 dark:bg-white/6 rounded-full">
+                  <ThumbsUp className="text-yellow-400" size={28} />
+                </div>
+                <div className="text-3xl md:text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-red-400">
+                  <CountUp end={'99.2%'} duration={2} />
+                </div>
+                <div className="text-sm text-slate-600 dark:text-slate-300">Kepuasan Pelanggan</div>
+              </div>
+
+              <div className="flex flex-col items-center gap-3 py-6">
+                <div className="p-3 bg-white/5 dark:bg-white/6 rounded-full">
+                  <MapPin className="text-rose-400" size={28} />
+                </div>
+                <div className="text-3xl md:text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-red-400">
+                  <CountUp end={34} duration={1.6} />
+                </div>
+                <div className="text-sm text-slate-600 dark:text-slate-300">Provinsi Jangkauan</div>
+              </div>
+            </motion.div>
           </div>
         </Section>
       </div>
@@ -270,6 +348,9 @@ export const HomePage = () => {
           </div>
         </div>
       </Section>
+
+      {/* Tracking Result Modal */}
+      {trackingResult && <TrackingResult shipment={trackingResult} onClose={handleCloseTracking} />}
     </>
   );
 };
