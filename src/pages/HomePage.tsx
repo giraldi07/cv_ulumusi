@@ -1,6 +1,5 @@
 import {
   Search,
-  ShieldCheck,
   Clock,
   Truck,
   Globe,
