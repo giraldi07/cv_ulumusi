@@ -6,9 +6,10 @@ import { HomePage } from './pages/HomePage';
 import { AboutPage } from './pages/AboutPage';
 import { ServicesPage } from './pages/ServicesPage';
 import { ContactPage } from './pages/ContactPage';
+import { ServiceDetailPage } from './pages/ServiceDetailPage';
 
 const AppContent = () => {
-  const { currentPage } = useNavigation();
+  const { currentPage, serviceDetailId } = useNavigation();
 
   const renderPage = () => {
     switch (currentPage) {
@@ -18,6 +19,8 @@ const AppContent = () => {
         return <AboutPage />;
       case 'services':
         return <ServicesPage />;
+      case 'service-detail':
+        return <ServiceDetailPage serviceId={serviceDetailId ?? 0} />;
       case 'contact':
         return <ContactPage />;
       default:

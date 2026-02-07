@@ -1,10 +1,12 @@
 import { createContext, useContext, useState, ReactNode } from 'react';
 
-export type PageType = 'home' | 'about' | 'services' | 'contact';
+export type PageType = 'home' | 'about' | 'services' | 'service-detail' | 'contact';
 
 interface NavigationContextType {
   currentPage: PageType;
   setCurrentPage: (page: PageType) => void;
+  serviceDetailId: number | null;
+  setServiceDetailId: (id: number | null) => void;
   isMobileMenuOpen: boolean;
   setIsMobileMenuOpen: (isOpen: boolean) => void;
 }
@@ -13,6 +15,7 @@ const NavigationContext = createContext<NavigationContextType | undefined>(undef
 
 export const NavigationProvider = ({ children }: { children: ReactNode }) => {
   const [currentPage, setCurrentPage] = useState<PageType>('home');
+  const [serviceDetailId, setServiceDetailId] = useState<number | null>(null);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   return (
@@ -20,6 +23,8 @@ export const NavigationProvider = ({ children }: { children: ReactNode }) => {
       value={{
         currentPage,
         setCurrentPage,
+        serviceDetailId,
+        setServiceDetailId,
         isMobileMenuOpen,
         setIsMobileMenuOpen,
       }}
