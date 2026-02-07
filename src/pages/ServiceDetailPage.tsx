@@ -44,9 +44,9 @@ const services: ServiceDetails[] = [
     estimatedTime: '2-3 hari kerja (antar kota)',
     coverage: '34 Provinsi di Indonesia',
     images: [
-      'https://images.unsplash.com/photo-1553531889-e6cf89d45abc?w=1200&q=80',
-      'https://images.unsplash.com/photo-1453612908626-e4e99ce417d0?w=1200&q=80',
-      'https://images.unsplash.com/photo-1578575437980-863b12388b86?w=1200&q=80'
+      'https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=1200&h=600&fit=crop&q=90',
+      'https://images.unsplash.com/photo-1526620155639-e79a670cf559?w=1200&h=600&fit=crop&q=90',
+      'https://images.unsplash.com/photo-1489824904134-891ab64532f1?w=1200&h=600&fit=crop&q=90'
     ]
   },
   {
@@ -75,9 +75,9 @@ const services: ServiceDetails[] = [
     estimatedTime: '24 jam kerja (same route)',
     coverage: 'Jangkauan ekspansi penuh',
     images: [
-      'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=1200&q=80',
-      'https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=1200&q=80',
-      'https://images.unsplash.com/photo-1453612908626-e4e99ce417d0?w=1200&q=80'
+      'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=1200&h=600&fit=crop&q=90',
+      'https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=1200&h=600&fit=crop&q=90',
+      'https://images.unsplash.com/photo-1553531088-df340101fc3f?w=1200&h=600&fit=crop&q=90'
     ]
   },
   {
@@ -106,9 +106,9 @@ const services: ServiceDetails[] = [
     estimatedTime: '4-6 jam (dalam kota)',
     coverage: 'Kota-kota besar (Jakarta, Bandung, Surabaya, dll)',
     images: [
-      'https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?w=1200&q=80',
-      'https://images.unsplash.com/photo-1533050487297-86d3d3a76f48?w=1200&q=80',
-      'https://images.unsplash.com/photo-1553531889-e6cf89d45abc?w=1200&q=80'
+      'https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?w=1200&h=600&fit=crop&q=90',
+      'https://images.unsplash.com/photo-1556740738-b6a63e27c4df?w=1200&h=600&fit=crop&q=90',
+      'https://images.unsplash.com/photo-1533050487297-86d3d3a76f48?w=1200&h=600&fit=crop&q=90'
     ]
   },
   {
@@ -137,9 +137,9 @@ const services: ServiceDetails[] = [
     estimatedTime: '5-7 hari (antar pulau)',
     coverage: 'Semua pulau utama Indonesia',
     images: [
-      'https://images.unsplash.com/photo-1578575437980-863b12388b86?w=1200&q=80',
-      'https://images.unsplash.com/photo-1519643381401-62a08dc9b50d?w=1200&q=80',
-      'https://images.unsplash.com/photo-1556421329-c8ca191ce70a?w=1200&q=80'
+      'https://images.unsplash.com/photo-1578575437980-863b12388b86?w=1200&h=600&fit=crop&q=90',
+      'https://images.unsplash.com/photo-1519643381401-62a08dc9b50d?w=1200&h=600&fit=crop&q=90',
+      'https://images.unsplash.com/photo-1496048646313-330519b3ad47?w=1200&h=600&fit=crop&q=90'
     ]
   },
   {
@@ -168,9 +168,9 @@ const services: ServiceDetails[] = [
     estimatedTime: '1-3 hari (tergantung volume)',
     coverage: 'Jakarta, Bandung, Surabaya & sekitarnya',
     images: [
-      'https://images.unsplash.com/photo-1552321554-5fefe8c9ef14?w=1200&q=80',
-      'https://images.unsplash.com/photo-1585771724684-38269d6639fd?w=1200&q=80',
-      'https://images.unsplash.com/photo-1552321554-5fefe8c9ef14?w=1200&q=80'
+      'https://images.unsplash.com/photo-1552321554-5fefe8c9ef14?w=1200&h=600&fit=crop&q=90',
+      'https://images.unsplash.com/photo-1585771724684-38269d6639fd?w=1200&h=600&fit=crop&q=90',
+      'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1200&h=600&fit=crop&q=90'
     ]
   },
   {
@@ -199,9 +199,9 @@ const services: ServiceDetails[] = [
     estimatedTime: 'Sesuai jadwal pengiriman utama',
     coverage: 'Domestik & internasional',
     images: [
-      'https://images.unsplash.com/photo-1608993691422-5cce72b2e3cd?w=1200&q=80',
-      'https://images.unsplash.com/photo-1600507423169-9c580c3be3bd?w=1200&q=80',
-      'https://images.unsplash.com/photo-1557821552-17105176677c?w=1200&q=80'
+      'https://images.unsplash.com/photo-1608993691422-5cce72b2e3cd?w=1200&h=600&fit=crop&q=90',
+      'https://images.unsplash.com/photo-1600507423169-9c580c3be3bd?w=1200&h=600&fit=crop&q=90',
+      'https://images.unsplash.com/photo-1577720643272-265efda13e0a?w=1200&h=600&fit=crop&q=90'
     ]
   }
 ];
@@ -209,6 +209,7 @@ const services: ServiceDetails[] = [
 export const ServiceDetailPage = ({ serviceId }: { serviceId: number }) => {
   const { setCurrentPage, setServiceDetailId } = useNavigation();
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [imageError, setImageError] = useState<number | null>(null);
 
   if (serviceId < 0 || serviceId >= services.length) {
     return (
@@ -241,6 +242,10 @@ export const ServiceDetailPage = ({ serviceId }: { serviceId: number }) => {
     setCurrentImageIndex((prev) => (prev - 1 + service.images.length) % service.images.length);
   };
 
+  const handleImageError = () => {
+    setImageError(currentImageIndex);
+  };
+
   return (
     <div className="pt-20 pb-20 bg-slate-50 dark:bg-slate-900 transition-colors duration-500 min-h-screen">
       {/* Back Button */}
@@ -255,18 +260,30 @@ export const ServiceDetailPage = ({ serviceId }: { serviceId: number }) => {
       </Section>
 
       {/* Hero Image Carousel */}
-      <div className="w-full h-64 sm:h-96 md:h-[500px] bg-slate-900 overflow-hidden group relative">
-        <img
-          src={service.images[currentImageIndex]}
-          alt={`${service.title} - ${currentImageIndex + 1}`}
-          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-        />
+      <div className="w-full h-64 sm:h-96 md:h-[500px] bg-gradient-to-br from-slate-900 to-slate-800 overflow-hidden group relative">
+        {imageError === currentImageIndex ? (
+          <div className="w-full h-full flex items-center justify-center bg-slate-900">
+            <div className="text-center">
+              <Zap className="text-orange-500 mx-auto mb-3" size={48} />
+              <p className="text-slate-300 font-semibold">{service.title}</p>
+              <p className="text-slate-500 text-sm mt-2">Gambar sedang dimuat...</p>
+            </div>
+          </div>
+        ) : (
+          <img
+            src={service.images[currentImageIndex]}
+            alt={`${service.title} - ${currentImageIndex + 1}`}
+            className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+            onError={handleImageError}
+            loading="lazy"
+          />
+        )}
 
         {/* Overlay gradient */}
         <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent"></div>
 
         {/* Navigation Buttons */}
-        {service.images.length > 1 && (
+        {service.images.length > 1 && !imageError && (
           <>
             <button
               onClick={prevImage}
@@ -392,7 +409,10 @@ export const ServiceDetailPage = ({ serviceId }: { serviceId: number }) => {
           <p className="text-sm sm:text-base text-white/90 mb-6 max-w-2xl">
             Hubungi tim profesional kami sekarang untuk konsultasi gratis dan dapatkan penawaran khusus sesuai kebutuhan Anda.
           </p>
-          <button className="bg-white text-orange-600 hover:bg-slate-100 font-bold px-6 sm:px-8 py-3 sm:py-4 rounded-lg transition-colors duration-300 hover:shadow-lg">
+          <button 
+            onClick={() => setCurrentPage('contact')}
+            className="bg-white text-orange-600 hover:bg-slate-100 font-bold px-6 sm:px-8 py-3 sm:py-4 rounded-lg transition-colors duration-300 hover:shadow-lg"
+          >
             Hubungi Kami Sekarang
           </button>
         </div>
