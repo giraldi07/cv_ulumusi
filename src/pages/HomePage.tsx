@@ -13,6 +13,10 @@ import {
   Users,
   ThumbsUp,
   AlertCircle,
+  Zap,
+  ShieldCheck,
+  Banknote,
+  Headphones,
 } from 'lucide-react';
 import { Section } from '../components/Section';
 import { ServiceCard } from '../components/ServiceCard';
@@ -38,26 +42,21 @@ export const HomePage = () => {
     setTrackingError('');
     setTrackingResult(null);
 
-    // Simulate API call delay
     setTimeout(() => {
       const resiNumber = trackingInput.trim().toUpperCase();
-
       if (!resiNumber) {
         setTrackingError('Silakan masukkan nomor resi');
         setIsSearching(false);
         return;
       }
-
       const shipment = findShipmentByResi(resiNumber);
-
       if (shipment) {
         setTrackingResult(shipment);
       } else {
         setTrackingError('Nomor resi tidak ditemukan. Silakan periksa kembali nomor resi Anda.');
       }
-
       setIsSearching(false);
-    }, 500);
+    }, 800);
   };
 
   const handleCloseTracking = () => {
@@ -67,289 +66,251 @@ export const HomePage = () => {
 
   return (
     <>
-      {/* Hero Section - Modern & Powerful */}
-      <div className="relative pt-32 pb-24 md:pt-48 md:pb-40 overflow-hidden">
-        <div className="absolute inset-0 bg-slate-50 dark:bg-slate-900 transition-colors duration-500">
-          <div className="absolute top-0 right-0 w-full h-full bg-gradient-to-br from-transparent via-slate-100/30 to-transparent dark:via-slate-800/30 rounded-bl-[200px] transform translate-x-1/2 -translate-y-1/2"></div>
-          <div className="absolute bottom-0 left-0 w-96 h-96 bg-orange-500/15 rounded-full blur-3xl animate-pulse"></div>
-          <div className="absolute top-1/3 right-1/4 w-72 h-72 bg-red-500/10 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }}></div>
+      {/* Hero Section - High Performance Logistics */}
+      <div className="relative pt-32 pb-20 md:pt-52 md:pb-40 overflow-hidden bg-slate-50 dark:bg-slate-950">
+        {/* Background Decorative Elements */}
+        <div className="absolute inset-0 z-0">
+          <div className="absolute inset-0 bg-[radial-gradient(#e2e8f0_1px,transparent_1px)] dark:bg-[radial-gradient(#1e293b_1px,transparent_1px)] [background-size:40px_40px] [mask-image:radial-gradient(ellipse_50%_50%_at_50%_50%,#000_70%,transparent_100%)]"></div>
+          <div className="absolute top-[-10%] right-[-10%] w-[500px] h-[500px] bg-orange-500/10 rounded-full blur-[120px]"></div>
+          <div className="absolute bottom-[-10%] left-[-10%] w-[500px] h-[500px] bg-red-600/10 rounded-full blur-[120px]"></div>
         </div>
 
-        <div className="relative max-w-7xl mx-auto px-4 md:px-8 grid md:grid-cols-2 gap-12 items-center">
-          <div className="space-y-8">
-            <div className="inline-flex items-center px-4 py-2 bg-orange-100 dark:bg-orange-900/30 text-orange-700 dark:text-orange-300 rounded-full text-sm font-semibold transform transition-all duration-300 hover:scale-105 hover:bg-orange-200 dark:hover:bg-orange-900/50 cursor-default">
-              <span className="w-2 h-2 bg-orange-500 rounded-full mr-2 animate-pulse"></span>
-              Partner Logistik Terpercaya
+        <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-8 grid lg:grid-cols-2 gap-16 items-center">
+          <motion.div 
+            initial={{ opacity: 0, x: -30 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8 }}
+            className="space-y-8"
+          >
+            <div className="inline-flex items-center space-x-2 px-3 py-1 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md border border-slate-200 dark:border-slate-800 rounded-full shadow-sm">
+              <span className="flex h-2 w-2 rounded-full bg-orange-500 animate-pulse"></span>
+              <span className="text-xs font-bold uppercase tracking-wider text-slate-600 dark:text-slate-300">Fast & Reliable Logistics</span>
             </div>
             
-            <h1 className="text-5xl md:text-7xl font-extrabold text-slate-900 dark:text-white leading-tight tracking-tight">
-              Kirim Paket{' '}
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-500 via-red-500 to-pink-600 animate-pulse">
-                Lebih Cepat
-              </span>{' '}
-              & Aman.
+            <h1 className="text-5xl md:text-7xl font-black text-slate-900 dark:text-white leading-[1.1] tracking-tight">
+              Efisienkan <br />
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-500 to-red-600">
+                Rantai Pasok
+              </span><br />
+              Bisnis Anda.
             </h1>
             
-            <p className="text-lg md:text-xl text-slate-600 dark:text-slate-300 max-w-lg leading-relaxed">
-              Solusi pengiriman barang terpadu untuk seluruh Indonesia. Dengan jaringan luas, armada modern, dan layanan pelanggan 24/7, kami siap mendukung kesuksesan bisnis Anda.
+            <p className="text-lg md:text-xl text-slate-600 dark:text-slate-400 max-w-lg leading-relaxed">
+              CV. ULUMUSI menghadirkan solusi pengiriman end-to-end yang cerdas, transparan, dan terintegrasi untuk mendukung akselerasi bisnis Anda di seluruh Nusantara.
             </p>
 
-            {/* Tracking & CTA */}
-            <div className="space-y-4">
-              <form onSubmit={handleTrackingSearch} className="bg-white dark:bg-slate-800 p-2 rounded-2xl shadow-xl shadow-slate-200/50 dark:shadow-black/40 flex flex-col sm:flex-row gap-2 border border-slate-100 dark:border-slate-700 hover:border-orange-300 dark:hover:border-orange-600 transition-all duration-300">
+            {/* Main Tracking Form */}
+            <div className="relative group max-w-xl">
+              <form 
+                onSubmit={handleTrackingSearch} 
+                className="relative bg-white dark:bg-slate-900 p-2 rounded-2xl shadow-2xl shadow-slate-200 dark:shadow-none flex flex-col sm:flex-row gap-2 border border-slate-200 dark:border-slate-800 group-focus-within:border-orange-500 transition-all duration-300"
+              >
                 <div className="flex-1 flex items-center px-4 h-14">
-                  <Search className="text-slate-400 mr-3" size={20} />
+                  <Search className="text-slate-400 mr-3" size={22} />
                   <input
                     type="text"
-                    placeholder="Lacak nomor resi Anda..."
+                    placeholder="Masukkan Nomor Resi (Contoh: REG-12345)..."
                     value={trackingInput}
                     onChange={(e) => setTrackingInput(e.target.value)}
-                    className="w-full bg-transparent border-none focus:outline-none text-slate-900 dark:text-white placeholder-slate-400 text-base"
+                    className="w-full bg-transparent border-none focus:outline-none text-slate-900 dark:text-white placeholder-slate-400 font-medium"
                   />
                 </div>
                 <button
                   type="submit"
                   disabled={isSearching}
-                  className="h-14 px-8 bg-gradient-to-r from-orange-600 to-red-600 hover:from-orange-700 hover:to-red-700 disabled:from-slate-400 disabled:to-slate-400 text-white font-bold rounded-xl transition-all shadow-lg shadow-orange-600/30 hover:shadow-orange-600/50 hover:scale-105 disabled:cursor-not-allowed disabled:hover:scale-100"
+                  className="h-14 px-10 bg-slate-900 dark:bg-orange-600 hover:bg-orange-600 dark:hover:bg-orange-700 text-white font-bold rounded-xl transition-all shadow-lg active:scale-95 disabled:opacity-50"
                 >
-                  {isSearching ? 'Mencari...' : 'Lacak'}
+                  {isSearching ? 'Loading...' : 'Lacak Sekarang'}
                 </button>
               </form>
-
-              {/* Error Message */}
+              
               {trackingError && (
-                <div className="flex items-center gap-3 p-4 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-xl">
-                  <AlertCircle className="text-red-600 dark:text-red-400 flex-shrink-0" size={20} />
-                  <p className="text-sm text-red-700 dark:text-red-300">{trackingError}</p>
-                </div>
+                <motion.div 
+                  initial={{ opacity: 0, y: -10 }} 
+                  animate={{ opacity: 1, y: 0 }}
+                  className="absolute -bottom-14 left-0 right-0 flex items-center gap-2 p-3 bg-red-50 dark:bg-red-950/30 border border-red-200 dark:border-red-900 rounded-lg text-red-600 dark:text-red-400 text-sm font-medium"
+                >
+                  <AlertCircle size={16} />
+                  {trackingError}
+                </motion.div>
               )}
             </div>
 
-            {/* Features List */}
-            <div className="grid grid-cols-2 gap-4 pt-4">
-              <div className="flex items-center gap-3 group">
-                <div className="p-2 bg-green-100 dark:bg-green-900/30 rounded-lg group-hover:scale-110 transition-transform">
-                  <CheckCircle2 size={20} className="text-green-600 dark:text-green-400" />
+            <div className="flex flex-wrap gap-6 pt-6">
+              {[
+                { icon: ShieldCheck, label: 'Safe Delivery', color: 'text-green-500' },
+                { icon: Clock, label: 'On Time', color: 'text-blue-500' },
+                { icon: Globe, label: 'National Network', color: 'text-purple-500' }
+              ].map((item, i) => (
+                <div key={i} className="flex items-center space-x-2 text-slate-500 dark:text-slate-400">
+                  <item.icon size={18} className={item.color} />
+                  <span className="text-sm font-semibold">{item.label}</span>
                 </div>
-                <span className="text-sm md:text-base text-slate-700 dark:text-slate-300 font-medium">Asuransi Barang</span>
-              </div>
-              <div className="flex items-center gap-3 group">
-                <div className="p-2 bg-blue-100 dark:bg-blue-900/30 rounded-lg group-hover:scale-110 transition-transform">
-                  <Clock size={20} className="text-blue-600 dark:text-blue-400" />
-                </div>
-                <span className="text-sm md:text-base text-slate-700 dark:text-slate-300 font-medium">Tepat Waktu</span>
-              </div>
-              <div className="flex items-center gap-3 group">
-                <div className="p-2 bg-purple-100 dark:bg-purple-900/30 rounded-lg group-hover:scale-110 transition-transform">
-                  <MapPin size={20} className="text-purple-600 dark:text-purple-400" />
-                </div>
-                <span className="text-sm md:text-base text-slate-700 dark:text-slate-300 font-medium">Jangkauan Luas</span>
-              </div>
-              <div className="flex items-center gap-3 group">
-                <div className="p-2 bg-yellow-100 dark:bg-yellow-900/30 rounded-lg group-hover:scale-110 transition-transform">
-                  <Award size={20} className="text-yellow-600 dark:text-yellow-400" />
-                </div>
-                <span className="text-sm md:text-base text-slate-700 dark:text-slate-300 font-medium">Terpercaya</span>
-              </div>
+              ))}
             </div>
-          </div>
+          </motion.div>
 
-          {/* Hero Image */}
-          <div className="relative hidden md:block">
-            <div className="absolute inset-0 bg-gradient-to-tr from-orange-500/20 to-red-500/20 rounded-3xl blur-2xl animate-pulse"></div>
-            <img
-              src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
-              alt="Logistics Delivery Truck"
-              className="relative rounded-3xl shadow-2xl w-full object-cover h-[550px] hover:scale-105 transition-transform duration-300"
-            />
-            <div className="absolute top-8 right-8 bg-gradient-to-br from-orange-500 to-red-600 text-white rounded-2xl p-6 shadow-xl backdrop-blur-sm bg-opacity-95 max-w-xs transform hover:scale-110 transition-transform duration-300">
-              <h4 className="font-bold text-lg mb-2">Jangkauan Nasional</h4>
-              <p className="text-sm opacity-90">Melayani pengiriman ke 34 provinsi dengan kecepatan dan keamanan terjamin</p>
+          {/* Hero Image / Visual */}
+          <motion.div 
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 1 }}
+            className="relative hidden lg:block"
+          >
+            <div className="relative z-10 overflow-hidden rounded-[2.5rem] shadow-2xl border-8 border-white dark:border-slate-900">
+              <img
+                src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80"
+                alt="Logistics Distribution"
+                className="w-full h-[600px] object-cover hover:scale-110 transition-transform duration-1000"
+              />
             </div>
-          </div>
-        </div>
-      </div>
-
-      {/* Divider */}
-      <div className="relative my-8">
-        <div className="mx-auto w-11/12">
-          <div className="relative">
-            <div className="h-1 rounded-full bg-gradient-to-r from-transparent via-orange-300/60 to-transparent dark:via-orange-600/60 opacity-100 backdrop-blur-sm" />
-            <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-              <div className="w-3/4 h-0.5 bg-gradient-to-r from-transparent via-orange-200/40 to-transparent dark:from-transparent dark:via-orange-600/30 dark:to-transparent rounded-full" />
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* Trusted Clients Section */}
-      <div className="py-16 md:py-24 bg-slate-50 dark:bg-slate-900 relative overflow-hidden">
-        {/* subtle decorative shapes - tuned for light/dark */}
-        <div className="absolute inset-0 pointer-events-none">
-          <div className="hidden md:block absolute -top-10 -left-16 w-80 h-80 rounded-full bg-orange-400/6 dark:bg-orange-500/20 blur-3xl mix-blend-screen" />
-          <div className="hidden md:block absolute -bottom-10 -right-16 w-96 h-96 rounded-full bg-red-400/6 dark:bg-red-500/18 blur-3xl mix-blend-screen" />
-        </div>
-
-        <Section>
-          <div className="relative z-10">
-            <motion.div
-              initial={{ opacity: 0, y: 12 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.2 }}
-              transition={{ duration: 0.6 }}
-              className="text-center mb-12"
+            {/* Floating Info Card */}
+            <motion.div 
+              animate={{ y: [0, -20, 0] }}
+              transition={{ repeat: Infinity, duration: 4, ease: "easeInOut" }}
+              className="absolute -bottom-10 -left-10 z-20 bg-white dark:bg-slate-900 p-8 rounded-3xl shadow-2xl border border-slate-100 dark:border-slate-800 max-w-[280px]"
             >
-              <h2 className="text-orange-500 dark:text-orange-400 font-semibold tracking-widest uppercase text-sm mb-3 flex items-center justify-center gap-3">
-                <span className="w-12 h-1 bg-gradient-to-r from-transparent to-orange-400 block"></span>
-                Dipercaya Oleh Ribuan Perusahaan
-                <span className="w-12 h-1 bg-gradient-to-l from-transparent to-orange-400 block"></span>
-              </h2>
-              <h3 className="text-3xl md:text-4xl font-extrabold text-slate-900 dark:text-white mb-3">
-                Mitra Bisnis Kami
-              </h3>
-              <p className="text-slate-600 dark:text-slate-300 max-w-2xl mx-auto text-base md:text-lg">
-                Lebih dari 5000 perusahaan di berbagai industri mempercayai CV. ULUMUSI untuk kebutuhan logistik mereka
+              <div className="flex items-center gap-4 mb-4">
+                <div className="p-3 bg-orange-100 dark:bg-orange-900/30 rounded-2xl">
+                  <Truck className="text-orange-600" size={32} />
+                </div>
+                <div>
+                  <p className="text-2xl font-black text-slate-900 dark:text-white">100%</p>
+                  <p className="text-xs text-slate-500 font-bold uppercase tracking-tight">Safe Delivery</p>
+                </div>
+              </div>
+              <p className="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
+                Keamanan barang Anda adalah prioritas utama kami dengan sistem proteksi ganda.
               </p>
             </motion.div>
-
-            {/* Clients Carousel */}
-            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.6, delay: 0.15 }} className="mb-12">
-              <ClientsCarousel
-                clients={clients}
-                autoPlay={true}
-                autoPlaySpeed={4500}
-              />
-            </motion.div>
-
-            {/* Trust Stats - simplified & animated */}
-            <motion.div
-              initial={{ opacity: 0, y: 8 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.3 }}
-              className="grid md:grid-cols-3 gap-6 py-10 px-6 md:px-10 bg-white/5 dark:bg-white/2 backdrop-blur-md border border-white/10 dark:border-white/6 rounded-3xl"
-            >
-              <div className="flex flex-col items-center gap-3 py-6">
-                <div className="p-3 bg-white/5 dark:bg-white/6 rounded-full">
-                  <Users className="text-orange-400" size={28} />
-                </div>
-                <div className="text-3xl md:text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-red-400">
-                  <CountUp end={5000} duration={2.2} />+
-                </div>
-                <div className="text-sm text-slate-600 dark:text-slate-300">Klien Aktif</div>
-              </div>
-
-              <div className="flex flex-col items-center gap-3 py-6">
-                <div className="p-3 bg-white/5 dark:bg-white/6 rounded-full">
-                  <ThumbsUp className="text-yellow-400" size={28} />
-                </div>
-                <div className="text-3xl md:text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-red-400">
-                  <CountUp end={'99.2%'} duration={2} />
-                </div>
-                <div className="text-sm text-slate-600 dark:text-slate-300">Kepuasan Pelanggan</div>
-              </div>
-
-              <div className="flex flex-col items-center gap-3 py-6">
-                <div className="p-3 bg-white/5 dark:bg-white/6 rounded-full">
-                  <MapPin className="text-rose-400" size={28} />
-                </div>
-                <div className="text-3xl md:text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-red-400">
-                  <CountUp end={34} duration={1.6} />
-                </div>
-                <div className="text-sm text-slate-600 dark:text-slate-300">Provinsi Jangkauan</div>
-              </div>
-            </motion.div>
-          </div>
-        </Section>
+          </motion.div>
+        </div>
       </div>
 
-      {/* Services Section - Enhanced */}
-      <Section className="py-24 bg-white dark:bg-slate-900 transition-colors duration-500">
-        <div className="text-center mb-16">
-          <h2 className="text-orange-600 dark:text-orange-400 font-bold tracking-widest uppercase text-sm mb-3">
-            Solusi Terlengkap
-          </h2>
-          <h3 className="text-4xl md:text-5xl font-bold text-slate-900 dark:text-white mb-4">
-            Layanan Pengiriman Kami
-          </h3>
-          <p className="text-slate-600 dark:text-slate-300 max-w-2xl mx-auto text-lg">
-            Kami menyediakan berbagai solusi logistik terintegrasi untuk memenuhi kebutuhan bisnis Anda
-          </p>
+      {/* Trust Section - Clients */}
+      <div className="py-20 bg-white dark:bg-slate-950">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="text-center mb-16">
+            <h2 className="text-slate-400 dark:text-slate-600 font-bold text-xs uppercase tracking-[0.3em] mb-4">Strategic Partners</h2>
+            <p className="text-2xl font-bold text-slate-800 dark:text-slate-200">Dipercaya oleh industri terkemuka di Indonesia</p>
+          </div>
+          <ClientsCarousel clients={clients} autoPlay={true} autoPlaySpeed={4000} />
+          
+          <div className="mt-20 grid grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12">
+            {[
+              { icon: Users, end: 5000, label: 'Klien Korporat', color: 'bg-orange-500' },
+              { icon: ThumbsUp, end: 99, suffix: '.2%', label: 'Tingkat Kepuasan', color: 'bg-blue-600' },
+              { icon: MapPin, end: 34, label: 'Provinsi Tercover', color: 'bg-red-600' }
+            ].map((stat, i) => (
+              <div key={i} className="flex flex-col items-center p-8 rounded-3xl bg-slate-50 dark:bg-slate-900/50 border border-slate-100 dark:border-slate-800 transition-colors hover:bg-white dark:hover:bg-slate-900">
+                <div className={`${stat.color} p-4 rounded-2xl text-white mb-6 shadow-lg`}>
+                  <stat.icon size={28} />
+                </div>
+                <div className="text-4xl font-black text-slate-900 dark:text-white mb-2">
+                  <CountUp end={stat.end} duration={2.5} />{stat.suffix || '+'}
+                </div>
+                <p className="text-slate-500 dark:text-slate-400 font-bold uppercase text-[10px] tracking-[0.2em]">{stat.label}</p>
+              </div>
+            ))}
+          </div>
         </div>
-        <div className="grid md:grid-cols-3 gap-8">
-          <ServiceCard
-            icon={Truck}
-            title="Transportasi Darat"
-            description="Armada truk modern untuk pengiriman antar kota dan provinsi dengan jadwal keberangkatan rutin setiap hari dan GPS tracking real-time."
-          />
-          <ServiceCard
-            icon={Globe}
-            title="Kargo Logistik"
-            description="Layanan pengiriman kargo dalam jumlah besar untuk kebutuhan bisnis dan korporasi dengan tarif kompetitif dan asuransi penuh."
-          />
-          <ServiceCard
-            icon={Package}
-            title="Door to Door"
-            description="Layanan penjemputan dari lokasi Anda dan pengiriman langsung ke tujuan dengan penanganan barang yang profesional dan aman."
-          />
-        </div>
-        <div className="mt-16 text-center">
-          <Button variant="outline" onClick={() => setCurrentPage('services')} className="group">
-            Lihat Semua Layanan <ArrowRight className="ml-2 group-hover:translate-x-1 transition-transform" size={20} />
+      </div>
+
+      {/* Services Section */}
+      <Section className="py-24 bg-slate-50 dark:bg-slate-950">
+        <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
+          <div className="max-w-2xl">
+            <h2 className="text-orange-600 font-black text-sm uppercase tracking-widest mb-4">Our Services</h2>
+            <h3 className="text-4xl md:text-5xl font-black text-slate-900 dark:text-white leading-tight">
+              Solusi Logistik Menyeluruh Untuk Kebutuhan Anda.
+            </h3>
+          </div>
+          <Button variant="outline" onClick={() => setCurrentPage('services')} className="group border-2 hover:bg-slate-900 hover:text-white transition-all">
+            Lihat Detail <ArrowRight className="ml-2 group-hover:translate-x-1 transition-transform" size={20} />
           </Button>
         </div>
-      </Section>
-
-      {/* Why Choose Us Section */}
-      <Section className="py-24 bg-gradient-to-r from-orange-50 to-red-50 dark:from-slate-800 dark:to-slate-900">
-        <div className="text-center mb-16">
-          <h2 className="text-orange-600 dark:text-orange-400 font-bold tracking-widest uppercase text-sm mb-3">
-            Keunggulan Kami
-          </h2>
-          <h3 className="text-4xl md:text-5xl font-bold text-slate-900 dark:text-white mb-4">
-            Mengapa Memilih CV. ULUMUSI?
-          </h3>
-        </div>
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+        
+        <div className="grid md:grid-cols-3 gap-8">
           {[
-            { icon: '⚡', title: 'Pengiriman Cepat', desc: 'Sistem logistik optimal untuk pengiriman tepat waktu' },
-            { icon: '🛡️', title: 'Keamanan Terjamin', desc: 'Asuransi penuh dan tracking 24/7 untuk setiap paket' },
-            { icon: '💰', title: 'Harga Kompetitif', desc: 'Tarif terbaik dengan kualitas layanan premium' },
-            { icon: '🤝', title: 'Customer Service', desc: 'Tim support responsif siap membantu kapan saja' },
-          ].map((item, idx) => (
-            <div key={idx} className="bg-white dark:bg-slate-800 p-8 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 border border-slate-100 dark:border-slate-700 hover:border-orange-300 dark:hover:border-orange-600">
-              <div className="text-5xl mb-4">{item.icon}</div>
-              <h4 className="text-xl font-bold text-slate-900 dark:text-white mb-2">{item.title}</h4>
-              <p className="text-slate-600 dark:text-slate-400">{item.desc}</p>
-            </div>
+            { icon: Truck, title: 'Land Transport', desc: 'Distribusi darat dengan sistem tracking GPS real-time dan jadwal harian yang presisi.' },
+            { icon: Globe, title: 'Enterprise Cargo', desc: 'Solusi kargo volume besar dengan skema kontrak yang fleksibel dan efisien bagi perusahaan.' },
+            { icon: Package, title: 'Door to Door', desc: 'Kemudahan penjemputan dan pengantaran langsung ke titik tujuan dengan keamanan maksimal.' }
+          ].map((service, idx) => (
+            <motion.div 
+              key={idx}
+              whileHover={{ y: -10 }}
+              transition={{ type: "spring", stiffness: 300 }}
+            >
+              <ServiceCard
+                icon={service.icon}
+                title={service.title}
+                description={service.desc}
+              />
+            </motion.div>
           ))}
         </div>
       </Section>
 
-      {/* CTA Section */}
-      <Section className="py-24 bg-gradient-to-r from-orange-600 to-red-600 text-white relative overflow-hidden">
-        <div className="absolute inset-0 opacity-10">
-          <div className="absolute top-0 right-0 w-96 h-96 bg-white rounded-full blur-3xl"></div>
+      {/* Why Choose Us - Modernized Cards */}
+      <Section className="py-24 bg-white dark:bg-slate-950 border-y border-slate-100 dark:border-slate-900">
+        <div className="text-center mb-16">
+          <h2 className="text-orange-600 font-bold tracking-[0.3em] uppercase text-xs mb-4">Core Strengths</h2>
+          <h3 className="text-4xl font-black text-slate-900 dark:text-white">Standar Layanan Kami</h3>
         </div>
-        <div className="relative z-10 max-w-3xl mx-auto text-center">
-          <h2 className="text-4xl md:text-5xl font-bold mb-6">
-            Siap Mulai Menggunakan Layanan Kami?
-          </h2>
-          <p className="text-xl opacity-90 mb-8">
-            Hubungi tim kami hari ini untuk mendiskusikan solusi logistik terbaik untuk bisnis Anda
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <button onClick={() => setCurrentPage('contact')} className="px-8 py-4 bg-white text-orange-600 font-bold rounded-xl hover:bg-slate-100 transition-all hover:scale-105 shadow-xl">
-              Hubungi Kami Sekarang
-            </button>
-            <button onClick={() => setCurrentPage('services')} className="px-8 py-4 bg-white/20 backdrop-blur-sm border-2 border-white text-white font-bold rounded-xl hover:bg-white/30 transition-all hover:scale-105">
-              Lihat Layanan Lengkap
-            </button>
-          </div>
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+          {[
+            { icon: Zap, title: 'Express Delivery', desc: 'Sistem rute tercepat yang memastikan paket tiba sesuai estimasi.', color: 'text-orange-500' },
+            { icon: ShieldCheck, title: 'Fully Insured', desc: 'Setiap pengiriman dilindungi asuransi untuk ketenangan pikiran Anda.', color: 'text-green-500' },
+            { icon: Banknote, title: 'Cost Efficient', desc: 'Optimasi biaya pengiriman tanpa mengurangi kualitas pelayanan.', color: 'text-blue-500' },
+            { icon: Headphones, title: '24/7 Priority', desc: 'Dukungan tim operasional profesional yang siap membantu kapan saja.', color: 'text-purple-500' },
+          ].map((item, idx) => (
+            <motion.div 
+              key={idx} 
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: idx * 0.1 }}
+              className="bg-slate-50 dark:bg-slate-900 p-8 rounded-[2rem] hover:bg-white dark:hover:bg-slate-800 transition-all border border-transparent hover:border-orange-500/20 shadow-sm"
+            >
+              <div className={`${item.color} mb-6`}>
+                <item.icon size={40} strokeWidth={1.5} />
+              </div>
+              <h4 className="text-xl font-bold text-slate-900 dark:text-white mb-3">{item.title}</h4>
+              <p className="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">{item.desc}</p>
+            </motion.div>
+          ))}
         </div>
       </Section>
 
-      {/* Tracking Result Modal */}
+      {/* CTA Section - Enterprise Style */}
+      <div className="px-6 py-12">
+        <Section className="py-20 bg-slate-900 dark:bg-orange-600 rounded-[3rem] overflow-hidden relative">
+          <div className="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-white/5 to-transparent"></div>
+          <div className="relative z-10 max-w-4xl mx-auto text-center px-4">
+            <h2 className="text-4xl md:text-6xl font-black text-white mb-8 leading-tight">
+              Siap Mengoptimalkan Logistik Anda Sekarang?
+            </h2>
+            <p className="text-xl text-slate-300 dark:text-orange-50 opacity-90 mb-10 max-w-2xl mx-auto">
+              Mari diskusikan bagaimana layanan kami dapat membantu menekan biaya operasional dan mempercepat distribusi bisnis Anda.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <button 
+                onClick={() => setCurrentPage('contact')} 
+                className="px-10 py-5 bg-white text-slate-900 font-black rounded-2xl hover:bg-orange-100 transition-all active:scale-95 shadow-2xl"
+              >
+                Konsultasi Gratis
+              </button>
+              <button 
+                onClick={() => setCurrentPage('services')} 
+                className="px-10 py-5 bg-transparent border-2 border-white/30 text-white font-bold rounded-2xl hover:bg-white/10 transition-all"
+              >
+                Pelajari Layanan
+              </button>
+            </div>
+          </div>
+        </Section>
+      </div>
+
       {trackingResult && <TrackingResult shipment={trackingResult} onClose={handleCloseTracking} />}
     </>
   );
