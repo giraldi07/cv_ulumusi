@@ -2,11 +2,13 @@ import { ThemeProvider } from './contexts/ThemeContext';
 import { NavigationProvider, useNavigation } from './contexts/NavigationContext';
 import { Header } from './components/Header';
 import { Footer } from './components/Footer';
+import { LoadingScreen } from './components/LoadingScreen';
 import { HomePage } from './pages/HomePage';
 import { AboutPage } from './pages/AboutPage';
 import { ServicesPage } from './pages/ServicesPage';
 import { ContactPage } from './pages/ContactPage';
 import { ServiceDetailPage } from './pages/ServiceDetailPage';
+import { useEffect, useState } from 'react';
 
 const AppContent = () => {
   const { currentPage, serviceDetailId } = useNavigation();
@@ -38,9 +40,21 @@ const AppContent = () => {
 };
 
 function App() {
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    // Simulate loading time and disappear when mounted
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 2500);
+
+    return () => clearTimeout(timer);
+  }, []);
+
   return (
     <ThemeProvider>
       <NavigationProvider>
+        <LoadingScreen isLoading={isLoading} />
         <AppContent />
       </NavigationProvider>
     </ThemeProvider>
