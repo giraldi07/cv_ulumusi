@@ -216,71 +216,78 @@ export const HomePage = () => {
         </div>
       </div>
 
-      {/* Services Section */}
-      <Section className="py-24 bg-slate-50 dark:bg-slate-950">
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
-          <div className="max-w-2xl">
-            <h2 className="text-orange-600 font-black text-sm uppercase tracking-widest mb-4">Our Services</h2>
-            <h3 className="text-4xl md:text-5xl font-black text-slate-900 dark:text-white leading-tight">
-              Solusi Logistik Menyeluruh Untuk Kebutuhan Anda.
-            </h3>
+{/* Services Section - Wrapper untuk gradasi dari White ke Slate-50 */}
+      <div className="w-full bg-gradient-to-b from-white via-slate-50 to-slate-50 dark:from-slate-950 dark:via-slate-900/50 dark:to-slate-900/50">
+        <Section className="py-24">
+          <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
+            <div className="max-w-2xl">
+              <h2 className="text-orange-600 font-black text-sm uppercase tracking-widest mb-4">Our Services</h2>
+              <h3 className="text-4xl md:text-5xl font-black text-slate-900 dark:text-white leading-tight">
+                Solusi Logistik Menyeluruh Untuk Kebutuhan Anda.
+              </h3>
+            </div>
+            <button 
+              onClick={() => setCurrentPage('services')} 
+              className="group text-orange-600 inline-flex items-center px-6 py-3 border-2 border-slate-200 dark:border-slate-800 rounded-xl font-bold hover:bg-slate-900 hover:text-white dark:hover:bg-white dark:hover:text-slate-900 transition-all"
+            >
+              Lihat Detail <ArrowRight className="ml-2 text-orange-600 group-hover:translate-x-1 transition-transform" size={20} />
+            </button>
           </div>
-          <Button variant="outline" onClick={() => setCurrentPage('services')} className="group border-2 hover:bg-slate-900 hover:text-white transition-all">
-            Lihat Detail <ArrowRight className="ml-2 group-hover:translate-x-1 transition-transform" size={20} />
-          </Button>
-        </div>
-        
-        <div className="grid md:grid-cols-3 gap-8">
-          {[
-            { icon: Truck, title: 'Land Transport', desc: 'Distribusi darat dengan sistem tracking GPS real-time dan jadwal harian yang presisi.' },
-            { icon: Globe, title: 'Enterprise Cargo', desc: 'Solusi kargo volume besar dengan skema kontrak yang fleksibel dan efisien bagi perusahaan.' },
-            { icon: Package, title: 'Door to Door', desc: 'Kemudahan penjemputan dan pengantaran langsung ke titik tujuan dengan keamanan maksimal.' }
-          ].map((service, idx) => (
-            <motion.div 
-              key={idx}
-              whileHover={{ y: -10 }}
-              transition={{ type: "spring", stiffness: 300 }}
-            >
-              <ServiceCard
-                icon={service.icon}
-                title={service.title}
-                description={service.desc}
-              />
-            </motion.div>
-          ))}
-        </div>
-      </Section>
+          
+          <div className="grid md:grid-cols-3 gap-8">
+            {[
+              { icon: Truck, title: 'Land Transport', desc: 'Distribusi darat dengan sistem tracking GPS real-time dan jadwal harian yang presisi.' },
+              { icon: Globe, title: 'Enterprise Cargo', desc: 'Solusi kargo volume besar dengan skema kontrak yang fleksibel dan efisien bagi perusahaan.' },
+              { icon: Package, title: 'Door to Door', desc: 'Kemudahan penjemputan dan pengantaran langsung ke titik tujuan dengan keamanan maksimal.' }
+            ].map((service, idx) => (
+              <motion.div 
+                key={idx}
+                whileHover={{ y: -10 }}
+                transition={{ type: "spring", stiffness: 300 }}
+              >
+                <ServiceCard
+                  icon={service.icon}
+                  title={service.title}
+                  description={service.desc}
+                />
+              </motion.div>
+            ))}
+          </div>
+        </Section>
+      </div>
 
-      {/* Why Choose Us - Modernized Cards */}
-      <Section className="py-24 bg-white dark:bg-slate-950 border-y border-slate-100 dark:border-slate-900">
-        <div className="text-center mb-16">
-          <h2 className="text-orange-600 font-bold tracking-[0.3em] uppercase text-xs mb-4">Core Strengths</h2>
-          <h3 className="text-4xl font-black text-slate-900 dark:text-white">Standar Layanan Kami</h3>
-        </div>
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-          {[
-            { icon: Zap, title: 'Express Delivery', desc: 'Sistem rute tercepat yang memastikan paket tiba sesuai estimasi.', color: 'text-orange-500' },
-            { icon: ShieldCheck, title: 'Fully Insured', desc: 'Setiap pengiriman dilindungi asuransi untuk ketenangan pikiran Anda.', color: 'text-green-500' },
-            { icon: Banknote, title: 'Cost Efficient', desc: 'Optimasi biaya pengiriman tanpa mengurangi kualitas pelayanan.', color: 'text-blue-500' },
-            { icon: Headphones, title: '24/7 Priority', desc: 'Dukungan tim operasional profesional yang siap membantu kapan saja.', color: 'text-purple-500' },
-          ].map((item, idx) => (
-            <motion.div 
-              key={idx} 
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: idx * 0.1 }}
-              className="bg-slate-50 dark:bg-slate-900 p-8 rounded-[2rem] hover:bg-white dark:hover:bg-slate-800 transition-all border border-transparent hover:border-orange-500/20 shadow-sm"
-            >
-              <div className={`${item.color} mb-6`}>
-                <item.icon size={40} strokeWidth={1.5} />
-              </div>
-              <h4 className="text-xl font-bold text-slate-900 dark:text-white mb-3">{item.title}</h4>
-              <p className="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">{item.desc}</p>
-            </motion.div>
-          ))}
-        </div>
-      </Section>
+      {/* Why Choose Us - Wrapper untuk gradasi dari Slate-50 kembali ke White */}
+      <div className="w-full bg-gradient-to-b from-slate-50 via-white to-white dark:from-slate-900/50 dark:via-slate-950 dark:to-slate-950 border-y border-slate-100 dark:border-slate-900/50">
+        <Section className="py-24">
+          <div className="text-center mb-16">
+            <h2 className="text-orange-600 font-bold tracking-[0.3em] uppercase text-xs mb-4">Core Strengths</h2>
+            <h3 className="text-4xl font-black text-slate-900 dark:text-white">Standar Layanan Kami</h3>
+          </div>
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {[
+              { icon: Zap, title: 'Express Delivery', desc: 'Sistem rute tercepat yang memastikan paket tiba sesuai estimasi.', color: 'text-orange-500' },
+              { icon: ShieldCheck, title: 'Fully Insured', desc: 'Setiap pengiriman dilindungi asuransi untuk ketenangan pikiran Anda.', color: 'text-green-500' },
+              { icon: Banknote, title: 'Cost Efficient', desc: 'Optimasi biaya pengiriman tanpa mengurangi kualitas pelayanan.', color: 'text-blue-500' },
+              { icon: Headphones, title: '24/7 Priority', desc: 'Dukungan tim operasional profesional yang siap membantu kapan saja.', color: 'text-purple-500' },
+            ].map((item, idx) => (
+              <motion.div 
+                key={idx} 
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: idx * 0.1 }}
+                className="bg-white dark:bg-slate-900/80 p-8 rounded-[2rem] hover:bg-white dark:hover:bg-slate-800 transition-all border border-slate-100 dark:border-slate-800/50 hover:border-orange-500/20 shadow-sm hover:shadow-xl hover:shadow-orange-500/5"
+              >
+                <div className={`${item.color} mb-6`}>
+                  <item.icon size={40} strokeWidth={1.5} />
+                </div>
+                <h4 className="text-xl font-bold text-slate-900 dark:text-white mb-3">{item.title}</h4>
+                <p className="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">{item.desc}</p>
+              </motion.div>
+            ))}
+          </div>
+        </Section>
+      </div>
 
       {/* CTA Section - Enterprise Style */}
       <div className="px-6 py-12">
