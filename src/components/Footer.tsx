@@ -1,6 +1,6 @@
-import { Truck } from 'lucide-react';
 import { useNavigation, PageType } from '../contexts/NavigationContext';
 import { FaFacebookF, FaInstagram, FaWhatsapp } from 'react-icons/fa';
+import logoImg from '../images/logo-ulumusi.png';
 
 export const Footer = () => {
   const { setCurrentPage } = useNavigation();
@@ -15,12 +15,18 @@ export const Footer = () => {
       <div className="max-w-7xl mx-auto px-4 md:px-8">
         <div className="grid md:grid-cols-4 gap-12 mb-16">
           <div className="col-span-1 md:col-span-1">
+            {/* Bagian Logo Baru */}
             <div className="flex items-center gap-3 mb-6">
-              <div className="w-10 h-10 bg-orange-600 rounded-lg flex items-center justify-center text-white">
-                <Truck size={24} />
+              <div className="flex items-center justify-center">
+                <img 
+                  src={logoImg} 
+                  alt="Logo CV. ULUMUSI" 
+                  className="h-14 w-auto object-contain" 
+                />
               </div>
-              <h2 className="text-2xl font-bold">CV. ULUMUSI</h2>
+              <h2 className="text-md font-bold tracking-tight">CV. ULUMUSI</h2>
             </div>
+            
             <p className="text-slate-400 leading-relaxed mb-6">
               Mitra logistik terpercaya Anda. Mengirimkan paket dengan amanah, cepat, dan aman
               hingga ke tujuan.
@@ -96,21 +102,21 @@ export const Footer = () => {
             <div className="flex gap-4 mt-6">
               <a
                 href="#"
-                className="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center hover:bg-orange-600 transition-colors cursor-pointer text-sm font-bold"
+                className="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center hover:bg-orange-600 transition-colors cursor-pointer"
                 aria-label="Instagram"
               >
                 <FaInstagram size={20} />
               </a>
               <a
                 href="#"
-                className="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center hover:bg-orange-600 transition-colors cursor-pointer text-sm font-bold"
+                className="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center hover:bg-orange-600 transition-colors cursor-pointer"
                 aria-label="Facebook"
               >
                 <FaFacebookF size={20} />
               </a>
               <a
                 href="#"
-                className="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center hover:bg-orange-600 transition-colors cursor-pointer text-sm font-bold"
+                className="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center hover:bg-orange-600 transition-colors cursor-pointer"
                 aria-label="WhatsApp"
               >
                 <FaWhatsapp size={20} />
