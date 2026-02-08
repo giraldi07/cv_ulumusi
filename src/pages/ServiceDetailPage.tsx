@@ -44,8 +44,8 @@ const services: ServiceDetails[] = [
     coverage: 'Seluruh Indonesia',
     images: [
       'https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&q=80',
-      'https://images.unsplash.com/photo-1526620155639-e79a670cf559?auto=format&fit=crop&q=80',
-      'https://images.unsplash.com/photo-1489824904134-891ab64532f1?auto=format&fit=crop&q=80'
+      'https://images.unsplash.com/photo-1559297434-fae8a1916a79?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D?auto=format&fit=crop&q=80',
+      'https://images.unsplash.com/photo-1504384308090-c894fdcc538d?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
     ]
   },
   {
@@ -59,9 +59,9 @@ const services: ServiceDetails[] = [
     estimatedTime: '1 Hari (Besok Sampai)',
     coverage: 'Kota Besar & Satelit',
     images: [
-      'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&q=80',
+      'https://plus.unsplash.com/premium_photo-1661901122974-e280f0c1efab?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
       'https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&q=80',
-      'https://images.unsplash.com/photo-1553531088-df340101fc3f?auto=format&fit=crop&q=80'
+      'https://plus.unsplash.com/premium_photo-1683120796013-f2f18451a907?q=80&w=1074&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
     ]
   },
   {
@@ -75,9 +75,9 @@ const services: ServiceDetails[] = [
     estimatedTime: '4-6 Jam Kerja',
     coverage: 'Area Metropolitan',
     images: [
-      'https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?auto=format&fit=crop&q=80',
+      'https://images.unsplash.com/photo-1627309366653-2dedc084cdf1?q=80&w=1966&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
       'https://images.unsplash.com/photo-1556740738-b6a63e27c4df?auto=format&fit=crop&q=80',
-      'https://images.unsplash.com/photo-1533050487297-86d3d3a76f48?auto=format&fit=crop&q=80'
+      'https://images.unsplash.com/photo-1587089879249-87bf7d2972df?q=80&w=1176&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
     ]
   },
   {
@@ -91,9 +91,9 @@ const services: ServiceDetails[] = [
     estimatedTime: '5-10 Hari Kerja',
     coverage: 'Nasional (Inter-island)',
     images: [
-      'https://images.unsplash.com/photo-1578575437980-863b12388b86?auto=format&fit=crop&q=80',
-      'https://images.unsplash.com/photo-1496048646313-330519b3ad47?auto=format&fit=crop&q=80',
-      'https://images.unsplash.com/photo-1519643381401-62a08dc9b50d?auto=format&fit=crop&q=80'
+      'https://images.unsplash.com/photo-1585713181935-d5f622cc2415?q=80&w=1171&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+      'https://images.unsplash.com/photo-1494412651409-8963ce7935a7?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+      'https://images.unsplash.com/photo-1617952740732-26b1904d6853?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
     ]
   },
   {
@@ -108,8 +108,8 @@ const services: ServiceDetails[] = [
     coverage: 'Seluruh Jawa-Sumatera',
     images: [
       'https://images.unsplash.com/photo-1552321554-5fefe8c9ef14?auto=format&fit=crop&q=80',
-      'https://images.unsplash.com/photo-1585771724684-38269d6639fd?auto=format&fit=crop&q=80',
-      'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&q=80'
+      'https://plus.unsplash.com/premium_photo-1679858781690-71bffb438658?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+      'https://images.unsplash.com/photo-1600725935160-f67ee4f6084a?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
     ]
   },
   {
@@ -123,9 +123,9 @@ const services: ServiceDetails[] = [
     estimatedTime: '+1 Jam Handling',
     coverage: 'Tersedia di Semua Cabang',
     images: [
-      'https://images.unsplash.com/photo-1608993691422-5cce72b2e3cd?auto=format&fit=crop&q=80',
-      'https://images.unsplash.com/photo-1600507423169-9c580c3be3bd?auto=format&fit=crop&q=80',
-      'https://images.unsplash.com/photo-1577720643272-265efda13e0a?auto=format&fit=crop&q=80'
+      'https://images.unsplash.com/photo-1564691848938-d0fc26235733?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+      'https://imgs.search.brave.com/yHIL89aQAGrRdYIER3d6p7f_cImznPvNa1jvFfS4r2E/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9wYWt1/dGVtYmFrLmNvbS93/cC1jb250ZW50L3Vw/bG9hZHMvMjAyNS8w/NS9jYXJhLXBlbWJ1/YXRhbi1wYWNraW5n/LWtheXUuanBlZw',
+      'https://imgs.search.brave.com/b8I8Hvwr25nkkLw2tPhJ2gf130L0vfHqzCRx_pdPSc4/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly93d3cu/bGFsYW1vdmUuY29t/L2h1YmZzL0tldGFo/dWklMjA1JTIwQ2Fy/YSUyMFBhY2tpbmcl/MjBLYXl1JTIwdW50/dWslMjBQZW5naXJp/bWFuJTIwRWtzdHJh/JTIwQW1hbi5qcGVn'
     ]
   }
 ];
