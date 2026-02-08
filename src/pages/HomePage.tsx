@@ -45,7 +45,7 @@ export const HomePage = () => {
     setTimeout(() => {
       const resiNumber = trackingInput.trim().toUpperCase();
       if (!resiNumber) {
-        setTrackingError('Silakan masukkan nomor resi');
+        setTrackingError('Masukkan nomor resi');
         setIsSearching(false);
         return;
       }
@@ -106,10 +106,10 @@ export const HomePage = () => {
                 className="relative bg-white dark:bg-slate-900 p-2 rounded-2xl shadow-2xl shadow-slate-200 dark:shadow-none flex flex-col sm:flex-row gap-2 border border-slate-200 dark:border-slate-800 group-focus-within:border-orange-500 transition-all duration-300"
               >
                 <div className="flex-1 flex items-center px-4 h-14">
-                  <Search className="text-slate-400 mr-3" size={22} />
+                  <Search className="text-slate-400 mr-3" size={24} />
                   <input
                     type="text"
-                    placeholder="Masukkan Nomor Resi (Contoh: REG-12345)..."
+                    placeholder="Masukkan Nomor Resi (Contoh: ULU-2024-004)..."
                     value={trackingInput}
                     onChange={(e) => setTrackingInput(e.target.value)}
                     className="w-full bg-transparent border-none focus:outline-none text-slate-900 dark:text-white placeholder-slate-400 font-medium"
