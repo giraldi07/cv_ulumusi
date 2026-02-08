@@ -1,9 +1,9 @@
-import { Truck, Menu, X, Sun, Moon } from 'lucide-react';
+import { Menu, X, Sun, Moon } from 'lucide-react';
 import { useTheme } from '../contexts/ThemeContext';
 import { useNavigation, PageType } from '../contexts/NavigationContext';
 import { useScrollEffect } from '../hooks/useScrollEffect';
 import { Button } from './Button';
-import logoImg from '../images/logo-ulumusi.png'; // Pastikan path relatifnya benar
+import logoImg from '../images/logo-ulumusi.png';
 
 const navItems: { id: PageType; label: string }[] = [
   { id: 'home', label: 'Beranda' },
@@ -62,10 +62,11 @@ export const Header = () => {
               <button
                 key={item.id}
                 onClick={() => handleNavigation(item.id)}
+                // UBAH: Warna teks aktif dan hover ke Merah Custom
                 className={`text-sm font-semibold transition-colors ${
                   currentPage === item.id
-                    ? 'text-orange-600'
-                    : 'text-slate-600 dark:text-slate-300 hover:text-orange-600 dark:hover:text-orange-400'
+                    ? 'text-[#AB1F24]'
+                    : 'text-slate-600 dark:text-slate-300 hover:text-[#AB1F24] dark:hover:text-red-400'
                 }`}
               >
                 {item.label}
@@ -82,7 +83,7 @@ export const Header = () => {
               {isDarkMode ? <Sun size={20} /> : <Moon size={20} />}
             </button>
             <Button
-              onClick={() => handleNavigation('shipping-rates')} // Ubah dari 'contact' ke 'shipping-rates'
+              onClick={() => handleNavigation('shipping-rates')}
               className="!py-2.5 !px-5 text-sm"
             >
               Cek Ongkir
@@ -108,6 +109,7 @@ export const Header = () => {
         </div>
       </header>
 
+      {/* MOBILE MENU */}
       {isMobileMenuOpen && (
         <div className="fixed inset-0 z-40 bg-white dark:bg-slate-900 pt-24 px-8 md:hidden animate-fade-in">
           <div className="flex flex-col gap-6">
@@ -115,9 +117,10 @@ export const Header = () => {
               <button
                 key={item.id}
                 onClick={() => handleNavigation(item.id)}
+                // UBAH: Warna teks aktif menu mobile ke Merah Custom
                 className={`text-2xl font-bold text-left transition-colors ${
                   currentPage === item.id
-                    ? 'text-orange-600'
+                    ? 'text-[#AB1F24]'
                     : 'text-slate-900 dark:text-white'
                 }`}
               >
