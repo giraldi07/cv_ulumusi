@@ -13,9 +13,10 @@ import { ShippingRatesPage } from './pages/ShippingRatesPage';
 import { LegalPage } from './pages/LegalPage';
 import { CareerPage } from './pages/CareerPage';
 import { NewsPage } from './pages/NewsPage';
+import { NewsDetailPage } from './pages/NewsDetailPage';
 
 const AppContent = () => {
-  const { currentPage, serviceDetailId } = useNavigation();
+  const { currentPage, serviceDetailId, newsDetailId } = useNavigation();
 
   const renderPage = () => {
     switch (currentPage) {
@@ -35,6 +36,7 @@ const AppContent = () => {
         return <CareerPage />;
       case 'news':   // Case baru untuk Berita
         return <NewsPage />;
+      case 'news-detail': return <NewsDetailPage articleId={newsDetailId ?? 1} />;
       case 'privacy': return <LegalPage type="privacy" />; // Panggil komponen baru
       case 'terms': return <LegalPage type="terms" />;     // Panggil komponen baru
       default:
