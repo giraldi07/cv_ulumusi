@@ -117,7 +117,7 @@ export const Header = () => {
               </button>
             ))}
             <hr className="border-slate-200 dark:border-slate-800" />
-            <Button className="w-full justify-center" onClick={() => handleNavigation('contact')}>
+            <Button className="w-full justify-center" onClick={() => handleNavigation('shipping-rates')}>
               Cek Ongkir Sekarang
             </Button>
           </div>
