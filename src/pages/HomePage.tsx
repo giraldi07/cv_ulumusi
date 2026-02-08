@@ -194,7 +194,7 @@ export const HomePage = () => {
             <h2 className="text-slate-400 dark:text-slate-600 font-bold text-xs uppercase tracking-[0.3em] mb-4">Strategic Partners</h2>
             <p className="text-2xl font-bold text-slate-800 dark:text-slate-200">Dipercaya oleh industri terkemuka di Indonesia</p>
           </div>
-          <ClientsCarousel clients={clients} autoPlay={true} autoPlaySpeed={4000} />
+          <ClientsCarousel clients={clients} autoPlay={true} autoPlaySpeed={7000} />
           
           <div className="mt-20 grid grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12">
             {[
