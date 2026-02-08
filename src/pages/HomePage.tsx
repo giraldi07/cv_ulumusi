@@ -17,7 +17,6 @@ import {
   Star
 } from 'lucide-react';
 import { Section } from '../components/Section';
-// `ServiceCard` not used in this page — removed to silence TS unused warnings
 import { TrackingResult } from '../components/TrackingResult';
 import { ClientsCarousel } from '../components/ClientsCarousel';
 import { CountUp } from '../components/CountUp';
@@ -84,7 +83,8 @@ export const HomePage = () => {
       <div className="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden bg-slate-50 dark:bg-slate-950">
         {/* Abstract Background */}
         <div className="absolute inset-0 z-0">
-          <div className="absolute top-[-20%] right-[-10%] w-[800px] h-[800px] bg-orange-400/10 rounded-full blur-[120px] mix-blend-multiply dark:mix-blend-screen animate-pulse duration-[10s]"></div>
+          {/* UBAH: Background blob orange jadi custom red */}
+          <div className="absolute top-[-20%] right-[-10%] w-[800px] h-[800px] bg-[#AB1F24]/10 rounded-full blur-[120px] mix-blend-multiply dark:mix-blend-screen animate-pulse duration-[10s]"></div>
           <div className="absolute bottom-[-20%] left-[-10%] w-[600px] h-[600px] bg-blue-500/10 rounded-full blur-[100px] mix-blend-multiply dark:mix-blend-screen"></div>
           <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20"></div>
         </div>
@@ -100,8 +100,9 @@ export const HomePage = () => {
           >
             <motion.div variants={fadeInUp} className="inline-flex items-center gap-2 px-4 py-2 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-full shadow-sm hover:shadow-md transition-shadow cursor-default">
               <span className="relative flex h-3 w-3">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-orange-400 opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-3 w-3 bg-orange-500"></span>
+                {/* UBAH: Dot status ping */}
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#AB1F24] opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-3 w-3 bg-[#AB1F24]"></span>
               </span>
               <span className="text-xs font-bold uppercase tracking-wider text-slate-600 dark:text-slate-300">
                 #1 Logistics Partner 2024
@@ -111,8 +112,10 @@ export const HomePage = () => {
             <motion.h1 variants={fadeInUp} className="text-5xl lg:text-7xl font-black text-slate-900 dark:text-white leading-[1.1] tracking-tight">
               Kirim Paket <br className="hidden lg:block" />
               <span className="relative whitespace-nowrap">
-                <span className="relative z-10 text-transparent bg-clip-text bg-gradient-to-r from-orange-500 to-amber-500">Tanpa Batas.</span>
-                <span className="absolute bottom-2 left-0 w-full h-4 bg-orange-200/50 dark:bg-orange-900/30 -rotate-1 z-0"></span>
+                {/* UBAH: Gradient Text Utama */}
+                <span className="relative z-10 text-transparent bg-clip-text bg-gradient-to-r from-[#AB1F24] to-red-500">Tanpa Batas.</span>
+                {/* UBAH: Underline effect */}
+                <span className="absolute bottom-2 left-0 w-full h-4 bg-[#AB1F24]/20 dark:bg-[#AB1F24]/30 -rotate-1 z-0"></span>
               </span>
             </motion.h1>
             
@@ -122,7 +125,8 @@ export const HomePage = () => {
 
             {/* Tracking Search Box - Floating Style */}
             <motion.div variants={fadeInUp} className="relative w-full max-w-xl mx-auto lg:mx-0">
-               <div className="absolute -inset-1 bg-gradient-to-r from-orange-400 to-orange-600 rounded-2xl blur opacity-20 group-hover:opacity-40 transition duration-1000 group-hover:duration-200"></div>
+               {/* UBAH: Glow effect di belakang search bar */}
+               <div className="absolute -inset-1 bg-gradient-to-r from-[#AB1F24] to-red-700 rounded-2xl blur opacity-20 group-hover:opacity-40 transition duration-1000 group-hover:duration-200"></div>
                <form 
                 onSubmit={handleTrackingSearch} 
                 className="relative flex items-center bg-white dark:bg-slate-900 p-2 rounded-2xl shadow-2xl ring-1 ring-slate-900/5 dark:ring-white/10"
@@ -140,7 +144,8 @@ export const HomePage = () => {
                 <button
                   type="submit"
                   disabled={isSearching}
-                  className="hidden sm:flex items-center gap-2 px-8 py-4 bg-orange-600 hover:bg-orange-700 text-white font-bold rounded-xl transition-all shadow-[0_4px_14px_0_rgba(234,88,12,0.39)] hover:shadow-[0_6px_20px_rgba(234,88,12,0.23)] hover:-translate-y-0.5 active:translate-y-0 disabled:opacity-70 disabled:cursor-not-allowed"
+                  // UBAH: Tombol utama search (bg dan shadow)
+                  className="hidden sm:flex items-center gap-2 px-8 py-4 bg-[#AB1F24] hover:bg-[#8a191d] text-white font-bold rounded-xl transition-all shadow-[0_4px_14px_0_rgba(171,31,36,0.39)] hover:shadow-[0_6px_20px_rgba(171,31,36,0.23)] hover:-translate-y-0.5 active:translate-y-0 disabled:opacity-70 disabled:cursor-not-allowed"
                 >
                   {isSearching ? <Clock className="animate-spin" size={20}/> : <span className="flex items-center gap-2">Lacak <ArrowRight size={18}/></span>}
                 </button>
@@ -149,7 +154,8 @@ export const HomePage = () => {
                 <button
                   type="submit"
                   disabled={isSearching}
-                  className="sm:hidden p-4 bg-orange-600 text-white rounded-xl"
+                  // UBAH: Tombol mobile
+                  className="sm:hidden p-4 bg-[#AB1F24] text-white rounded-xl"
                 >
                   {isSearching ? <Clock className="animate-spin" size={20}/> : <ArrowRight size={20}/>}
                 </button>
@@ -176,7 +182,8 @@ export const HomePage = () => {
                {[
                  { label: 'Terpercaya', val: '4.9/5', icon: Star, color: 'text-yellow-500' },
                  { label: 'Jangkauan', val: 'Seluruh ID', icon: Globe, color: 'text-blue-500' },
-                 { label: 'Kecepatan', val: '1 Hari', icon: Zap, color: 'text-orange-500' }
+                 // UBAH: Icon Kecepatan jadi warna custom
+                 { label: 'Kecepatan', val: '1 Hari', icon: Zap, color: 'text-[#AB1F24]' }
                ].map((stat, i) => (
                  <div key={i} className="flex items-center gap-3 px-4 py-2 rounded-xl bg-white/50 dark:bg-slate-800/50 border border-slate-100 dark:border-slate-800 backdrop-blur-sm">
                     <stat.icon className={stat.color} size={18} fill="currentColor" fillOpacity={0.2} />
@@ -207,11 +214,13 @@ export const HomePage = () => {
               {/* Floating Glass Card */}
               <div className="absolute bottom-8 left-8 right-8 z-20 p-6 bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl text-white shadow-xl">
                  <div className="flex items-center justify-between mb-2">
-                    <span className="text-xs font-bold uppercase tracking-widest text-orange-400">Live Status</span>
+                    {/* UBAH: Text accent */}
+                    <span className="text-xs font-bold uppercase tracking-widest text-[#AB1F24]">Live Status</span>
                     <span className="flex h-2 w-2 rounded-full bg-green-500 animate-pulse"></span>
                  </div>
                  <div className="flex items-center gap-4">
-                    <div className="h-12 w-12 rounded-full bg-orange-500 flex items-center justify-center">
+                    {/* UBAH: Icon background */}
+                    <div className="h-12 w-12 rounded-full bg-[#AB1F24] flex items-center justify-center">
                        <Truck size={24} className="text-white"/>
                     </div>
                     <div>
@@ -227,7 +236,8 @@ export const HomePage = () => {
                <svg width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
                   <defs>
                      <pattern id="dot-pattern" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse">
-                        <circle cx="2" cy="2" r="2" className="text-orange-500/30" fill="currentColor" />
+                        {/* UBAH: Dot color */}
+                        <circle cx="2" cy="2" r="2" className="text-[#AB1F24]/30" fill="currentColor" />
                      </pattern>
                   </defs>
                   <rect width="200" height="200" fill="url(#dot-pattern)" />
@@ -246,7 +256,8 @@ export const HomePage = () => {
       <Section className="py-24 bg-slate-50 dark:bg-slate-900/50">
         <div className="flex flex-col md:flex-row justify-between items-end mb-12 gap-6">
           <div className="max-w-2xl">
-            <h2 className="text-orange-600 font-black text-sm uppercase tracking-widest mb-4">Layanan Unggulan</h2>
+            {/* UBAH: Title accent */}
+            <h2 className="text-[#AB1F24] font-black text-sm uppercase tracking-widest mb-4">Layanan Unggulan</h2>
             <h3 className="text-3xl md:text-5xl font-black text-slate-900 dark:text-white leading-tight">
               Solusi Logistik untuk <br/> Setiap Skala Bisnis.
             </h3>
@@ -256,8 +267,9 @@ export const HomePage = () => {
             className="group flex items-center gap-2 px-6 py-3 bg-white dark:bg-slate-800 text-slate-900 dark:text-white rounded-full font-bold shadow-sm hover:shadow-lg transition-all border border-slate-200 dark:border-slate-700"
           >
             Lihat Semua Layanan
-            <div className="bg-orange-100 dark:bg-orange-900/30 p-1 rounded-full group-hover:translate-x-1 transition-transform">
-               <ChevronRight size={16} className="text-orange-600"/>
+            {/* UBAH: Button arrow accent */}
+            <div className="bg-[#AB1F24]/10 p-1 rounded-full group-hover:translate-x-1 transition-transform">
+               <ChevronRight size={16} className="text-[#AB1F24]"/>
             </div>
           </button>
         </div>
@@ -275,8 +287,9 @@ export const HomePage = () => {
               icon: Globe, 
               title: 'Cargo Logistics', 
               desc: 'Solusi pengiriman volume besar antarpulau dengan biaya kompetitif.',
-              bg: 'bg-orange-50 dark:bg-orange-900/10',
-              accent: 'text-orange-600'
+              // UBAH: Card accent background dan text
+              bg: 'bg-[#AB1F24]/10',
+              accent: 'text-[#AB1F24]'
             },
             { 
               icon: Package, 
@@ -298,7 +311,8 @@ export const HomePage = () => {
               <p className="text-slate-500 dark:text-slate-400 leading-relaxed mb-6">
                 {service.desc}
               </p>
-              <div className="flex items-center text-sm font-bold text-slate-900 dark:text-white group-hover:text-orange-600 transition-colors cursor-pointer">
+              {/* UBAH: Link hover color */}
+              <div className="flex items-center text-sm font-bold text-slate-900 dark:text-white group-hover:text-[#AB1F24] transition-colors cursor-pointer">
                 Pelajari Lebih Lanjut <ArrowRight size={16} className="ml-2"/>
               </div>
             </motion.div>
@@ -310,67 +324,73 @@ export const HomePage = () => {
       <div className="py-24 bg-white dark:bg-slate-950 border-t border-slate-100 dark:border-slate-900">
         <div className="max-w-7xl mx-auto px-6">
            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-              
-              {/* Main Title Block */}
-              <div className="lg:col-span-2 bg-slate-900 dark:bg-slate-900 rounded-[2.5rem] p-10 flex flex-col justify-center relative overflow-hidden group">
-                 <div className="absolute top-0 right-0 w-64 h-64 bg-orange-500 rounded-full blur-[100px] opacity-20 group-hover:opacity-30 transition-opacity"></div>
+             
+             {/* Main Title Block */}
+             <div className="lg:col-span-2 bg-slate-900 dark:bg-slate-900 rounded-[2.5rem] p-10 flex flex-col justify-center relative overflow-hidden group">
+                 {/* UBAH: Glow effect */}
+                 <div className="absolute top-0 right-0 w-64 h-64 bg-[#AB1F24] rounded-full blur-[100px] opacity-20 group-hover:opacity-30 transition-opacity"></div>
                  <div className="relative z-10">
-                    <h2 className="text-orange-500 font-bold tracking-[0.2em] text-xs uppercase mb-3">Why Choose Us</h2>
+                    {/* UBAH: Small text */}
+                    <h2 className="text-[#AB1F24] font-bold tracking-[0.2em] text-xs uppercase mb-3">Why Choose Us</h2>
                     <h3 className="text-3xl lg:text-4xl font-black text-white mb-4">Pertumbuhan Anda,<br/>Prioritas Kami.</h3>
                     <p className="text-slate-400">Kami mengkombinasikan kecepatan, keamanan, dan teknologi untuk memberikan pengalaman logistik terbaik.</p>
                  </div>
-              </div>
+             </div>
 
-              {/* Stat Cards */}
-              {[
-                { icon: Users, val: 5000, suffix: '+', label: 'Happy Clients', color: 'text-blue-500', bg: 'bg-blue-50 dark:bg-blue-900/10' },
-                { icon: MapPin, val: 34, suffix: '', label: 'Provinsi Covered', color: 'text-red-500', bg: 'bg-red-50 dark:bg-red-900/10' },
-                { icon: ThumbsUp, val: 99, suffix: '%', label: 'Satisfaction Rate', color: 'text-green-500', bg: 'bg-green-50 dark:bg-green-900/10' },
-                { icon: ShieldCheck, val: 100, suffix: '%', label: 'Insurance Protection', color: 'text-purple-500', bg: 'bg-purple-50 dark:bg-purple-900/10' }
-              ].map((stat, i) => (
-                 <div key={i} className={`rounded-[2.5rem] p-8 bg-slate-50 dark:bg-slate-900/50 border border-slate-100 dark:border-slate-800 flex flex-col items-start justify-center hover:bg-white dark:hover:bg-slate-800 transition-colors`}>
-                    <div className={`p-3 rounded-xl ${stat.bg} mb-4`}>
-                       <stat.icon size={24} className={stat.color} />
-                    </div>
-                    <div className="text-4xl font-black text-slate-900 dark:text-white mb-1">
-                       <CountUp end={stat.val} duration={2.5} />{stat.suffix}
-                    </div>
-                    <p className="text-xs font-bold text-slate-400 uppercase tracking-wider">{stat.label}</p>
-                 </div>
-              ))}
+             {/* Stat Cards */}
+             {[
+               { icon: Users, val: 5000, suffix: '+', label: 'Happy Clients', color: 'text-blue-500', bg: 'bg-blue-50 dark:bg-blue-900/10' },
+               { icon: MapPin, val: 34, suffix: '', label: 'Provinsi Covered', color: 'text-red-500', bg: 'bg-red-50 dark:bg-red-900/10' },
+               { icon: ThumbsUp, val: 99, suffix: '%', label: 'Satisfaction Rate', color: 'text-green-500', bg: 'bg-green-50 dark:bg-green-900/10' },
+               { icon: ShieldCheck, val: 100, suffix: '%', label: 'Insurance Protection', color: 'text-purple-500', bg: 'bg-purple-50 dark:bg-purple-900/10' }
+             ].map((stat, i) => (
+                <div key={i} className={`rounded-[2.5rem] p-8 bg-slate-50 dark:bg-slate-900/50 border border-slate-100 dark:border-slate-800 flex flex-col items-start justify-center hover:bg-white dark:hover:bg-slate-800 transition-colors`}>
+                   <div className={`p-3 rounded-xl ${stat.bg} mb-4`}>
+                      <stat.icon size={24} className={stat.color} />
+                   </div>
+                   <div className="text-4xl font-black text-slate-900 dark:text-white mb-1">
+                      <CountUp end={stat.val} duration={2.5} />{stat.suffix}
+                   </div>
+                   <p className="text-xs font-bold text-slate-400 uppercase tracking-wider">{stat.label}</p>
+                </div>
+             ))}
            </div>
         </div>
       </div>
 
       {/* --- CTA SECTION (Modern) --- */}
       <div className="px-4 pb-20 pt-10 bg-white dark:bg-slate-950">
-        <div className="max-w-7xl mx-auto rounded-[3rem] bg-gradient-to-br from-orange-600 to-red-600 dark:from-orange-700 dark:to-red-800 overflow-hidden relative shadow-2xl shadow-orange-500/20">
+        {/* UBAH: CTA Gradient Background */}
+        <div className="max-w-7xl mx-auto rounded-[3rem] bg-gradient-to-br from-[#AB1F24] to-red-900 dark:from-[#AB1F24] dark:to-red-950 overflow-hidden relative shadow-2xl shadow-red-900/20">
            {/* Background Patterns */}
            <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 mix-blend-overlay"></div>
            <div className="absolute -left-20 -bottom-20 w-96 h-96 bg-white rounded-full blur-[150px] opacity-20"></div>
            
            <div className="relative z-10 px-8 py-20 md:py-24 text-center">
-              <h2 className="text-4xl md:text-6xl font-black text-white mb-6 tracking-tight">
+             <h2 className="text-4xl md:text-6xl font-black text-white mb-6 tracking-tight">
                  Siap Mengirim Paket?
-              </h2>
-              <p className="text-orange-100 text-lg md:text-xl max-w-2xl mx-auto mb-10 font-medium">
+             </h2>
+             {/* UBAH: Text color to match red theme */}
+             <p className="text-red-100 text-lg md:text-xl max-w-2xl mx-auto mb-10 font-medium">
                  Bergabung dengan ribuan bisnis yang telah mempercayakan distribusi produk mereka kepada CV. ULUMUSI.
-              </p>
-              
-              <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                 <button 
-                    onClick={() => setCurrentPage('contact')} 
-                    className="px-10 py-5 bg-white text-orange-600 font-bold rounded-2xl shadow-xl hover:shadow-2xl hover:scale-105 active:scale-95 transition-all duration-300"
-                 >
-                    Hubungi Kami
-                 </button>
-                 <button 
-                    onClick={() => setCurrentPage('services')} 
-                    className="px-10 py-5 bg-orange-700/40 backdrop-blur-sm border border-white/20 text-white font-bold rounded-2xl hover:bg-orange-700/60 transition-all"
-                 >
-                    Cek Ongkir
-                 </button>
-              </div>
+             </p>
+             
+             <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                <button 
+                  onClick={() => setCurrentPage('contact')} 
+                  // UBAH: Button CTA Utama text color
+                  className="px-10 py-5 bg-white text-[#AB1F24] font-bold rounded-2xl shadow-xl hover:shadow-2xl hover:scale-105 active:scale-95 transition-all duration-300"
+                >
+                  Hubungi Kami
+                </button>
+                <button 
+                  onClick={() => setCurrentPage('services')} 
+                  // UBAH: Button Secondary background
+                  className="px-10 py-5 bg-red-900/40 backdrop-blur-sm border border-white/20 text-white font-bold rounded-2xl hover:bg-red-900/60 transition-all"
+                >
+                  Cek Ongkir
+                </button>
+             </div>
            </div>
         </div>
       </div>
