@@ -49,16 +49,17 @@ export const ContactPage = () => {
       title: 'WhatsApp & Call',
       detail: '+62 818 0853 0188',
       subDetail: 'Senin - Sabtu (08:00 - 17:00)',
-      color: 'text-green-500',
-      bg: 'bg-green-500/10'
+      color: 'text-emerald-500',
+      bg: 'bg-emerald-500/10'
     },
     {
       icon: Mail,
       title: 'Email Support',
       detail: 'cv.ulumusi@gmail.com',
       subDetail: 'Respon dalam 1x24 jam',
-      color: 'text-orange-500',
-      bg: 'bg-orange-500/10'
+      // UBAH: Warna icon email ke Merah
+      color: 'text-[#AB1F24]',
+      bg: 'bg-[#AB1F24]/10'
     }
   ];
 
@@ -68,7 +69,8 @@ export const ContactPage = () => {
       {/* --- HERO SECTION --- */}
       <section className="relative py-20 overflow-hidden bg-slate-900">
         <div className="absolute inset-0 opacity-20">
-          <div className="absolute top-0 left-0 w-96 h-96 bg-orange-600 rounded-full blur-[120px] -translate-x-1/2 -translate-y-1/2" />
+          {/* UBAH: Glow effect ke Merah */}
+          <div className="absolute top-0 left-0 w-96 h-96 bg-[#AB1F24] rounded-full blur-[120px] -translate-x-1/2 -translate-y-1/2" />
           <div className="absolute bottom-0 right-0 w-96 h-96 bg-blue-600 rounded-full blur-[120px] translate-x-1/2 translate-y-1/2" />
         </div>
         
@@ -79,7 +81,8 @@ export const ContactPage = () => {
             transition={{ duration: 0.6 }}
           >
             <h1 className="text-4xl md:text-6xl font-black text-white mb-6 uppercase tracking-tighter">
-              Get In <span className="text-orange-500">Touch</span>
+              {/* UBAH: Span text ke Merah */}
+              Get In <span className="text-[#AB1F24]">Touch</span>
             </h1>
             <p className="text-slate-400 text-lg md:text-xl max-w-2xl mx-auto font-light leading-relaxed">
               Ada pertanyaan mengenai logistik atau butuh penawaran khusus? Tim kami siap membantu mencarikan solusi terbaik untuk Anda.
@@ -123,7 +126,8 @@ export const ContactPage = () => {
             className="bg-slate-50 dark:bg-slate-900/50 p-8 md:p-12 rounded-[3rem] border border-slate-100 dark:border-slate-800"
           >
             <div className="flex items-center gap-3 mb-8">
-              <div className="p-2 bg-orange-600 rounded-lg text-white">
+              {/* UBAH: Icon box ke Merah */}
+              <div className="p-2 bg-[#AB1F24] rounded-lg text-white">
                 <MessageSquare size={20} />
               </div>
               <h3 className="text-2xl font-black text-slate-900 dark:text-white uppercase tracking-tight">Kirim Pesan</h3>
@@ -157,9 +161,10 @@ export const ContactPage = () => {
                       <label className="text-xs font-bold uppercase tracking-widest text-slate-500 ml-1">Pesan Anda</label>
                       <Textarea rows={5} placeholder="Bagaimana kami bisa membantu Anda?" required className="bg-white dark:bg-slate-800" />
                     </div>
+                    {/* UBAH: Button Background & Hover ke Merah */}
                     <Button 
                       type="submit" 
-                      className="w-full py-4 bg-orange-600 hover:bg-orange-700 text-white rounded-2xl flex items-center justify-center gap-2 group transition-all"
+                      className="w-full py-4 bg-[#AB1F24] hover:bg-[#8e191d] text-white rounded-2xl flex items-center justify-center gap-2 group transition-all"
                       disabled={isSubmitting}
                     >
                       {isSubmitting ? (
@@ -179,16 +184,17 @@ export const ContactPage = () => {
                     className="py-12 text-center space-y-4"
                   >
                     <div className="flex justify-center">
-                      <div className="w-20 h-20 bg-green-500/20 text-green-500 rounded-full flex items-center justify-center">
+                      <div className="w-20 h-20 bg-emerald-500/20 text-emerald-500 rounded-full flex items-center justify-center">
                         <CheckCircle2 size={48} />
                       </div>
                     </div>
                     <h4 className="text-2xl font-bold text-slate-900 dark:text-white">Pesan Terkirim!</h4>
                     <p className="text-slate-500">Terima kasih telah menghubungi CV. Ulu Musi. Tim kami akan segera merespon pesan Anda.</p>
+                    {/* UBAH: Text color ke Merah */}
                     <button 
                       type="button"
                       onClick={() => setIsSubmitted(false)}
-                      className="text-orange-600 font-bold hover:underline"
+                      className="text-[#AB1F24] font-bold hover:underline"
                     >
                       Kirim pesan lain
                     </button>
@@ -206,15 +212,14 @@ export const ContactPage = () => {
             className="space-y-8"
           >
             <div className="relative group rounded-[3rem] overflow-hidden shadow-2xl border-4 border-white dark:border-slate-900 h-[400px]">
-              {/* Google Maps Embed Placeholder */}
               <iframe 
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15865.000!2d106.15!3d-6.12!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNsKwMDcnMTIuMCJTIDEwNsKwMDknMDAuMCJF!5e0!3m2!1sen!2sid!4v1620000000000!5m2!1sen!2sid" 
-                className="w-full h-full grayscale hover:grayscale-0 transition-all duration-700"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3967.042857430932!2d106.1669281!3d-6.1249495!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e418b39860c4969%3A0x6e78872e616c6804!2sRSS%20Pemda!5e0!3m2!1sid!2sid!4v1707000000000!5m2!1sid!2sid" 
+                className="w-full h-full grayscale hover:grayscale-0 transition-all duration-700 border-0"
                 loading="lazy"
                 title="CV Ulu Musi Location"
               />
               <div className="absolute top-4 right-4 bg-white/90 dark:bg-slate-900/90 backdrop-blur px-4 py-2 rounded-full text-xs font-bold shadow-lg flex items-center gap-2">
-                <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse" />
+                <div className="w-2 h-2 bg-emerald-500 rounded-full animate-pulse" />
                 Live Office Status: Open
               </div>
             </div>
@@ -228,7 +233,8 @@ export const ContactPage = () => {
                 {[Instagram, Facebook, Linkedin].map((Icon, idx) => (
                   <button 
                     key={idx}
-                    className="w-12 h-12 bg-white/10 hover:bg-orange-600 rounded-2xl flex items-center justify-center transition-all hover:-translate-y-1"
+                    /* UBAH: Hover background ke Merah */
+                    className="w-12 h-12 bg-white/10 hover:bg-[#AB1F24] rounded-2xl flex items-center justify-center transition-all hover:-translate-y-1"
                   >
                     <Icon size={20} />
                   </button>
@@ -244,7 +250,8 @@ export const ContactPage = () => {
         <div className="border-t border-slate-100 dark:border-slate-800 pt-16 grid md:grid-cols-3 gap-12">
           <div>
             <div className="flex items-center gap-2 mb-4">
-              <Clock className="text-orange-600" size={20} />
+              {/* UBAH: Icon color ke Merah */}
+              <Clock className="text-[#AB1F24]" size={20} />
               <h5 className="font-bold dark:text-white uppercase tracking-widest text-sm">Jam Operasional</h5>
             </div>
             <p className="text-slate-500 text-sm">Setiap Senin sampai Sabtu pukul 08:00 - 17:00 WIB. Hari Minggu dan libur nasional kantor tutup, namun tracking online tetap aktif 24/7.</p>
@@ -258,7 +265,7 @@ export const ContactPage = () => {
           </div>
           <div>
             <div className="flex items-center gap-2 mb-4">
-              <MapPin className="text-green-600" size={20} />
+              <MapPin className="text-emerald-600" size={20} />
               <h5 className="font-bold dark:text-white uppercase tracking-widest text-sm">Kunjungan Kantor</h5>
             </div>
             <p className="text-slate-500 text-sm">Silakan buat janji temu melalui email atau telepon jika ingin mendiskusikan kontrak kerjasama logistik jangka panjang di kantor kami.</p>
