@@ -9,6 +9,7 @@ import { ServicesPage } from './pages/ServicesPage';
 import { ContactPage } from './pages/ContactPage';
 import { ServiceDetailPage } from './pages/ServiceDetailPage';
 import { useEffect, useState } from 'react';
+import { ShippingRatesPage } from './pages/ShippingRatesPage';
 
 const AppContent = () => {
   const { currentPage, serviceDetailId } = useNavigation();
@@ -25,6 +26,8 @@ const AppContent = () => {
         return <ServiceDetailPage serviceId={serviceDetailId ?? 0} />;
       case 'contact':
         return <ContactPage />;
+      case 'shipping-rates':
+        return <ShippingRatesPage />;
       default:
         return <HomePage />;
     }

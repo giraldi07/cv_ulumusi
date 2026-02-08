@@ -1,6 +1,6 @@
 import { createContext, useContext, useState, ReactNode } from 'react';
 
-export type PageType = 'home' | 'about' | 'services' | 'service-detail' | 'contact';
+export type PageType = 'home' | 'about' | 'services' | 'service-detail' | 'contact' | 'shipping-rates';
 
 interface NavigationContextType {
   currentPage: PageType;

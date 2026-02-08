@@ -74,7 +74,7 @@ export const Header = () => {
               {isDarkMode ? <Sun size={20} /> : <Moon size={20} />}
             </button>
             <Button
-              onClick={() => handleNavigation('contact')}
+              onClick={() => handleNavigation('shipping-rates')} // Ubah dari 'contact' ke 'shipping-rates'
               className="!py-2.5 !px-5 text-sm"
             >
               Cek Ongkir
