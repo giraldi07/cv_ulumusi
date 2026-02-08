@@ -1,102 +1,219 @@
-import { motion, AnimatePresence } from 'framer-motion';
-import { Box, Truck } from 'lucide-react';
+import React, { useEffect, useState } from 'react';
+import { motion, AnimatePresence, Variants } from 'framer-motion';
+import { Box, Truck, Globe, LucideIcon } from 'lucide-react';
+
+/**
+ * --- ANIMATION VARIANTS ---
+ */
+const containerVariants: Variants = {
+  initial: { opacity: 0 },
+  animate: { 
+    opacity: 1,
+    transition: { staggerChildren: 0.1 } 
+  },
+  exit: {
+    opacity: 0,
+    transition: { 
+      duration: 0.6, 
+      ease: [0.22, 1, 0.36, 1], // Custom Cubic Bezier untuk kesan premium
+      when: "afterChildren" 
+    }
+  }
+};
+
+const childVariants: Variants = {
+  initial: { opacity: 0, y: 15 },
+  animate: { 
+    opacity: 1, 
+    y: 0,
+    transition: { duration: 0.8, ease: "easeOut" }
+  },
+};
+
+/**
+ * --- SUB-COMPONENTS ---
+ */
+const BackgroundDecor = () => (
+  <div className="absolute inset-0 overflow-hidden pointer-events-none">
+    {/* Ambient Glows - Dioptimalkan dengan GPU acceleration */}
+    <motion.div 
+      animate={{ 
+        scale: [1, 1.1, 1],
+        opacity: [0.3, 0.5, 0.3]
+      }}
+      transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+      className="absolute -top-[10%] -left-[10%] w-[60%] h-[60%] bg-orange-500/10 rounded-full blur-[100px] will-change-transform" 
+    />
+    <motion.div 
+      animate={{ 
+        scale: [1.1, 1, 1.1],
+        opacity: [0.2, 0.4, 0.2]
+      }}
+      transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
+      className="absolute -bottom-[10%] -right-[10%] w-[60%] h-[60%] bg-blue-600/10 rounded-full blur-[100px] will-change-transform" 
+    />
+    
+    {/* Tech Grid Pattern */}
+    <div 
+      className="absolute inset-0 opacity-[0.03] dark:opacity-[0.07]" 
+      style={{ 
+        backgroundImage: `radial-gradient(#9C92AC 0.5px, transparent 0.5px)`,
+        backgroundSize: '24px 24px'
+      }} 
+    />
+  </div>
+);
 
 export const LoadingScreen = ({ isLoading }: { isLoading: boolean }) => {
+  const [counter, setCounter] = useState(0);
+
+  // Simulasi progress angka untuk kesan "System Loading"
+  useEffect(() => {
+    if (isLoading) {
+      const interval = setInterval(() => {
+        setCounter(prev => (prev < 99 ? prev + 1 : 99));
+      }, 30);
+      return () => clearInterval(interval);
+    } else {
+      setCounter(100);
+    }
+  }, [isLoading]);
+
   return (
     <AnimatePresence>
       {isLoading && (
         <motion.div
-          initial={{ opacity: 1 }}
-          exit={{ opacity: 0, transition: { duration: 0.8, ease: "easeInOut" } }}
-          className="fixed inset-0 z-[100] flex items-center justify-center bg-slate-50 dark:bg-slate-950 overflow-hidden"
+          variants={containerVariants}
+          initial="initial"
+          animate="animate"
+          exit="exit"
+          className="fixed inset-0 z-[9999] flex flex-col items-center justify-center bg-slate-50 dark:bg-[#020617] selection:bg-orange-500/30"
         >
-          {/* --- BACKGROUND DECORATION --- */}
-          <div className="absolute inset-0 overflow-hidden pointer-events-none">
-            <div className="absolute -top-[10%] -left-[10%] w-[40%] h-[40%] bg-orange-500/5 rounded-full blur-[100px]" />
-            <div className="absolute -bottom-[10%] -right-[10%] w-[40%] h-[40%] bg-blue-500/5 rounded-full blur-[100px]" />
-          </div>
+          <BackgroundDecor />
 
           {/* --- MAIN CONTENT --- */}
           <div className="relative z-10 flex flex-col items-center">
             
-            {/* LOGO ANIMATION AREA */}
-            <div className="relative w-32 h-32 mb-12">
-              {/* Outer Orbit Ring */}
+            {/* RADAR & ICON SECTION */}
+            <div className="relative w-48 h-48 mb-8 flex items-center justify-center">
+              {/* Radar Pulses */}
+              {[...Array(2)].map((_, i) => (
+                <motion.div
+                  key={i}
+                  initial={{ scale: 0.5, opacity: 0 }}
+                  animate={{ scale: [1, 1.8], opacity: [0.5, 0] }}
+                  transition={{ duration: 2.5, repeat: Infinity, delay: i * 1, ease: "circOut" }}
+                  className="absolute inset-0 border border-orange-500/20 rounded-full"
+                />
+              ))}
+
+              {/* Spinning Orbit */}
               <motion.div 
                 animate={{ rotate: 360 }}
-                transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
-                className="absolute inset-0 border-[1px] border-dashed border-slate-300 dark:border-slate-700 rounded-full"
-              />
-              
-              {/* Pulsing Core */}
-              <motion.div
-                animate={{ scale: [1, 1.1, 1], opacity: [0.3, 0.6, 0.3] }}
-                transition={{ duration: 2, repeat: Infinity }}
-                className="absolute inset-4 bg-orange-500/10 dark:bg-orange-500/20 rounded-full blur-xl"
+                transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
+                className="absolute inset-0 border-[0.5px] border-dashed border-slate-300 dark:border-slate-700 rounded-full"
               />
 
-              {/* Moving Delivery Truck on Orbit */}
+              {/* Delivery Truck Tracker */}
               <motion.div
                 animate={{ rotate: 360 }}
-                transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
+                transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
                 className="absolute inset-0"
               >
-                <div className="absolute -top-3 left-1/2 -translate-x-1/2 p-2 bg-white dark:bg-slate-900 shadow-xl rounded-lg border border-slate-100 dark:border-slate-800">
-                  <Truck size={16} className="text-orange-600" />
+                <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2">
+                  <motion.div 
+                    initial={{ scale: 0 }}
+                    animate={{ scale: 1 }}
+                    className="bg-white dark:bg-slate-900 p-2 rounded-xl shadow-xl border border-orange-500/20"
+                  >
+                    <Truck size={18} className="text-orange-500 fill-orange-500/10" />
+                  </motion.div>
                 </div>
               </motion.div>
 
-              {/* Central Package Icon */}
-              <div className="absolute inset-0 flex items-center justify-center">
+              {/* Center Core */}
+              <div className="relative group">
                 <motion.div
-                  initial={{ y: 0 }}
-                  animate={{ y: [-5, 5, -5] }}
-                  transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+                  animate={{ rotateY: 360 }}
+                  transition={{ duration: 12, repeat: Infinity, ease: "linear" }}
+                  className="absolute inset-0 flex items-center justify-center opacity-20"
                 >
-                  <Box size={44} className="text-slate-900 dark:text-white" strokeWidth={1.5} />
+                  <Globe size={90} className="text-slate-400" strokeWidth={0.5} />
+                </motion.div>
+                
+                <motion.div
+                  animate={{ 
+                    y: [-5, 5, -5],
+                  }}
+                  transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+                  className="relative z-10 drop-shadow-[0_10px_10px_rgba(0,0,0,0.1)]"
+                >
+                  <Box size={56} className="text-slate-800 dark:text-white" strokeWidth={1.5} />
                 </motion.div>
               </div>
             </div>
 
-            {/* BRANDING TEXT */}
-            <div className="text-center space-y-3">
-              <motion.div
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.2 }}
-                className="flex flex-col items-center"
-              >
-                <h1 className="text-2xl font-black tracking-[0.3em] text-slate-900 dark:text-white uppercase">
-                  CV. ULUMUSI
+            {/* TEXT SECTION */}
+            <div className="text-center space-y-3 px-6">
+              <motion.div variants={childVariants} className="space-y-1">
+                <h1 className="text-3xl md:text-4xl font-black tracking-[0.3em] text-slate-800 dark:text-white uppercase">
+                  CV. <span className="text-orange-500">ULUMUSI</span>
                 </h1>
-                <div className="h-0.5 w-12 bg-orange-500 mt-1 rounded-full" />
+                <div className="flex items-center justify-center gap-3">
+                  <div className="h-[1px] w-8 bg-gradient-to-r from-transparent to-slate-300 dark:to-slate-700" />
+                  <p className="text-[10px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-[0.5em]">
+                    Logistics & Supply Chain
+                  </p>
+                  <div className="h-[1px] w-8 bg-gradient-to-l from-transparent to-slate-300 dark:to-slate-700" />
+                </div>
               </motion.div>
 
-              <motion.p
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 0.4 }}
-                className="text-[10px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-[0.5em] pl-2"
+              {/* PROGRESS BAR SECTION */}
+              <motion.div 
+                variants={childVariants}
+                className="pt-6 flex flex-col items-center gap-3"
               >
-                Connecting Nations
-              </motion.p>
-            </div>
-
-            {/* PROGRESS BAR (MODERN REPLACEMENT FOR DOTS) */}
-            <div className="mt-10 w-48 h-[2px] bg-slate-200 dark:bg-slate-800 rounded-full overflow-hidden">
-              <motion.div
-                initial={{ x: "-100%" }}
-                animate={{ x: "100%" }}
-                transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
-                className="w-full h-full bg-gradient-to-r from-transparent via-orange-500 to-transparent"
-              />
+                <div className="relative w-64 h-[4px] bg-slate-200 dark:bg-slate-800 rounded-full overflow-hidden">
+                  <motion.div
+                    initial={{ width: "0%" }}
+                    animate={{ width: `${counter}%` }}
+                    className="absolute inset-y-0 left-0 bg-gradient-to-r from-orange-400 to-orange-600 shadow-[0_0_10px_rgba(249,115,22,0.5)]"
+                  />
+                </div>
+                
+                <div className="flex justify-between w-64 px-1">
+                  <span className="text-[9px] font-mono text-slate-400 animate-pulse">
+                    {counter < 100 ? 'PROCESSING_CORE...' : 'SYSTEM_READY'}
+                  </span>
+                  <span className="text-[9px] font-mono text-orange-500 font-bold">
+                    {counter}%
+                  </span>
+                </div>
+              </motion.div>
             </div>
           </div>
           
-          {/* VERSION TAG */}
-          <div className="absolute bottom-8 text-[9px] font-mono text-slate-300 dark:text-slate-800 tracking-tighter">
-            SYS-V.2.0.6 // STABLE_READY
-          </div>
+          {/* FOOTER INFO */}
+          <motion.div 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 1 }}
+            className="absolute bottom-10 text-center"
+          >
+            <p className="text-[10px] font-mono text-slate-400/60 dark:text-slate-600 tracking-widest uppercase">
+              Secure Connection Established
+            </p>
+            <div className="mt-2 flex justify-center gap-1">
+              {[...Array(3)].map((_, i) => (
+                <motion.div 
+                  key={i}
+                  animate={{ opacity: [0.2, 1, 0.2] }}
+                  transition={{ duration: 1, repeat: Infinity, delay: i * 0.2 }}
+                  className="w-1 h-1 bg-orange-500 rounded-full"
+                />
+              ))}
+            </div>
+          </motion.div>
         </motion.div>
       )}
     </AnimatePresence>

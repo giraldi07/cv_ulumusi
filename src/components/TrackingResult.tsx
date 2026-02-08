@@ -6,6 +6,7 @@ import {
   Check, ChevronRight, Box
 } from 'lucide-react';
 import { Shipment, STATUS_DETAILS, SERVICE_TYPES } from '../types/shipment';
+import { generateShipmentPDF } from '../utils/generatePDF';
 
 // --- ANIMATION VARIANTS ---
 const modalVariants: Variants = {
@@ -55,6 +56,15 @@ export const TrackingResult = ({ shipment, onClose }: TrackingResultProps) => {
     const statusOrder = ['pending', 'picked-up', 'in-transit', 'in-delivery', 'delivered'];
     const currentStatusIndex = statusOrder.indexOf(shipment.status);
     return Math.max(5, ((currentStatusIndex + 1) / statusOrder.length) * 100);
+  };
+
+  const handleDownloadPDF = () => {
+    try {
+      generateShipmentPDF(shipment);
+    } catch (error) {
+      console.error("Gagal membuat PDF:", error);
+      alert("Terjadi kesalahan saat mengunduh PDF.");
+    }
   };
 
   return (
@@ -298,9 +308,15 @@ export const TrackingResult = ({ shipment, onClose }: TrackingResultProps) => {
 
           {/* --- FOOTER (Call to Action) --- */}
           <div className="p-4 md:p-6 bg-white dark:bg-slate-900 border-t border-slate-100 dark:border-slate-800 shrink-0 z-30">
-            <button className="w-full py-4 bg-slate-900 dark:bg-white text-white dark:text-slate-900 rounded-xl font-bold text-sm tracking-wide flex items-center justify-center gap-2 hover:scale-[1.02] active:scale-[0.98] transition-all shadow-xl">
-               <span>Unduh Bukti Pengiriman</span>
-               <ChevronRight size={16} />
+            <button 
+              onClick={handleDownloadPDF} // 3. Pasang fungsi di sini
+              className="w-full py-4 bg-slate-900 dark:bg-white text-white dark:text-slate-900 rounded-xl font-bold text-sm tracking-wide flex items-center justify-center gap-2 hover:scale-[1.02] active:scale-[0.98] transition-all shadow-xl group"
+            >
+              <div className="bg-orange-600 p-1 rounded group-hover:rotate-12 transition-transform">
+                <Package size={14} className="text-white" />
+              </div>
+              <span>Unduh Bukti Pengiriman (PDF)</span>
+              <ChevronRight size={16} />
             </button>
           </div>
 
