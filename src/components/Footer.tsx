@@ -1,5 +1,6 @@
 import { useNavigation, PageType } from '../contexts/NavigationContext';
 import { FaFacebookF, FaInstagram, FaWhatsapp } from 'react-icons/fa';
+import { FaTruck, FaClock, FaBox, FaShip, FaTruckMoving, FaHammer } from 'react-icons/fa';
 import logoImg from '../images/logo-ulumusi.png';
 
 export const Footer = () => {
@@ -36,25 +37,29 @@ export const Footer = () => {
           <div>
             <h3 className="font-bold text-lg mb-6 text-orange-500">Layanan</h3>
             <ul className="space-y-4 text-slate-400">
-              <li>
-                <a href="#" className="hover:text-white transition-colors">
-                  Regular Shipping
-                </a>
+              <li className="flex items-center gap-3">
+                <FaTruck className="text-orange-500" size={16} />
+                <span>Reguler Service</span>
               </li>
-              <li>
-                <a href="#" className="hover:text-white transition-colors">
-                  Kargo Udara
-                </a>
+              <li className="flex items-center gap-3">
+                <FaClock className="text-orange-500" size={16} />
+                <span>Next Day Service</span>
               </li>
-              <li>
-                <a href="#" className="hover:text-white transition-colors">
-                  Transportasi Laut
-                </a>
+              <li className="flex items-center gap-3">
+                <FaBox className="text-orange-500" size={16} />
+                <span>Same Day Service</span>
               </li>
-              <li>
-                <a href="#" className="hover:text-white transition-colors">
-                  Pergudangan
-                </a>
+              <li className="flex items-center gap-3">
+                <FaShip className="text-orange-500" size={16} />
+                <span>Kargo Laut</span>
+              </li>
+              <li className="flex items-center gap-3">
+                <FaTruckMoving className="text-orange-500" size={16} />
+                <span>Pindahan</span>
+              </li>
+              <li className="flex items-center gap-3">
+                <FaHammer className="text-orange-500" size={16} />
+                <span>Packing Kayu</span>
               </li>
             </ul>
           </div>
