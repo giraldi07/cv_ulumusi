@@ -11,7 +11,7 @@ export const clients: Client[] = [
   {
     id: 'pt-mitra-utama',
     name: 'PT. Mitra Utama',
-    logo: 'https://cdn.worldvectorlogo.com/logos/fedex-express-6.svg',
+    logo: 'https://www.ptsi.co.id/images/logo-white-surveyor.svg',
     category: 'Manufacturing',
     description: 'Perusahaan manufaktur terkemuka',
   },
