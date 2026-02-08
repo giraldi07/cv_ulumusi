@@ -122,12 +122,18 @@ export const Footer = () => {
         <div className="pt-8 border-t border-slate-800 flex flex-col md:flex-row justify-between items-center gap-4 text-slate-500 text-sm">
           <p>&copy; {new Date().getFullYear()} CV. ULUMUSI. All rights reserved.</p>
           <div className="flex gap-6">
-            <a href="#" className="hover:text-white transition-colors">
-              Privacy Policy
-            </a>
-            <a href="#" className="hover:text-white transition-colors">
-              Terms of Service
-            </a>
+            <button 
+                onClick={() => handleNavigation('privacy')} 
+                className="hover:text-white transition-colors cursor-pointer"
+              >
+                Privacy Policy
+            </button>
+            <button 
+                onClick={() => handleNavigation('terms')} 
+                className="hover:text-white transition-colors cursor-pointer"
+            >
+                Terms of Service
+            </button>
           </div>
         </div>
       </div>

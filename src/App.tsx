@@ -10,6 +10,7 @@ import { ContactPage } from './pages/ContactPage';
 import { ServiceDetailPage } from './pages/ServiceDetailPage';
 import { useEffect, useState } from 'react';
 import { ShippingRatesPage } from './pages/ShippingRatesPage';
+import { LegalPage } from './pages/LegalPage';
 
 const AppContent = () => {
   const { currentPage, serviceDetailId } = useNavigation();
@@ -28,6 +29,8 @@ const AppContent = () => {
         return <ContactPage />;
       case 'shipping-rates':
         return <ShippingRatesPage />;
+      case 'privacy': return <LegalPage type="privacy" />; // Panggil komponen baru
+      case 'terms': return <LegalPage type="terms" />;     // Panggil komponen baru
       default:
         return <HomePage />;
     }
