@@ -70,7 +70,7 @@ export const Footer = () => {
               </li>
               <li
                 className="cursor-pointer hover:text-white transition-colors"
-                onClick={() => handleNavigation('services')}
+                onClick={() => handleNavigation('career')}
               >
                 Karir
               </li>
@@ -81,7 +81,9 @@ export const Footer = () => {
                 Hubungi Kami
               </li>
               <li>
-                <a href="#" className="hover:text-white transition-colors">
+                <a href="#" className="hover:text-white transition-colors"
+                onClick={() => handleNavigation('news')}
+                >
                   Berita & Artikel
                 </a>
               </li>

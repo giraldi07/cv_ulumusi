@@ -11,6 +11,8 @@ import { ServiceDetailPage } from './pages/ServiceDetailPage';
 import { useEffect, useState } from 'react';
 import { ShippingRatesPage } from './pages/ShippingRatesPage';
 import { LegalPage } from './pages/LegalPage';
+import { CareerPage } from './pages/CareerPage';
+import { NewsPage } from './pages/NewsPage';
 
 const AppContent = () => {
   const { currentPage, serviceDetailId } = useNavigation();
@@ -29,6 +31,10 @@ const AppContent = () => {
         return <ContactPage />;
       case 'shipping-rates':
         return <ShippingRatesPage />;
+      case 'career': // Case baru untuk Karir
+        return <CareerPage />;
+      case 'news':   // Case baru untuk Berita
+        return <NewsPage />;
       case 'privacy': return <LegalPage type="privacy" />; // Panggil komponen baru
       case 'terms': return <LegalPage type="terms" />;     // Panggil komponen baru
       default:
