@@ -3,7 +3,8 @@ import { useTheme } from '../contexts/ThemeContext';
 import { useNavigation, PageType } from '../contexts/NavigationContext';
 import { useScrollEffect } from '../hooks/useScrollEffect';
 import { Button } from './Button';
-import logoImg from '../images/logo-ulumusi.png';
+import logoLight from '../images/logo-light.png';
+import logoDark from '../images/logo-dark.png';
 
 const navItems: { id: PageType; label: string }[] = [
   { id: 'home', label: 'Beranda' },
@@ -40,21 +41,13 @@ export const Header = () => {
             {/* Kontainer Logo */}
             <div className="flex items-center justify-center overflow-hidden">
               <img 
-                src={logoImg} 
+                // LOGIKA SWITCH LOGO DI SINI:
+                src={isDarkMode ? logoDark : logoLight} 
                 alt="Logo CV. ULUMUSI" 
-                className="h-10 w-auto object-contain transform group-hover:scale-105 transition-transform duration-300"
+                className="h-8 w-auto object-contain transform group-hover:scale-105 transition-transform duration-300"
               />
             </div>
 
-            {/* Teks Brand */}
-            <div className="flex flex-col justify-center">
-              <h1 className="text-xl font-extrabold tracking-tight text-slate-900 dark:text-white leading-none">
-                CV. ULUMUSI
-              </h1>
-              <p className="text-[10px] text-slate-500 font-medium tracking-widest uppercase mt-1">
-                Express & Logistics
-              </p>
-            </div>
           </div>
 
           <nav className="hidden md:flex items-center gap-8">

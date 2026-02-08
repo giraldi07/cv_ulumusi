@@ -1,7 +1,7 @@
 import { useNavigation, PageType } from '../contexts/NavigationContext';
 import { FaFacebookF, FaInstagram, FaWhatsapp } from 'react-icons/fa';
 import { FaTruck, FaClock, FaBox, FaShip, FaTruckMoving, FaHammer } from 'react-icons/fa';
-import logoImg from '../images/logo-ulumusi.png';
+import logoImg from '../images/logo-dark.png';
 
 export const Footer = () => {
   const { setCurrentPage } = useNavigation();
@@ -22,10 +22,9 @@ export const Footer = () => {
                 <img 
                   src={logoImg} 
                   alt="Logo CV. ULUMUSI" 
-                  className="h-14 w-auto object-contain" 
+                  className="h-8 w-auto object-contain" 
                 />
               </div>
-              <h2 className="text-md font-bold tracking-tight">CV. ULUMUSI</h2>
             </div>
             
             <p className="text-slate-400 leading-relaxed mb-6">
