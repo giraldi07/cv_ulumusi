@@ -3,6 +3,7 @@ import { useTheme } from '../contexts/ThemeContext';
 import { useNavigation, PageType } from '../contexts/NavigationContext';
 import { useScrollEffect } from '../hooks/useScrollEffect';
 import { Button } from './Button';
+import logoImg from '../images/logo-ulumusi.png'; // Pastikan path relatifnya benar
 
 const navItems: { id: PageType; label: string }[] = [
   { id: 'home', label: 'Beranda' },
@@ -36,14 +37,21 @@ export const Header = () => {
             className="flex items-center gap-3 cursor-pointer group"
             onClick={() => handleNavigation('home')}
           >
-            <div className="w-10 h-10 bg-orange-600 rounded-lg flex items-center justify-center text-white transform group-hover:rotate-12 transition-transform shadow-lg shadow-orange-500/50">
-              <Truck size={24} />
+            {/* Kontainer Logo */}
+            <div className="flex items-center justify-center overflow-hidden">
+              <img 
+                src={logoImg} 
+                alt="Logo CV. ULUMUSI" 
+                className="h-10 w-auto object-contain transform group-hover:scale-105 transition-transform duration-300"
+              />
             </div>
-            <div>
-              <h1 className="text-xl font-extrabold tracking-tight text-slate-900 dark:text-white">
+
+            {/* Teks Brand */}
+            <div className="flex flex-col justify-center">
+              <h1 className="text-xl font-extrabold tracking-tight text-slate-900 dark:text-white leading-none">
                 CV. ULUMUSI
               </h1>
-              <p className="text-[10px] text-slate-500 font-medium tracking-widest uppercase">
+              <p className="text-[10px] text-slate-500 font-medium tracking-widest uppercase mt-1">
                 Express & Logistics
               </p>
             </div>
