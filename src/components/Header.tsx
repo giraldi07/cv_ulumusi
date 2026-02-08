@@ -6,11 +6,18 @@ import { Button } from './Button';
 import logoLight from '../images/logo-light.png';
 import logoDark from '../images/logo-dark.png';
 
+// Menu Utama (Desktop & Mobile)
 const navItems: { id: PageType; label: string }[] = [
   { id: 'home', label: 'Beranda' },
   { id: 'about', label: 'Tentang Kami' },
   { id: 'services', label: 'Layanan' },
   { id: 'contact', label: 'Hubungi' },
+];
+
+// Menu Tambahan (Hanya Mobile)
+const extraMobileItems: { id: PageType; label: string }[] = [
+  { id: 'career', label: 'Karir' },
+  { id: 'news', label: 'Berita & Artikel' },
 ];
 
 export const Header = () => {
@@ -38,24 +45,21 @@ export const Header = () => {
             className="flex items-center gap-3 cursor-pointer group"
             onClick={() => handleNavigation('home')}
           >
-            {/* Kontainer Logo */}
             <div className="flex items-center justify-center overflow-hidden">
               <img 
-                // LOGIKA SWITCH LOGO DI SINI:
                 src={isDarkMode ? logoDark : logoLight} 
                 alt="Logo CV. ULUMUSI" 
                 className="h-8 w-auto object-contain transform group-hover:scale-105 transition-transform duration-300"
               />
             </div>
-
           </div>
 
+          {/* DESKTOP NAVIGATION */}
           <nav className="hidden md:flex items-center gap-8">
             {navItems.map((item) => (
               <button
                 key={item.id}
                 onClick={() => handleNavigation(item.id)}
-                // UBAH: Warna teks aktif dan hover ke Merah Custom
                 className={`text-sm font-semibold transition-colors ${
                   currentPage === item.id
                     ? 'text-[#AB1F24]'
@@ -83,6 +87,7 @@ export const Header = () => {
             </Button>
           </div>
 
+          {/* MOBILE CONTROLS */}
           <div className="md:hidden flex items-center gap-4">
             <button
               onClick={toggleTheme}
@@ -104,13 +109,13 @@ export const Header = () => {
 
       {/* MOBILE MENU */}
       {isMobileMenuOpen && (
-        <div className="fixed inset-0 z-40 bg-white dark:bg-slate-900 pt-24 px-8 md:hidden animate-fade-in">
-          <div className="flex flex-col gap-6">
+        <div className="fixed inset-0 z-40 bg-white dark:bg-slate-900 pt-24 px-8 md:hidden animate-fade-in overflow-y-auto">
+          <div className="flex flex-col gap-6 pb-10">
+            {/* Render Menu Utama */}
             {navItems.map((item) => (
               <button
                 key={item.id}
                 onClick={() => handleNavigation(item.id)}
-                // UBAH: Warna teks aktif menu mobile ke Merah Custom
                 className={`text-2xl font-bold text-left transition-colors ${
                   currentPage === item.id
                     ? 'text-[#AB1F24]'
@@ -120,8 +125,25 @@ export const Header = () => {
                 {item.label}
               </button>
             ))}
-            <hr className="border-slate-200 dark:border-slate-800" />
-            <Button className="w-full justify-center" onClick={() => handleNavigation('shipping-rates')}>
+
+            {/* Render Menu Tambahan (Hanya Mobile) */}
+            {extraMobileItems.map((item) => (
+              <button
+                key={item.id}
+                onClick={() => handleNavigation(item.id)}
+                className={`text-2xl font-bold text-left transition-colors ${
+                  currentPage === item.id
+                    ? 'text-[#AB1F24]'
+                    : 'text-slate-900 dark:text-white opacity-80' 
+                }`}
+              >
+                {item.label}
+              </button>
+            ))}
+
+            <hr className="border-slate-200 dark:border-slate-800 my-2" />
+            
+            <Button className="w-full justify-center py-4 text-lg" onClick={() => handleNavigation('shipping-rates')}>
               Cek Ongkir Sekarang
             </Button>
           </div>
