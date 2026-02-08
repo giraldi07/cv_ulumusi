@@ -49,16 +49,16 @@ const milestones = [
   },
   {
     year: "2024",
-    title: "Sustainability Era",
-    desc: "Peremajaan armada dengan standar Euro 4 dan implementasi rute cerdas AI untuk menekan jejak karbon.",
-    icon: Globe,
+    title: "Strategic BUMN Partnership",
+    desc: "Dipercaya oleh PT. Surveyor Indonesia untuk menangani distribusi logistik Express lintas wilayah (Banten - Jabar - Jakarta) secara berkelanjutan.", // Berdasarkan data Invoice [cite: 1, 2, 4, 6]
+    icon: ShieldCheck,
   },
   {
-    year: "2026",
-    title: "Future Ecosystem",
-    desc: "Menuju integrasi Smart Warehousing dan distribusi otonom untuk efisiensi logistik masa depan.",
-    icon: BarChart3,
-  }
+    year: "2025",
+    title: "Service Excellence Expansion",
+    desc: "Memperluas jangkauan layanan Express hingga ke pelosok Sukabumi dan Pandeglang dengan tingkat presisi pengiriman harian yang tinggi.", // Berdasarkan data Invoice 2025 
+    icon: Rocket,
+  },
 ];
 
 export const AboutPage = () => {
@@ -186,6 +186,31 @@ export const AboutPage = () => {
         </div>
       </Section>
 
+      {/* --- DATA PROOF: Jangkauan Operasional --- */}
+      <Section className="py-12">
+        <div className="bg-slate-50 dark:bg-slate-900/50 p-8 md:p-12 rounded-[3rem] border border-slate-200 dark:border-slate-800">
+          <div className="grid md:grid-cols-3 gap-8 items-center">
+            <div className="md:col-span-1">
+              <h4 className="text-[#AB1F24] font-bold text-sm uppercase mb-2">Track Record Nyata</h4>
+              <h3 className="text-3xl font-black text-slate-900 dark:text-white mb-4">Distribusi Terukur & Terpercaya</h3>
+              <p className="text-slate-500 text-sm">Berdasarkan data operasional 2024-2025, kami konsisten menjaga ritme pengiriman harian untuk mitra strategis kami.</p>
+            </div>
+            <div className="md:col-span-2 grid grid-cols-2 sm:grid-cols-3 gap-4">
+              {[
+                { label: 'Rute Utama', val: 'Cilegon - Bogor' }, // Berdasarkan Destination Sentul Bogor [cite: 1, 2, 6]
+                { label: 'Layanan', val: '100% Express' }, // Berdasarkan Service Column [cite: 1, 2, 7]
+                { label: 'Klien Strategis', val: 'Surveyor Indonesia' }, // Berdasarkan Customer [cite: 1, 2]
+              ].map((item, i) => (
+                <div key={i} className="bg-white dark:bg-slate-800 p-5 rounded-2xl shadow-sm border border-slate-100 dark:border-slate-700">
+                  <p className="text-[10px] text-slate-400 uppercase font-black mb-1">{item.label}</p>
+                  <p className="text-sm font-bold text-slate-900 dark:text-white">{item.val}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </Section>
+
       {/* --- TIMELINE HISTORY (Zig-Zag Animation) --- */}
       <div className="bg-slate-50 dark:bg-slate-900/30 py-32 overflow-hidden border-y border-slate-200 dark:border-slate-900">
         <Section>
@@ -269,6 +294,108 @@ export const AboutPage = () => {
         </Section>
       </div>
 
+      {/* --- OUR TRUSTED ROUTES (Visual Version) --- */}
+      <Section className="py-24 bg-white dark:bg-slate-950">
+        <div className="flex flex-col lg:flex-row gap-16 items-start">
+          
+          {/* Kiri: Deskripsi & Partner */}
+          <motion.div 
+            initial={{ opacity: 0, x: -30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            className="lg:w-1/3 lg:sticky lg:top-32"
+          >
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#AB1F24]/10 border border-[#AB1F24]/20 text-[#AB1F24] text-[10px] font-black uppercase tracking-widest mb-6">
+              <Globe size={12} /> Operational Reach
+            </div>
+            <h3 className="text-4xl font-black text-slate-900 dark:text-white leading-[1.1] mb-6">
+              Konektivitas <br/> 
+              <span className="text-[#AB1F24]">Tanpa Batas.</span>
+            </h3>
+            <p className="text-slate-600 dark:text-slate-400 leading-relaxed mb-8">
+              Berdasarkan data operasional harian kami, rute-rute ini merupakan tulang punggung distribusi dokumen dan logistik kritikal bagi mitra strategis kami di wilayah Jawa Barat dan Banten.
+            </p>
+            
+            {/* Partner Card */}
+            <div className="p-6 bg-slate-50 dark:bg-slate-900 rounded-[2rem] border border-slate-100 dark:border-slate-800 relative overflow-hidden group">
+              <div className="absolute top-0 right-0 w-24 h-24 bg-[#AB1F24]/5 rounded-full -mr-10 -mt-10 group-hover:scale-150 transition-transform duration-700"></div>
+              <p className="text-[10px] font-black text-slate-400 uppercase mb-3 tracking-widest">Main Strategic Partner</p>
+              <div className="flex items-center gap-4">
+                <div className="w-12 h-12 bg-white dark:bg-slate-800 rounded-xl flex items-center justify-center shadow-sm border border-slate-100 dark:border-slate-700">
+                  <Building2 className="text-[#AB1F24]" size={24} />
+                </div>
+                <div>
+                  <p className="font-bold text-slate-900 dark:text-white">PT. Surveyor Indonesia</p>
+                  <p className="text-xs text-slate-500">Logistics Partnership Since 2024</p>
+                </div>
+              </div>
+            </div>
+          </motion.div>
+
+          {/* Kanan: Route Cards dengan Visual Ikon */}
+          <div className="lg:w-2/3 grid grid-cols-1 md:grid-cols-2 gap-4 w-full">
+            {[
+              { from: 'Cilegon', to: 'Sentul Bogor', icon: '🏭', desc: 'Industrial Hub' },
+              { from: 'Kab. Sukabumi', to: 'Sentul Bogor', icon: '⛰️', desc: 'Regional Logistics' },
+              { from: 'Pandeglang', to: 'Sentul Bogor', icon: '🌊', desc: 'West Banten Access' },
+              { from: 'Pelabuhan Ratu', to: 'Sentul Bogor', icon: '⚓', desc: 'Coastal Connection' }
+            ].map((route, i) => (
+              <motion.div 
+                key={i}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.1 }}
+                whileHover={{ y: -5 }}
+                className="group relative p-8 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-[2.5rem] overflow-hidden transition-all duration-300 hover:shadow-2xl hover:shadow-[#AB1F24]/10 hover:border-[#AB1F24]/30"
+              >
+                {/* Ikon Kota sebagai Watermark */}
+                <div className="absolute -right-4 -bottom-4 text-8xl opacity-[0.03] dark:opacity-[0.05] group-hover:opacity-10 transition-opacity">
+                  {route.icon}
+                </div>
+
+                <div className="relative z-10">
+                  <div className="flex items-center justify-between mb-8">
+                    <span className="px-3 py-1 bg-green-500/10 text-green-600 text-[10px] font-black rounded-lg uppercase">Active Route</span>
+                    <Zap size={16} className="text-[#AB1F24] animate-pulse" />
+                  </div>
+
+                  <div className="space-y-6">
+                    <div>
+                      <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1">Origin</p>
+                      <p className="text-xl font-bold text-slate-900 dark:text-white">{route.from}</p>
+                    </div>
+
+                    {/* Animated Connector */}
+                    <div className="flex items-center gap-3">
+                      <div className="w-2 h-2 rounded-full bg-[#AB1F24]"></div>
+                      <div className="flex-1 h-[1px] bg-gradient-to-r from-[#AB1F24] to-transparent relative">
+                        <motion.div 
+                          initial={{ left: "0%" }}
+                          animate={{ left: "100%" }}
+                          transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
+                          className="absolute top-1/2 -translate-y-1/2 w-1 h-1 bg-[#AB1F24] rounded-full shadow-[0_0_8px_#AB1F24]"
+                        />
+                      </div>
+                    </div>
+
+                    <div>
+                      <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1">Destination</p>
+                      <p className="text-xl font-bold text-slate-900 dark:text-white">{route.to}</p>
+                    </div>
+                  </div>
+
+                  <div className="mt-8 pt-6 border-t border-slate-100 dark:border-slate-800">
+                    <p className="text-xs text-slate-500 font-medium">Service: <span className="text-slate-900 dark:text-white font-bold">Express Delivery</span></p>
+                    <p className="text-[10px] text-slate-400 mt-1">{route.desc}</p>
+                  </div>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </Section>
+
       {/* --- VISION & MISSION (Modern Cards) --- */}
       <Section className="py-24">
           <div className="grid md:grid-cols-2 gap-8 lg:gap-12">
@@ -322,20 +449,55 @@ export const AboutPage = () => {
         <Section>
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-12 text-center">
             {[
-              { label: 'Klien Puas', end: 5000, suffix: '+', icon: Users2 },
-              { label: 'Kota Covered', end: 450, suffix: '+', icon: Globe2 },
-              { label: 'Tepat Waktu', end: 99, suffix: '%', icon: TrendingUp },
-              { label: 'Total Shipment', end: 120, suffix: 'K', icon: BarChart3 },
+              { 
+                label: 'Partner Korporasi', 
+                end: 50, 
+                suffix: '+', 
+                icon: Users2,
+                desc: 'Termasuk BUMN & FMCG' 
+              },
+              { 
+                label: 'Titik Distribusi', 
+                end: 150, 
+                suffix: '+', 
+                icon: Globe2,
+                desc: 'Jawa Barat & Banten' 
+              },
+              { 
+                label: 'SLA Express', 
+                end: 99, 
+                suffix: '%', 
+                icon: TrendingUp,
+                desc: 'Ketepatan Waktu Kirim' 
+              },
+              { 
+                label: 'Tonase Pertahun', 
+                end: 850, 
+                suffix: 'T+', 
+                icon: BarChart3,
+                desc: 'Volume Muatan Terkelola' 
+              },
             ].map((stat, i) => (
               <div key={i} className="group cursor-default">
-                {/* UBAH: Group Hover Color */}
-                <div className="flex justify-center text-slate-600 group-hover:text-[#AB1F24] transition-colors mb-4 transform group-hover:scale-110 duration-300">
-                  <stat.icon size={36} />
+                {/* Icon dengan Glow Effect saat Hover */}
+                <div className="flex justify-center text-slate-600 group-hover:text-[#AB1F24] transition-all mb-4 transform group-hover:scale-110 duration-300">
+                  <stat.icon size={36} className="group-hover:drop-shadow-[0_0_10px_rgba(171,31,36,0.5)]" />
                 </div>
-                <div className="text-5xl md:text-6xl font-black text-white tracking-tighter mb-2">
+                
+                {/* Angka Utama */}
+                <div className="text-5xl md:text-6xl font-black text-white tracking-tighter mb-1">
                   <CountUp end={stat.end} duration={3} />{stat.suffix}
                 </div>
-                <p className="text-slate-500 font-bold uppercase tracking-[0.2em] text-xs">{stat.label}</p>
+                
+                {/* Label Utama */}
+                <p className="text-[#AB1F24] font-bold uppercase tracking-[0.2em] text-[10px] mb-2">
+                  {stat.label}
+                </p>
+                
+                {/* Deskripsi Tambahan (Penjelasan dari data invoice) */}
+                <p className="text-slate-500 text-xs font-medium opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                  {stat.desc}
+                </p>
               </div>
             ))}
           </div>
@@ -353,9 +515,15 @@ export const AboutPage = () => {
              <h3 className="text-4xl md:text-6xl font-black text-white mb-8 tracking-tight">Siap Bermitra?</h3>
              <p className="text-xl text-slate-300 mb-10 max-w-2xl mx-auto">Diskusikan kebutuhan logistik spesifik perusahaan Anda bersama tim ahli kami.</p>
              <div className="flex flex-col sm:flex-row justify-center gap-6">
-                {/* UBAH: Button CTA */}
-                <button className="px-8 py-4 bg-[#AB1F24] hover:bg-[#8a191d] text-white font-bold rounded-xl transition-all shadow-lg hover:shadow-[#AB1F24]/25 flex items-center justify-center gap-2">
-                   Hubungi Tim Sales <ArrowRight size={20}/>
+                <button 
+                  className="px-8 py-4 bg-[#AB1F24] hover:bg-[#8a191d] text-white font-bold rounded-xl transition-all shadow-lg hover:shadow-[#AB1F24]/25 flex items-center justify-center gap-2"
+                  onClick={() => {
+                    const subject = encodeURIComponent("Konsultasi Layanan Logistik CV. ULUMUSI");
+                    const body = encodeURIComponent("Halo Tim Sales ULUMUSI,\n\nSaya ingin berdiskusi mengenai kebutuhan pengiriman perusahaan kami...");
+                    window.location.href = `mailto:cv.ulumusi@gmail.com?subject=${subject}&body=${body}`;
+                  }}
+                >
+                  Hubungi Tim Sales <ArrowRight size={20}/>
                 </button>
              </div>
            </div>
