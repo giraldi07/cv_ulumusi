@@ -17,6 +17,14 @@ import {
   searchDestination 
 } from '../data/ongkir';
 
+// Komponen Loading Sederhana (Jika belum ada di file Anda)
+const LoadingState = () => (
+  <div className="flex flex-col items-center justify-center py-20 space-y-4">
+    <div className="w-16 h-16 border-4 border-[#AB1F24]/20 border-t-[#AB1F24] rounded-full animate-spin" />
+    <p className="text-slate-500 font-bold animate-pulse">Menghitung Estimasi Terbaik...</p>
+  </div>
+);
+
 type ServiceFilter = 'all' | 'express' | 'sameDay' | 'nextDay' | 'reguler' | 'ekonomis' | 'cargo';
 
 export const ShippingRatesPage = () => {
@@ -35,13 +43,10 @@ export const ShippingRatesPage = () => {
 
   const suggestions = useMemo(() => {
     if (search.length < 2) return [];
-    
     let results = searchDestination(search);
-    
     if (selectedProvince !== 'all') {
       results = results.filter(r => r.province === selectedProvince);
     }
-    
     return results.slice(0, 10);
   }, [search, selectedProvince]);
 
@@ -97,10 +102,10 @@ export const ShippingRatesPage = () => {
       key: 'nextDay' as const, 
       type: 'Next Day', 
       icon: TrendingUp, 
-      color: 'orange', 
-      bg: 'bg-orange-500',
+      color: 'red', // UBAH ke Red
+      bg: 'bg-red-500',
       desc: 'Besok Sampai',
-      gradient: 'from-orange-500 to-orange-600'
+      gradient: 'from-red-500 to-red-600'
     },
     { 
       key: 'reguler' as const, 
@@ -146,7 +151,8 @@ export const ShippingRatesPage = () => {
     <div className="relative pt-24 pb-20 bg-slate-50 dark:bg-slate-950 min-h-screen overflow-hidden transition-colors duration-500">
       {/* --- BACKGROUND ELEMENTS --- */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-[10%] -left-[10%] w-[40%] h-[40%] bg-orange-500/10 dark:bg-orange-500/5 rounded-full blur-[120px] animate-pulse" />
+        {/* UBAH: Glow oranye ke Merah */}
+        <div className="absolute top-[10%] -left-[10%] w-[40%] h-[40%] bg-[#AB1F24]/10 dark:bg-[#AB1F24]/5 rounded-full blur-[120px] animate-pulse" />
         <div className="absolute bottom-[10%] -right-[10%] w-[40%] h-[40%] bg-blue-500/10 dark:bg-blue-600/5 rounded-full blur-[120px]" />
         <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-[0.03] dark:opacity-[0.1] invert dark:invert-0" />
       </div>
@@ -159,7 +165,8 @@ export const ShippingRatesPage = () => {
             <motion.div
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
-              className="inline-flex items-center gap-2 px-4 py-2 bg-orange-100/80 dark:bg-orange-950/40 text-orange-600 dark:text-orange-400 border border-orange-200/50 dark:border-orange-800/30 rounded-2xl mb-2 backdrop-blur-md"
+              // UBAH: Badge oranye ke Merah
+              className="inline-flex items-center gap-2 px-4 py-2 bg-red-100/80 dark:bg-red-950/40 text-[#AB1F24] dark:text-red-400 border border-red-200/50 dark:border-red-800/30 rounded-2xl mb-2 backdrop-blur-md"
             >
               <Sparkles size={14} className="animate-pulse" />
               <span className="text-[10px] font-black uppercase tracking-[0.2em]">Smart Pricing Engine v3.0</span>
@@ -170,7 +177,8 @@ export const ShippingRatesPage = () => {
               animate={{ opacity: 1, y: 0 }}
               className="text-5xl md:text-7xl font-black text-slate-900 dark:text-white leading-tight tracking-tighter"
             >
-              CEK <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-600 to-orange-400 dark:from-orange-500 dark:to-red-400">ONGKIR</span>
+              {/* UBAH: Gradient text oranye ke Merah */}
+              CEK <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#AB1F24] to-red-500 dark:from-red-500 dark:to-red-400">ONGKIR</span>
             </motion.h1>
             
             <motion.p 
@@ -179,7 +187,8 @@ export const ShippingRatesPage = () => {
               transition={{ delay: 0.2 }}
               className="max-w-2xl mx-auto text-slate-600 dark:text-slate-400 font-medium"
             >
-              Platform estimasi pengiriman terlengkap dari <span className="text-slate-900 dark:text-slate-200 font-bold">Serang</span> ke <span className="text-orange-600 dark:text-orange-400 font-bold">{shippingRates.length}+ kota</span> di seluruh Indonesia dengan tarif real-time.
+              {/* UBAH: Span oranye ke merah */}
+              Platform estimasi pengiriman terlengkap dari <span className="text-slate-900 dark:text-slate-200 font-bold">Serang</span> ke <span className="text-[#AB1F24] dark:text-red-400 font-bold">{shippingRates.length}+ kota</span> di seluruh Indonesia dengan tarif real-time.
             </motion.p>
 
             {/* Stats */}
@@ -195,7 +204,8 @@ export const ShippingRatesPage = () => {
                 { icon: Users, value: '50K+', label: 'Pengguna Aktif' },
               ].map((stat, i) => (
                 <div key={i} className="flex items-center gap-3 px-4 py-2 bg-white/50 dark:bg-slate-900/30 backdrop-blur-sm rounded-xl border border-slate-200/50 dark:border-slate-800/50">
-                  <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-orange-500 to-orange-600 flex items-center justify-center text-white">
+                  {/* UBAH: Icon stat background ke Merah */}
+                  <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-[#AB1F24] to-[#8E191D] flex items-center justify-center text-white">
                     <stat.icon size={16} />
                   </div>
                   <div className="text-left">
@@ -225,9 +235,10 @@ export const ShippingRatesPage = () => {
                 </button>
                 <button
                   onClick={() => setCompareMode(!compareMode)}
+                  // UBAH: Active compare button ke Merah
                   className={`flex items-center gap-2 px-4 py-2.5 rounded-xl font-bold text-sm transition-all ${
                     compareMode 
-                      ? 'bg-orange-500 text-white' 
+                      ? 'bg-[#AB1F24] text-white' 
                       : 'bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700'
                   }`}
                 >
@@ -250,7 +261,7 @@ export const ShippingRatesPage = () => {
                       <select
                         value={selectedProvince}
                         onChange={(e) => setSelectedProvince(e.target.value)}
-                        className="w-full p-3 bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl font-medium text-sm outline-none focus:border-orange-500"
+                        className="w-full p-3 bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl font-medium text-sm outline-none focus:border-[#AB1F24]"
                       >
                         <option value="all">Semua Provinsi</option>
                         {provinces.map(prov => (
@@ -263,7 +274,7 @@ export const ShippingRatesPage = () => {
                       <select
                         value={serviceFilter}
                         onChange={(e) => setServiceFilter(e.target.value as ServiceFilter)}
-                        className="w-full p-3 bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl font-medium text-sm outline-none focus:border-orange-500"
+                        className="w-full p-3 bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl font-medium text-sm outline-none focus:border-[#AB1F24]"
                       >
                         <option value="all">Semua Layanan</option>
                         <option value="express">Express</option>
@@ -283,7 +294,7 @@ export const ShippingRatesPage = () => {
                 {/* Origin */}
                 <div className="md:col-span-3 space-y-3">
                   <label className="text-[10px] font-black uppercase tracking-widest text-slate-500 dark:text-slate-400 flex items-center gap-2 ml-2">
-                    <MapPin size={12} className="text-orange-500" /> Titik Jemput
+                    <MapPin size={12} className="text-[#AB1F24]" /> Titik Jemput
                   </label>
                   <div className="p-4 bg-slate-100/50 dark:bg-slate-800/40 rounded-2xl border border-slate-200/50 dark:border-slate-700/30 text-slate-700 dark:text-slate-300 font-bold italic">
                     Serang, Banten
@@ -293,7 +304,7 @@ export const ShippingRatesPage = () => {
                 {/* Weight */}
                 <div className="md:col-span-2 space-y-3">
                   <label className="text-[10px] font-black uppercase tracking-widest text-slate-500 dark:text-slate-400 flex items-center gap-2 ml-2">
-                    <Scale size={12} className="text-orange-500" /> Berat
+                    <Scale size={12} className="text-[#AB1F24]" /> Berat
                   </label>
                   <div className="relative group">
                     <input 
@@ -302,7 +313,7 @@ export const ShippingRatesPage = () => {
                       max="1000"
                       value={weight}
                       onChange={(e) => setWeight(Math.max(1, parseInt(e.target.value) || 0))}
-                      className="w-full p-4 pl-6 bg-white dark:bg-slate-800 border-2 border-slate-200 dark:border-slate-700 focus:border-orange-500 dark:focus:border-orange-500 rounded-2xl text-slate-900 dark:text-white font-black transition-all outline-none"
+                      className="w-full p-4 pl-6 bg-white dark:bg-slate-800 border-2 border-slate-200 dark:border-slate-700 focus:border-[#AB1F24] dark:focus:border-[#AB1F24] rounded-2xl text-slate-900 dark:text-white font-black transition-all outline-none"
                     />
                     <span className="absolute right-4 top-1/2 -translate-y-1/2 font-black text-slate-400 dark:text-slate-500">KG</span>
                   </div>
@@ -311,7 +322,7 @@ export const ShippingRatesPage = () => {
                 {/* Destination */}
                 <div className="md:col-span-7 space-y-3 relative">
                   <label className="text-[10px] font-black uppercase tracking-widest text-slate-500 dark:text-slate-400 flex items-center gap-2 ml-2">
-                    <Globe size={12} className="text-orange-500" /> Kota Tujuan
+                    <Globe size={12} className="text-[#AB1F24]" /> Kota Tujuan
                   </label>
                   <div className="relative">
                     <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400" size={20} />
@@ -320,7 +331,7 @@ export const ShippingRatesPage = () => {
                       placeholder="Cari kota, provinsi, atau area..."
                       value={search}
                       onChange={(e) => setSearch(e.target.value)}
-                      className="w-full pl-12 pr-4 py-4 bg-white dark:bg-slate-800 border-2 border-slate-200 dark:border-slate-700 focus:border-orange-500 dark:focus:border-orange-500 rounded-2xl text-slate-900 dark:text-white font-black transition-all outline-none"
+                      className="w-full pl-12 pr-4 py-4 bg-white dark:bg-slate-800 border-2 border-slate-200 dark:border-slate-700 focus:border-[#AB1F24] dark:focus:border-[#AB1F24] rounded-2xl text-slate-900 dark:text-white font-black transition-all outline-none"
                     />
                   </div>
 
@@ -340,12 +351,13 @@ export const ShippingRatesPage = () => {
                           >
                             <button
                               onClick={() => handleCalculate(rate)}
-                              className="w-full px-6 py-4 text-left flex items-center justify-between hover:bg-orange-500 hover:text-white dark:hover:bg-orange-600 transition-all"
+                              // UBAH: Hover dropdown ke Merah
+                              className="w-full px-6 py-4 text-left flex items-center justify-between hover:bg-[#AB1F24] hover:text-white dark:hover:bg-[#AB1F24] transition-all"
                             >
                               <div className="flex-1">
                                 <div className="font-bold text-sm flex items-center gap-2">
                                   {rate.destination}
-                                  {rate.popularRoute && <Star size={12} className="text-orange-500 group-hover:text-white fill-current" />}
+                                  {rate.popularRoute && <Star size={12} className="text-[#AB1F24] group-hover:text-white fill-current" />}
                                 </div>
                                 <div className="text-xs opacity-70">{rate.province} • {rate.distance} km</div>
                               </div>
@@ -379,7 +391,8 @@ export const ShippingRatesPage = () => {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: 20 }}
-                className="mb-10 bg-gradient-to-r from-orange-500 to-orange-600 p-6 rounded-3xl"
+                // UBAH: Compare panel background ke Merah
+                className="mb-10 bg-gradient-to-r from-[#AB1F24] to-[#8E191D] p-6 rounded-3xl"
               >
                 <div className="flex items-center justify-between mb-4">
                   <h3 className="text-white font-black text-lg">Perbandingan Kota</h3>
@@ -426,7 +439,8 @@ export const ShippingRatesPage = () => {
             >
               <div className="flex items-center gap-6 mb-6">
                 <h2 className="text-xs font-black uppercase tracking-[0.4em] text-slate-400 dark:text-slate-500 whitespace-nowrap flex items-center gap-2">
-                  <Star size={14} className="text-orange-500" /> Rute Populer
+                  {/* UBAH: Star icon ke Merah */}
+                  <Star size={14} className="text-[#AB1F24]" /> Rute Populer
                 </h2>
                 <div className="h-px w-full bg-gradient-to-r from-slate-200 dark:from-slate-800 to-transparent" />
               </div>
@@ -438,10 +452,12 @@ export const ShippingRatesPage = () => {
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: i * 0.05 }}
                     onClick={() => handleCalculate(rate)}
-                    className="group bg-white dark:bg-slate-900 p-6 rounded-2xl border border-slate-200 dark:border-slate-800 hover:border-orange-500 dark:hover:border-orange-500 transition-all text-left shadow-sm hover:shadow-lg"
+                    // UBAH: Hover border ke Merah
+                    className="group bg-white dark:bg-slate-900 p-6 rounded-2xl border border-slate-200 dark:border-slate-800 hover:border-[#AB1F24] dark:hover:border-[#AB1F24] transition-all text-left shadow-sm hover:shadow-lg"
                   >
                     <div className="flex items-start justify-between mb-3">
-                      <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-orange-500 to-orange-600 flex items-center justify-center text-white">
+                      {/* UBAH: Icon background ke Merah */}
+                      <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#AB1F24] to-[#8E191D] flex items-center justify-center text-white">
                         <Navigation size={18} />
                       </div>
                       <span className="text-xs font-bold text-slate-400 dark:text-slate-500">{rate.distance} km</span>
@@ -450,7 +466,8 @@ export const ShippingRatesPage = () => {
                     <p className="text-xs text-slate-500 dark:text-slate-400 mb-3">{rate.province}</p>
                     <div className="flex items-center gap-2">
                       <span className="text-xs text-slate-600 dark:text-slate-400">Dari</span>
-                      <span className="text-sm font-black text-orange-600 dark:text-orange-400">
+                      {/* UBAH: Harga ke Merah */}
+                      <span className="text-sm font-black text-[#AB1F24] dark:text-red-400">
                         {formatIDR(rate.services.reguler.price * weight)}
                       </span>
                     </div>
@@ -468,7 +485,8 @@ export const ShippingRatesPage = () => {
               {selectedResult && (
                 <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="space-y-10">
                   {/* Header Info */}
-                  <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6 p-6 bg-gradient-to-r from-orange-500 to-orange-600 rounded-3xl text-white">
+                  {/* UBAH: Result header background ke Merah */}
+                  <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6 p-6 bg-gradient-to-r from-[#AB1F24] to-[#8E191D] rounded-3xl text-white">
                     <div className="flex-1">
                       <div className="flex items-center gap-3 mb-2">
                         <Building2 size={24} />
@@ -497,7 +515,8 @@ export const ShippingRatesPage = () => {
                     {compareMode && !compareList.find(r => r.destination === selectedResult.destination) && (
                       <button
                         onClick={() => addToCompare(selectedResult)}
-                        className="px-6 py-3 bg-white text-orange-600 font-bold rounded-xl hover:bg-white/90 transition-colors"
+                        // UBAH: Text button compare ke Merah
+                        className="px-6 py-3 bg-white text-[#AB1F24] font-bold rounded-xl hover:bg-white/90 transition-colors"
                       >
                         + Tambah ke Perbandingan
                       </button>
@@ -546,9 +565,9 @@ export const ShippingRatesPage = () => {
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ delay: i * 0.1 }}
-                            className="group bg-white dark:bg-slate-900 p-8 rounded-[2.5rem] border border-slate-100 dark:border-slate-800 shadow-lg shadow-slate-200/50 dark:shadow-none hover:border-orange-500/50 transition-all overflow-hidden relative"
+                            // UBAH: Service card hover border ke Merah
+                            className="group bg-white dark:bg-slate-900 p-8 rounded-[2.5rem] border border-slate-100 dark:border-slate-800 shadow-lg shadow-slate-200/50 dark:shadow-none hover:border-[#AB1F24]/50 transition-all overflow-hidden relative"
                           >
-                            {/* Decorative Accent */}
                             <div className={`absolute top-0 right-0 w-32 h-32 bg-gradient-to-br ${service.gradient} opacity-[0.05] dark:opacity-[0.1] rounded-full -translate-y-14 translate-x-14 group-hover:scale-150 transition-transform duration-700`} />
                             
                             <div className={`w-12 h-12 rounded-2xl mb-6 flex items-center justify-center ${service.bg} text-white shadow-lg relative z-10`}>
@@ -566,19 +585,18 @@ export const ShippingRatesPage = () => {
                               </p>
                               
                               <div className="flex flex-wrap gap-2">
-                                <div className="flex items-center gap-2 text-[10px] font-black text-orange-600 dark:text-orange-400 bg-orange-50 dark:bg-orange-500/10 px-3 py-1.5 rounded-xl border border-orange-100 dark:border-orange-500/20">
+                                {/* UBAH: Badge ETD ke skema Merah (hanya untuk yang warna asalnya oranye) */}
+                                <div className={`flex items-center gap-2 text-[10px] font-black px-3 py-1.5 rounded-xl border ${
+                                  service.color === 'red' 
+                                    ? 'text-red-600 dark:text-red-400 bg-red-50 dark:bg-red-500/10 border-red-100 dark:border-red-500/20'
+                                    : 'text-slate-600 dark:text-slate-400 bg-slate-50 dark:bg-slate-800 border-slate-100 dark:border-slate-800'
+                                }`}>
                                   <Clock size={12} /> {serviceData.etd}
                                 </div>
                                 
                                 {service.isCargo && (
                                   <div className="flex items-center gap-2 text-[10px] font-black text-slate-600 dark:text-slate-400 bg-slate-100 dark:bg-slate-800 px-3 py-1.5 rounded-xl">
                                     <Scale size={12} /> Min. {(serviceData as any).minWeight}kg
-                                  </div>
-                                )}
-                                
-                                {service.key === 'sameDay' && (serviceData as any).cutoffTime && (
-                                  <div className="flex items-center gap-2 text-[10px] font-black text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-500/10 px-3 py-1.5 rounded-xl border border-blue-100 dark:border-blue-500/20">
-                                    <AlertCircle size={12} /> Cutoff {(serviceData as any).cutoffTime}
                                   </div>
                                 )}
                               </div>
@@ -610,11 +628,12 @@ export const ShippingRatesPage = () => {
                       { icon: Info, title: 'Tarif Transparan', text: 'Harga final tanpa biaya tambahan tersembunyi. Yang tertera = yang dibayar.' },
                     ].map((item, i) => (
                       <div key={i} className="flex gap-4 group cursor-default">
-                        <div className="w-10 h-10 rounded-xl bg-slate-100 dark:bg-slate-800 flex items-center justify-center text-orange-500 group-hover:bg-orange-500 group-hover:text-white transition-colors duration-300 flex-shrink-0">
+                        {/* UBAH: Icon trust ke Merah */}
+                        <div className="w-10 h-10 rounded-xl bg-slate-100 dark:bg-slate-800 flex items-center justify-center text-[#AB1F24] group-hover:bg-[#AB1F24] group-hover:text-white transition-all duration-300">
                           <item.icon size={20} />
                         </div>
-                        <div>
-                          <h4 className="font-bold text-slate-900 dark:text-white text-sm mb-1">{item.title}</h4>
+                        <div className="flex-1">
+                          <h4 className="font-black text-slate-900 dark:text-white text-sm mb-1">{item.title}</h4>
                           <p className="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">{item.text}</p>
                         </div>
                       </div>
@@ -629,20 +648,3 @@ export const ShippingRatesPage = () => {
     </div>
   );
 };
-
-// --- SUB-COMPONENTS ---
-
-const LoadingState = () => (
-  <div className="flex flex-col items-center justify-center py-20 space-y-6">
-    <div className="relative">
-      <div className="w-20 h-20 border-4 border-slate-200 dark:border-slate-800 border-t-orange-500 rounded-full animate-spin" />
-      <div className="absolute inset-0 flex items-center justify-center">
-        <Truck className="text-orange-500 animate-bounce" size={24} />
-      </div>
-    </div>
-    <div className="text-center">
-      <p className="text-slate-900 dark:text-white font-black tracking-widest uppercase text-sm">Menghitung Tarif...</p>
-      <p className="text-slate-500 dark:text-slate-500 text-xs">Menganalisa rute terbaik untuk pengiriman Anda</p>
-    </div>
-  </div>
-);
