@@ -1,4 +1,4 @@
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { motion, useScroll, useTransform, useSpring } from 'framer-motion';
 import { useRef } from 'react';
 import { 
   Target, 
@@ -10,30 +10,85 @@ import {
   Award, 
   TrendingUp,
   ArrowRight,
-  CheckCircle2
+  CheckCircle2,
+  Building2, 
+  Truck, 
+  Cpu, 
+  Globe, 
+  BarChart3 
 } from 'lucide-react';
 import { Section } from '../components/Section';
 import { CountUp } from '../components/CountUp';
 
+// Data untuk Timeline Sejarah
+const milestones = [
+  {
+    year: "2014",
+    title: "The Foundation",
+    desc: "CV. ULUMUSI resmi berdiri dengan fokus pada distribusi lokal dan komitmen integritas tinggi.",
+    icon: Building2,
+  },
+  {
+    year: "2017",
+    title: "Ekspansi Regional",
+    desc: "Membuka kantor cabang di 5 kota besar di Sumatera & Jawa guna mempercepat konektivitas.",
+    icon: Truck,
+  },
+  {
+    year: "2019",
+    title: "Transformasi Digital",
+    desc: "Implementasi sistem Management Transportasi (TMS) berbasis cloud untuk transparansi data.",
+    icon: Cpu,
+  },
+  {
+    year: "2022",
+    title: "Kemitraan Strategis",
+    desc: "Dipercaya sebagai mitra logistik utama bagi 3 perusahaan FMCG terbesar di Indonesia.",
+    icon: ShieldCheck,
+  },
+  {
+    year: "2024",
+    title: "Go Green Initiative",
+    desc: "Modernisasi armada dengan teknologi ramah lingkungan dan optimalisasi rute cerdas.",
+    icon: Globe,
+  },
+  {
+    year: "2026",
+    title: "Logistics Ecosystem",
+    desc: "Membangun ekosistem logistik terpadu yang menghubungkan pergudangan cerdas dengan distribusi nasional.",
+    icon: BarChart3,
+  }
+];
+
 export const AboutPage = () => {
   const containerRef = useRef(null);
-  const { scrollYProgress } = useScroll({
+  const timelineRef = useRef(null);
+  
+  // Parallax untuk Hero
+  const { scrollYProgress: pageScroll } = useScroll({
     target: containerRef,
     offset: ["start start", "end end"]
   });
+  const y = useTransform(pageScroll, [0, 1], [0, -200]);
 
-  const y = useTransform(scrollYProgress, [0, 1], [0, -200]);
+  // Progress untuk Timeline Line
+  const { scrollYProgress: timelineScroll } = useScroll({
+    target: timelineRef,
+    offset: ["start center", "end center"]
+  });
+  const scaleY = useSpring(timelineScroll, {
+    stiffness: 100,
+    damping: 30,
+    restDelta: 0.001
+  });
 
   return (
     <div ref={containerRef} className="bg-white dark:bg-slate-950 transition-colors duration-500 overflow-hidden">
       
       {/* --- HERO SECTION: Parallax Impression --- */}
       <section className="relative h-[70vh] md:h-[85vh] flex items-center justify-center overflow-hidden">
-        <motion.div 
-          style={{ y }}
-          className="absolute inset-0 z-0"
-        >
-          <div className="absolute inset-0 bg-slate-900/60 z-10" /> {/* Overlay */}
+        <motion.div style={{ y }} className="absolute inset-0 z-0">
+          <div className="absolute inset-0 bg-slate-900/60 z-10" />
           <img 
             src="https://images.unsplash.com/photo-1578575437130-527eed3abbec?auto=format&fit=crop&w=1920&q=80" 
             className="w-full h-full object-cover scale-110"
@@ -58,12 +113,10 @@ export const AboutPage = () => {
             </p>
           </motion.div>
         </Section>
-        
-        {/* Decorative Wave */}
         <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-white dark:from-slate-950 to-transparent z-20" />
       </section>
 
-      {/* --- INTRO: The Narrative --- */}
+      {/* --- INTRO: Narrative --- */}
       <Section className="py-24">
         <div className="grid lg:grid-cols-2 gap-20 items-center">
           <motion.div 
@@ -118,14 +171,11 @@ export const AboutPage = () => {
         </div>
       </Section>
 
-      {/* --- VISION & MISSION: Modern Split Grid --- */}
+      {/* --- VISION & MISSION --- */}
       <div className="bg-slate-50 dark:bg-slate-900/50 py-24 border-y border-slate-100 dark:border-slate-800">
         <Section>
           <div className="grid md:grid-cols-2 gap-12">
-            <motion.div 
-              whileHover={{ y: -5 }}
-              className="bg-white dark:bg-slate-900 p-12 rounded-[3rem] shadow-sm border border-slate-100 dark:border-slate-800"
-            >
+            <motion.div whileHover={{ y: -5 }} className="bg-white dark:bg-slate-900 p-12 rounded-[3rem] shadow-sm border border-slate-100 dark:border-slate-800">
               <div className="w-16 h-16 bg-orange-600 rounded-2xl flex items-center justify-center mb-8 rotate-3 shadow-lg shadow-orange-500/20">
                 <Target className="text-white" size={32} />
               </div>
@@ -134,35 +184,73 @@ export const AboutPage = () => {
                 "Menjadi katalisator utama pertumbuhan ekonomi nasional melalui ekosistem logistik yang paling efisien, cerdas, dan terpercaya di Indonesia."
               </p>
             </motion.div>
-
-            <motion.div 
-              whileHover={{ y: -5 }}
-              className="bg-slate-900 dark:bg-orange-600 p-12 rounded-[3rem] shadow-xl text-white"
-            >
+            <motion.div whileHover={{ y: -5 }} className="bg-slate-900 dark:bg-orange-600 p-12 rounded-[3rem] shadow-xl text-white">
               <div className="w-16 h-16 bg-white/20 backdrop-blur-md rounded-2xl flex items-center justify-center mb-8 -rotate-3">
                 <Rocket className="text-white" size={32} />
               </div>
               <h4 className="text-3xl font-black mb-6">Misi Kami</h4>
               <ul className="space-y-4 opacity-90 text-lg">
-                <li className="flex gap-3">
-                  <span className="font-bold text-orange-400">01.</span>
-                  Mengoptimalkan rantai pasok klien dengan teknologi mutakhir.
-                </li>
-                <li className="flex gap-3">
-                  <span className="font-bold text-orange-400">02.</span>
-                  Membangun jaringan distribusi yang menjangkau area remote (3T).
-                </li>
-                <li className="flex gap-3">
-                  <span className="font-bold text-orange-400">03.</span>
-                  Menjamin keamanan aset klien sebagai prioritas tertinggi.
-                </li>
+                <li className="flex gap-3"><span className="font-bold text-orange-400">01.</span> Mengoptimalkan rantai pasok klien dengan teknologi mutakhir.</li>
+                <li className="flex gap-3"><span className="font-bold text-orange-400">02.</span> Membangun jaringan distribusi yang menjangkau area remote (3T).</li>
+                <li className="flex gap-3"><span className="font-bold text-orange-400">03.</span> Menjamin keamanan aset klien sebagai prioritas tertinggi.</li>
               </ul>
             </motion.div>
           </div>
         </Section>
       </div>
 
-      {/* --- CORE VALUES: Interactive Cards --- */}
+      {/* --- NEW SECTION: VERTICAL TIMELINE --- */}
+      <div className="bg-white dark:bg-slate-950 py-32 overflow-hidden">
+        <Section>
+          <div className="text-center mb-24">
+            <h2 className="text-orange-600 font-black text-sm uppercase tracking-[0.3em] mb-4">The Journey</h2>
+            <h3 className="text-4xl md:text-5xl font-black text-slate-900 dark:text-white">Jejak Langkah Kami</h3>
+          </div>
+
+          <div ref={timelineRef} className="relative max-w-5xl mx-auto">
+            {/* Desktop Center Line */}
+            <div className="absolute left-1/2 transform -translate-x-1/2 w-1 h-full bg-slate-100 dark:bg-slate-800 hidden md:block">
+              <motion.div style={{ scaleY, originY: 0 }} className="w-full h-full bg-orange-600 shadow-[0_0_15px_rgba(234,88,12,0.5)]" />
+            </div>
+            {/* Mobile Side Line */}
+            <div className="absolute left-4 transform w-1 h-full bg-slate-100 dark:bg-slate-800 md:hidden">
+              <motion.div style={{ scaleY, originY: 0 }} className="w-full h-full bg-orange-600" />
+            </div>
+
+            <div className="space-y-24 md:space-y-32">
+              {milestones.map((item, idx) => {
+                const isEven = idx % 2 === 0;
+                return (
+                  <div key={idx} className="relative flex flex-col md:flex-row items-center">
+                    <motion.div 
+                      initial={{ opacity: 0, x: isEven ? -50 : 50 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      viewport={{ once: true, margin: "-100px" }}
+                      className={`w-full md:w-1/2 flex ${isEven ? 'md:justify-end' : 'md:justify-start'} pl-12 md:pl-0`}
+                    >
+                      <div className={`max-w-md ${isEven ? 'md:text-right' : 'md:text-left'} bg-slate-50 dark:bg-slate-900/50 p-8 rounded-[2.5rem] border border-slate-100 dark:border-slate-800 hover:border-orange-500/30 transition-all group`}>
+                        <span className="text-3xl font-black text-orange-600 mb-2 block group-hover:scale-110 transition-transform origin-left md:origin-right">{item.year}</span>
+                        <h4 className="text-xl font-bold text-slate-900 dark:text-white mb-3">{item.title}</h4>
+                        <p className="text-slate-500 dark:text-slate-400 leading-relaxed text-sm md:text-base">{item.desc}</p>
+                      </div>
+                    </motion.div>
+                    <motion.div 
+                      initial={{ scale: 0 }}
+                      whileInView={{ scale: 1 }}
+                      viewport={{ once: true }}
+                      className="absolute left-0 md:left-1/2 transform -translate-x-1/2 w-10 h-10 bg-white dark:bg-slate-950 border-4 border-orange-600 rounded-full z-10 flex items-center justify-center shadow-lg"
+                    >
+                      <item.icon className="text-orange-600" size={16} />
+                    </motion.div>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        </Section>
+      </div>
+
+      {/* --- CORE VALUES --- */}
       <Section className="py-24">
         <div className="text-center mb-20">
           <h2 className="text-orange-600 font-black text-sm uppercase tracking-widest mb-4">Core Principles</h2>
@@ -170,24 +258,9 @@ export const AboutPage = () => {
         </div>
         <div className="grid md:grid-cols-3 gap-8">
           {[
-            { 
-              icon: ShieldCheck, 
-              title: "Integritas Tanpa Kompromi", 
-              desc: "Kejujuran adalah fondasi. Kami memberikan data real-time tanpa ada yang disembunyikan.",
-              color: "blue"
-            },
-            { 
-              icon: Zap, 
-              title: "Agilitas & Inovasi", 
-              desc: "Beradaptasi cepat dengan perubahan pasar dan teknologi untuk efisiensi biaya Anda.",
-              color: "orange"
-            },
-            { 
-              icon: Globe2, 
-              title: "Konektivitas Nasional", 
-              desc: "Memahami geografis Indonesia sedalam kami memahami kebutuhan bisnis Anda.",
-              color: "red"
-            },
+            { icon: ShieldCheck, title: "Integritas Tanpa Kompromi", desc: "Kejujuran adalah fondasi. Kami memberikan data real-time tanpa ada yang disembunyikan." },
+            { icon: Zap, title: "Agilitas & Inovasi", desc: "Beradaptasi cepat dengan perubahan pasar dan teknologi untuk efisiensi biaya Anda." },
+            { icon: Globe2, title: "Konektivitas Nasional", desc: "Memahami geografis Indonesia sedalam kami memahami kebutuhan bisnis Anda." },
           ].map((value, idx) => (
             <motion.div
               key={idx}
@@ -207,7 +280,7 @@ export const AboutPage = () => {
         </div>
       </Section>
 
-      {/* --- STATS: Impact in Numbers --- */}
+      {/* --- STATS --- */}
       <div className="py-24 relative overflow-hidden bg-slate-900">
         <div className="absolute inset-0 opacity-10 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')]" />
         <Section className="relative z-10">
@@ -219,9 +292,7 @@ export const AboutPage = () => {
               { label: 'Proyek Selesai', end: 120, suffix: 'K', icon: CheckCircle2 },
             ].map((stat, i) => (
               <div key={i} className="space-y-4">
-                <div className="flex justify-center text-orange-500 mb-2">
-                  <stat.icon size={32} />
-                </div>
+                <div className="flex justify-center text-orange-500 mb-2"><stat.icon size={32} /></div>
                 <div className="text-5xl md:text-6xl font-black text-white italic tracking-tighter">
                   <CountUp end={stat.end} duration={3} />{stat.suffix}
                 </div>
@@ -236,24 +307,14 @@ export const AboutPage = () => {
       <Section className="py-24">
         <div className="bg-gradient-to-br from-orange-600 to-red-700 rounded-[4rem] p-12 md:p-24 text-center text-white relative overflow-hidden shadow-2xl">
           <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-white/10 to-transparent opacity-50" />
-          <motion.div 
-            initial={{ scale: 0.9, opacity: 0 }}
-            whileInView={{ scale: 1, opacity: 1 }}
-            className="relative z-10 space-y-10"
-          >
-            <h3 className="text-4xl md:text-6xl font-black leading-tight">
-              Ingin Mengetahui Lebih Dalam <br /> Tentang Solusi Kami?
-            </h3>
-            <p className="text-xl text-orange-50 opacity-90 max-w-2xl mx-auto">
-              Buka peluang baru bagi efisiensi bisnis Anda. Mari berdiskusi bagaimana kami dapat membantu akselerasi distribusi produk Anda.
-            </p>
+          <motion.div initial={{ scale: 0.9, opacity: 0 }} whileInView={{ scale: 1, opacity: 1 }} className="relative z-10 space-y-10">
+            <h3 className="text-4xl md:text-6xl font-black leading-tight">Ingin Mengetahui Lebih Dalam <br /> Tentang Solusi Kami?</h3>
+            <p className="text-xl text-orange-50 opacity-90 max-w-2xl mx-auto">Buka peluang baru bagi efisiensi bisnis Anda. Mari berdiskusi bagaimana kami dapat membantu akselerasi distribusi produk Anda.</p>
             <div className="flex flex-wrap justify-center gap-6">
               <button className="px-10 py-5 bg-white text-orange-600 font-black rounded-2xl hover:bg-orange-50 transition-all shadow-xl hover:-translate-y-1 flex items-center gap-2">
                 Download Company Profile <ArrowRight size={20} />
               </button>
-              <a href="/contact" className="px-10 py-5 bg-transparent border-2 border-white/30 text-white font-bold rounded-2xl hover:bg-white/10 transition-all">
-                Hubungi Direksi
-              </a>
+              <a href="/contact" className="px-10 py-5 bg-transparent border-2 border-white/30 text-white font-bold rounded-2xl hover:bg-white/10 transition-all">Hubungi Direksi</a>
             </div>
           </motion.div>
         </div>
