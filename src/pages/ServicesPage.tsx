@@ -6,7 +6,7 @@ import {
 import { Section } from '../components/Section';
 import { useNavigation } from '../contexts/NavigationContext';
 
-// Interface tetap sama, namun kita tambahkan properti 'color' untuk variasi visual
+// Interface tetap sama
 interface ServiceDetails {
   icon: any;
   title: string;
@@ -25,7 +25,8 @@ const services: ServiceDetails[] = [
   {
     icon: Truck,
     title: 'Reguler Service',
-    color: 'orange',
+    // UBAH: Mengganti identifier 'orange' ke 'red' agar sesuai tema baru saat rendering dynamic class
+    color: 'red',
     description: 'Estimasi sampai 2-3 hari kerja dengan harga paling ekonomis.',
     fullDescription: 'Layanan pengiriman reguler kami adalah pilihan terbaik untuk pengiriman barang yang tidak terburu-buru.',
     features: ['Pengiriman ke seluruh Indonesia', 'Tracking real-time 24/7', 'Kemasan standar aman'],
@@ -116,7 +117,8 @@ export const ServicesPage = () => {
       
       {/* --- BACKGROUND DECORATION --- */}
       <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-orange-500/5 dark:bg-orange-500/10 rounded-full blur-[120px]" />
+        {/* UBAH: Background Blob Color */}
+        <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-[#AB1F24]/5 dark:bg-[#AB1F24]/10 rounded-full blur-[120px]" />
         <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-blue-500/5 dark:bg-blue-500/10 rounded-full blur-[120px]" />
       </div>
 
@@ -128,7 +130,8 @@ export const ServicesPage = () => {
             <motion.div
               initial={{ opacity: 0, y: -20 }}
               animate={{ opacity: 1, y: 0 }}
-              className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-orange-100 dark:bg-orange-950/30 text-orange-600 dark:text-orange-400 border border-orange-200 dark:border-orange-800/30 shadow-sm"
+              // UBAH: Badge Colors (Background, Text, Border)
+              className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#AB1F24]/10 text-[#AB1F24] border border-[#AB1F24]/20 shadow-sm"
             >
               <Sparkles size={14} />
               <span className="text-[10px] font-black uppercase tracking-[0.2em]">Our Premium Logistics</span>
@@ -140,7 +143,8 @@ export const ServicesPage = () => {
               transition={{ delay: 0.1 }}
               className="text-5xl md:text-7xl font-black text-slate-900 dark:text-white tracking-tighter"
             >
-              SOLUSI <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-600 to-orange-400 dark:from-orange-500 dark:to-red-400">TERBAIK</span>
+              {/* UBAH: Gradient Text Title */}
+              SOLUSI <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#AB1F24] to-red-400">TERBAIK</span>
             </motion.h1>
             
             <motion.p 
@@ -149,7 +153,8 @@ export const ServicesPage = () => {
               transition={{ delay: 0.2 }}
               className="text-lg text-slate-600 dark:text-slate-400 font-medium leading-relaxed"
             >
-              Dari dokumen mendesak hingga kargo antar pulau, <span className="text-slate-900 dark:text-slate-100 font-bold underline decoration-orange-500/30">CV. ULUMUSI</span> menghadirkan layanan logistik yang presisi, aman, dan transparan.
+              {/* UBAH: Underline decoration color */}
+              Dari dokumen mendesak hingga kargo antar pulau, <span className="text-slate-900 dark:text-slate-100 font-bold underline decoration-[#AB1F24]/30">CV. ULUMUSI</span> menghadirkan layanan logistik yang presisi, aman, dan transparan.
             </motion.p>
           </div>
 
@@ -166,14 +171,16 @@ export const ServicesPage = () => {
                 className="group relative cursor-pointer"
               >
                 {/* Background Card */}
-                <div className="relative h-full bg-white dark:bg-slate-900/60 backdrop-blur-xl p-8 rounded-[2.5rem] border border-slate-200/60 dark:border-slate-800/50 shadow-xl shadow-slate-200/50 dark:shadow-none hover:border-orange-500/50 transition-all duration-500 group-hover:-translate-y-2 overflow-hidden">
+                {/* UBAH: Hover Border Color */}
+                <div className="relative h-full bg-white dark:bg-slate-900/60 backdrop-blur-xl p-8 rounded-[2.5rem] border border-slate-200/60 dark:border-slate-800/50 shadow-xl shadow-slate-200/50 dark:shadow-none hover:border-[#AB1F24]/50 transition-all duration-500 group-hover:-translate-y-2 overflow-hidden">
                   
-                  {/* Glowing Accent */}
+                  {/* Glowing Accent (Tetap menggunakan dynamic color untuk variasi, tapi 'orange' sudah diubah jadi 'red') */}
                   <div className={`absolute -right-4 -top-4 w-24 h-24 bg-${service.color}-500 opacity-[0.03] dark:opacity-[0.08] rounded-full group-hover:scale-[3] transition-transform duration-700`} />
                   
                   {/* Icon Area */}
-                  <div className={`w-14 h-14 rounded-2xl mb-8 flex items-center justify-center bg-slate-50 dark:bg-slate-800 border border-slate-100 dark:border-slate-700 group-hover:bg-orange-600 transition-colors duration-500`}>
-                    <service.icon size={28} className="text-orange-600 dark:text-orange-400 group-hover:text-white transition-colors duration-500" />
+                  {/* UBAH: Icon Background Hover & Default Icon Color */}
+                  <div className={`w-14 h-14 rounded-2xl mb-8 flex items-center justify-center bg-slate-50 dark:bg-slate-800 border border-slate-100 dark:border-slate-700 group-hover:bg-[#AB1F24] transition-colors duration-500`}>
+                    <service.icon size={28} className="text-[#AB1F24] dark:text-[#AB1F24] group-hover:text-white transition-colors duration-500" />
                   </div>
 
                   {/* Content */}
@@ -201,7 +208,8 @@ export const ServicesPage = () => {
                         <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Pricing</span>
                         <span className="text-sm font-bold text-slate-900 dark:text-slate-200">{service.pricing.split(' ')[2]}++</span>
                       </div>
-                      <div className="w-10 h-10 rounded-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center text-slate-400 group-hover:bg-orange-600 group-hover:text-white transition-all">
+                      {/* UBAH: Arrow Button Hover Background */}
+                      <div className="w-10 h-10 rounded-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center text-slate-400 group-hover:bg-[#AB1F24] group-hover:text-white transition-all">
                         <ArrowRight size={18} />
                       </div>
                     </div>
@@ -218,7 +226,8 @@ export const ServicesPage = () => {
             className="mt-24 p-8 rounded-[3rem] bg-gradient-to-br from-slate-900 to-slate-800 text-white flex flex-col md:flex-row items-center justify-between gap-8 shadow-2xl"
           >
             <div className="flex items-center gap-6">
-              <div className="w-16 h-16 rounded-2xl bg-orange-600 flex items-center justify-center shadow-lg shadow-orange-600/30">
+              {/* UBAH: Icon Box Color & Shadow */}
+              <div className="w-16 h-16 rounded-2xl bg-[#AB1F24] flex items-center justify-center shadow-lg shadow-[#AB1F24]/30">
                 <Star fill="currentColor" />
               </div>
               <div>
@@ -226,7 +235,8 @@ export const ServicesPage = () => {
                 <p className="text-slate-400 text-sm font-medium">Layanan logistik dengan tingkat keamanan barang 99.9%.</p>
               </div>
             </div>
-            <button className="px-8 py-4 bg-white text-slate-900 font-black rounded-2xl hover:bg-orange-500 hover:text-white transition-all active:scale-95 whitespace-nowrap">
+            {/* UBAH: Button Hover Color */}
+            <button className="px-8 py-4 bg-white text-slate-900 font-black rounded-2xl hover:bg-[#AB1F24] hover:text-white transition-all active:scale-95 whitespace-nowrap">
               KONSULTASI GRATIS
             </button>
           </motion.div>
