@@ -20,6 +20,8 @@ import {
 } from 'lucide-react';
 import { Section } from '../components/Section';
 import { CountUp } from '../components/CountUp';
+import heroImageAbout from '../images/cv-ulumusi-goodang@3x.jpg';
+import meetingImage from '../images/rapat2@3x.jpg';
 
 // Data untuk Timeline Sejarah
 const milestones = [
@@ -94,8 +96,8 @@ export const AboutPage = () => {
           <div className="absolute inset-0 bg-slate-900/70 z-10 mix-blend-multiply" />
           <div className="absolute inset-0 bg-gradient-to-b from-transparent to-slate-950/90 z-20" />
           <img 
-            src="https://images.unsplash.com/photo-1578575437130-527eed3abbec?auto=format&fit=crop&w=1920&q=80" 
-            className="w-full h-full object-cover scale-110 grayscale-[30%]"
+            src={heroImageAbout} 
+            className="w-full h-full object-cover grayscale-[30%]"
             alt="Logistics Background"
           />
         </motion.div>
@@ -138,7 +140,7 @@ export const AboutPage = () => {
             {/* UBAH: Border color outline image */}
             <div className="absolute top-10 left-10 w-full h-full border-2 border-[#AB1F24]/20 rounded-[3rem] z-0"></div>
             <img
-              src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80"
+              src={meetingImage}
               alt="Meeting"
               className="rounded-[3rem] shadow-2xl relative z-10 grayscale hover:grayscale-0 transition-all duration-700 object-cover h-[500px] w-full"
             />

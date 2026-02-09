@@ -24,6 +24,7 @@ import { useNavigation } from '../contexts/NavigationContext';
 import { findShipmentByResi } from '../data/mockShipments';
 import { clients } from '../data/clients';
 import type { Shipment } from '../types/shipment';
+import ulumusiImage from '../images/gudang-ulumusi.png';
 
 // Animation Variants
 const fadeInUp = {
@@ -203,33 +204,53 @@ export const HomePage = () => {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="lg:col-span-5 relative hidden lg:block"
           >
-            <div className="relative z-10 rounded-[3rem] overflow-hidden shadow-2xl border-[8px] border-white dark:border-slate-800 transform rotate-2 hover:rotate-0 transition-transform duration-700 ease-out group">
-              <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 to-transparent z-10 pointer-events-none"></div>
-              <img
-                src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80"
-                alt="Logistics Worker"
-                className="w-full h-[600px] object-cover group-hover:scale-110 transition-transform duration-700 ease-out transform-gpu"
-                style={{ willChange: 'transform' }}
-              />
-              {/* Floating Glass Card */}
-              <div className="absolute bottom-8 left-8 right-8 z-20 p-6 bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl text-white shadow-xl">
-                 <div className="flex items-center justify-between mb-2">
-                    {/* UBAH: Text accent */}
-                    <span className="text-xs font-bold uppercase tracking-widest text-[#AB1F24]">Live Status</span>
+            {/* Wrapper = BORDER */}
+            <div className="
+              relative z-10 rounded-[3rem] p-[4px]
+              bg-white
+              dark:bg-gradient-to-r dark:from-red-600 dark:via-red-500 dark:to-rose-500
+              shadow-2xl
+              transform rotate-2 hover:rotate-0 transition-transform duration-700 ease-out
+              group
+            ">
+              {/* Inner = CONTENT */}
+              <div className="
+                relative overflow-hidden rounded-[2.4rem]
+                bg-white dark:bg-slate-900
+              ">
+                <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 to-transparent z-10 pointer-events-none"></div>
+
+                <img
+                  src={ulumusiImage}
+                  alt="Logistics Worker"
+                  className="w-full h-[600px] object-cover group-hover:scale-110 transition-transform duration-700 ease-out transform-gpu"
+                  style={{ willChange: 'transform' }}
+                />
+
+                {/* Floating Glass Card */}
+                <div className="absolute bottom-8 left-8 right-8 z-20 p-6 bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl text-white shadow-xl">
+                  <div className="flex items-center justify-between mb-2">
+                    <span className="text-xs font-bold uppercase tracking-widest text-[#AB1F24]">
+                      Live Status
+                    </span>
                     <span className="flex h-2 w-2 rounded-full bg-green-500 animate-pulse"></span>
-                 </div>
-                 <div className="flex items-center gap-4">
-                    {/* UBAH: Icon background */}
+                  </div>
+
+                  <div className="flex items-center gap-4">
                     <div className="h-12 w-12 rounded-full bg-[#AB1F24] flex items-center justify-center">
-                       <Truck size={24} className="text-white"/>
+                      <Truck size={24} className="text-white" />
                     </div>
                     <div>
-                       <p className="font-bold text-lg">Pengiriman Aktif</p>
-                       <p className="text-sm text-white/70">1,240+ Paket sedang bergerak</p>
+                      <p className="font-bold text-lg">Pengiriman Aktif</p>
+                      <p className="text-sm text-white/70">
+                        1,240+ Paket sedang bergerak
+                      </p>
                     </div>
-                 </div>
+                  </div>
+                </div>
               </div>
             </div>
+
             
             {/* Decoration Pattern */}
             <div className="absolute -bottom-10 -right-10 z-0">
