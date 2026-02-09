@@ -434,103 +434,103 @@ export const HomePage = () => {
       </div>
 
       {/* --- BLOG & ARTICLES SECTION (SHOWCASE) --- */}
-      <Section className="py-24 bg-slate-50 dark:bg-slate-900/30 overflow-hidden">
+      <Section className="py-16 md:py-24 bg-slate-50 dark:bg-slate-900/30 overflow-hidden">
         <div className="max-w-7xl mx-auto px-6">
-          <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
-            <div className="max-w-2xl">
+          <div className="flex flex-col md:flex-row justify-between items-center md:items-end mb-12 gap-6">
+            <div className="max-w-2xl text-center md:text-left">
               <motion.div 
                 initial={{ opacity: 0, y: 10 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                className="flex items-center gap-2 mb-4"
+                className="flex items-center justify-center md:justify-start gap-2 mb-4"
               >
                 <span className="w-8 h-[2px] bg-[#AB1F24]"></span>
-                <span className="text-[#AB1F24] font-black text-sm uppercase tracking-[0.3em]">Insights</span>
+                <span className="text-[#AB1F24] font-black text-xs md:text-sm uppercase tracking-[0.3em]">Insights</span>
               </motion.div>
               <motion.h3 
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.1 }}
-                className="text-4xl md:text-6xl font-black text-slate-900 dark:text-white leading-[1.1]"
+                className="text-3xl md:text-5xl lg:text-6xl font-black text-slate-900 dark:text-white leading-[1.1]"
               >
                 Edukasi & <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#AB1F24] to-red-500">Update Logistik.</span>
               </motion.h3>
             </div>
             
-            {/* Carousel Navigation - Tetap ada untuk geser konten */}
-            <div className="flex gap-4">
+            {/* Carousel Navigation - Lebih kecil & responsif */}
+            <div className="hidden md:flex gap-3">
               <button 
                 onClick={() => scroll('left')}
-                className="group p-5 rounded-2xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-400 hover:text-[#AB1F24] transition-all shadow-sm active:scale-90"
+                className="group p-4 rounded-2xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-400 hover:text-[#AB1F24] transition-all shadow-sm active:scale-90"
               >
-                <ChevronLeft size={28} className="group-hover:-translate-x-1 transition-transform" />
+                <ChevronLeft size={24} className="group-hover:-translate-x-1 transition-transform" />
               </button>
               <button 
                 onClick={() => scroll('right')}
-                className="group p-5 rounded-2xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-400 hover:text-[#AB1F24] transition-all shadow-sm active:scale-90"
+                className="group p-4 rounded-2xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-400 hover:text-[#AB1F24] transition-all shadow-sm active:scale-90"
               >
-                <ChevronRight size={28} className="group-hover:translate-x-1 transition-transform" />
+                <ChevronRight size={24} className="group-hover:translate-x-1 transition-transform" />
               </button>
             </div>
           </div>
 
-          {/* Carousel Container */}
+          {/* Carousel Container - min-w disesuaikan agar tidak kegedean */}
           <div 
             ref={scrollRef}
-            className="flex gap-8 overflow-x-auto snap-x snap-mandatory scrollbar-hide pb-12 cursor-grab active:cursor-grabbing"
+            className="flex gap-6 overflow-x-auto snap-x snap-mandatory scrollbar-hide pb-8 cursor-grab active:cursor-grabbing"
             style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
           >
             {newsArticles.map((article) => (
               <div 
                 key={article.id}
-                className="min-w-[320px] md:min-w-[450px] snap-start"
+                className="min-w-[280px] sm:min-w-[350px] md:min-w-[400px] snap-start"
               >
-                {/* Card Design - Dibuat Statis (Non-Clickable) */}
-                <div className="bg-white dark:bg-slate-900 rounded-[3rem] p-4 border border-slate-100 dark:border-slate-800 shadow-xl shadow-slate-200/50 dark:shadow-none h-full flex flex-col">
+                {/* Card Design - Padding dikurangi agar proporsional */}
+                <div className="bg-white dark:bg-slate-900 rounded-[2.5rem] p-3 border border-slate-100 dark:border-slate-800 shadow-xl shadow-slate-200/50 dark:shadow-none h-full flex flex-col">
                   
-                  {/* Image Area */}
-                  <div className="relative h-72 rounded-[2.5rem] overflow-hidden mb-8">
+                  {/* Image Area - Tinggi dikurangi (h-72 ke h-56/64) */}
+                  <div className="relative h-56 md:h-64 rounded-[2rem] overflow-hidden mb-6">
                     <img 
                       src={article.image} 
                       alt={article.title}
                       className="w-full h-full object-cover select-none"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-slate-900/40 via-transparent to-transparent"></div>
-                    <div className="absolute bottom-6 left-6">
-                      <span className="px-5 py-2.5 bg-[#AB1F24] text-white rounded-2xl text-[10px] font-black uppercase tracking-widest shadow-lg">
+                    <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 via-transparent to-transparent"></div>
+                    <div className="absolute bottom-4 left-4">
+                      <span className="px-4 py-2 bg-[#AB1F24] text-white rounded-xl text-[9px] font-black uppercase tracking-widest shadow-lg">
                         {article.category}
                       </span>
                     </div>
                   </div>
 
                   {/* Text Content Area */}
-                  <div className="px-4 pb-6 flex flex-col flex-grow">
-                    <div className="flex items-center gap-6 mb-6 text-[11px] font-bold text-slate-400 uppercase tracking-wider">
-                      <div className="flex items-center gap-2">
-                        <Calendar size={14} className="text-[#AB1F24]" />
+                  <div className="px-3 pb-4 flex flex-col flex-grow">
+                    <div className="flex items-center gap-4 mb-4 text-[10px] font-bold text-slate-400 uppercase tracking-wider">
+                      <div className="flex items-center gap-1.5">
+                        <Calendar size={12} className="text-[#AB1F24]" />
                         {article.date}
                       </div>
-                      <div className="flex items-center gap-2">
-                        <Clock size={14} className="text-[#AB1F24]" />
+                      <div className="flex items-center gap-1.5">
+                        <Clock size={12} className="text-[#AB1F24]" />
                         {article.readTime}
                       </div>
                     </div>
 
-                    <h4 className="text-2xl font-black text-slate-900 dark:text-white mb-4 leading-tight">
+                    <h4 className="text-xl md:text-2xl font-black text-slate-900 dark:text-white mb-3 leading-tight line-clamp-2">
                       {article.title}
                     </h4>
                     
-                    <p className="text-slate-500 dark:text-slate-400 text-sm leading-relaxed mb-10 line-clamp-3 italic">
+                    <p className="text-slate-500 dark:text-slate-400 text-xs md:text-sm leading-relaxed mb-6 line-clamp-3 italic">
                       "{article.excerpt}"
                     </p>
 
-                    {/* Author Info - Static Info */}
-                    <div className="mt-auto flex items-center gap-4 p-4 rounded-3xl bg-slate-50 dark:bg-slate-800/50 border border-slate-100 dark:border-slate-700">
-                      <div className="h-12 w-12 rounded-2xl bg-gradient-to-br from-[#AB1F24] to-red-400 flex items-center justify-center text-white font-black shadow-inner">
+                    {/* Author Info - Lebih slim */}
+                    <div className="mt-auto flex items-center gap-3 p-3 rounded-2xl bg-slate-50 dark:bg-slate-800/50 border border-slate-100 dark:border-slate-700">
+                      <div className="h-10 w-10 rounded-xl bg-gradient-to-br from-[#AB1F24] to-red-400 flex items-center justify-center text-white text-sm font-black shadow-inner">
                         {article.author.charAt(0)}
                       </div>
                       <div>
-                        <p className="text-xs font-black text-slate-900 dark:text-white uppercase tracking-tighter">{article.author}</p>
-                        <p className="text-[10px] text-slate-500 dark:text-slate-400 font-medium italic">{article.authorRole}</p>
+                        <p className="text-[10px] font-black text-slate-900 dark:text-white uppercase tracking-tighter">{article.author}</p>
+                        <p className="text-[9px] text-slate-500 dark:text-slate-400 font-medium italic">{article.authorRole}</p>
                       </div>
                     </div>
                   </div>
@@ -539,23 +539,22 @@ export const HomePage = () => {
             ))}
           </div>
           
-          {/* Main Action - Satu-satunya pintu keluar ke halaman News */}
-          <div className="mt-16 flex justify-center">
-             <motion.button 
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
+          {/* Main Action - Padding & Button size diatur ulang */}
+          <div className="mt-12 flex justify-center">
+            <motion.button 
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
               onClick={() => setCurrentPage('news')}
-              className="group flex items-center gap-4 px-10 py-5 bg-slate-900 dark:bg-white text-white dark:text-slate-900 rounded-full font-black text-lg shadow-2xl transition-all"
-             >
-               Eksplorasi Semua Artikel
-               <div className="bg-[#AB1F24] p-1.5 rounded-full group-hover:rotate-45 transition-transform duration-500">
-                  <ArrowRight size={20} className="text-white" />
-               </div>
-             </motion.button>
+              className="group flex items-center gap-3 px-8 py-4 bg-slate-900 dark:bg-white text-white dark:text-slate-900 rounded-2xl font-black text-base shadow-xl transition-all"
+            >
+              Lihat Semua Artikel
+              <div className="bg-[#AB1F24] p-1 rounded-full group-hover:rotate-45 transition-transform duration-500">
+                  <ArrowRight size={18} className="text-white" />
+              </div>
+            </motion.button>
           </div>
         </div>
       </Section>
-
       {/* Tracking Modal */}
       {trackingResult && <TrackingResult shipment={trackingResult} onClose={handleCloseTracking} />}
       
