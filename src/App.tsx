@@ -98,10 +98,10 @@ function App() {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    // Simulasi loading selama 2.5 detik
+    // Simulasi loading selama 4.2 detik
     const timer = setTimeout(() => {
       setIsLoading(false);
-    }, 2500);
+    }, 4200);
 
     return () => clearTimeout(timer);
   }, []);
