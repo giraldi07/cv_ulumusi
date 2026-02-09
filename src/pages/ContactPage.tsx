@@ -16,6 +16,7 @@ import { Section } from '../components/Section';
 import { Button } from '../components/Button';
 import { Input } from '../components/Input';
 import { Textarea } from '../components/Textarea';
+import HeroImageContact from '../images/cs-ulumusi.jpg';
 
 export const ContactPage = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -66,12 +67,20 @@ export const ContactPage = () => {
   return (
     <div className="pt-20 bg-white dark:bg-slate-950 transition-colors duration-500 min-h-screen">
       
-      {/* --- HERO SECTION --- */}
-      <section className="relative py-20 overflow-hidden bg-slate-900">
-        <div className="absolute inset-0 opacity-20">
-          {/* UBAH: Glow effect ke Merah */}
-          <div className="absolute top-0 left-0 w-96 h-96 bg-[#AB1F24] rounded-full blur-[120px] -translate-x-1/2 -translate-y-1/2" />
-          <div className="absolute bottom-0 right-0 w-96 h-96 bg-blue-600 rounded-full blur-[120px] translate-x-1/2 translate-y-1/2" />
+      {/* --- HERO SECTION DENGAN BACKGROUND IMAGE --- */}
+      <section className="relative py-28 md:py-40 overflow-hidden bg-slate-900">
+        {/* Background Image Container */}
+        <div className="absolute inset-0 z-0">
+          <img 
+            src={HeroImageContact} 
+            alt="Customer Service Ulu Musi" 
+            className="w-full h-full object-cover"
+          />
+          {/* Overlay Gelap: Menggunakan opacity 70% agar teks putih terlihat jelas di tengah */}
+          <div className="absolute inset-0 bg-slate-900/70 backdrop-blur-[2px]" />
+          
+          {/* Efek Glow Merah di tengah untuk memperkuat branding */}
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-[#AB1F24] rounded-full blur-[150px] opacity-20" />
         </div>
         
         <Section className="relative z-10 text-center">
@@ -79,13 +88,14 @@ export const ContactPage = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
+            className="max-w-3xl mx-auto flex flex-col items-center" // mx-auto & items-center untuk centering
           >
-            <h1 className="text-4xl md:text-6xl font-black text-white mb-6 uppercase tracking-tighter">
-              {/* UBAH: Span text ke Merah */}
+            <h1 className="text-4xl md:text-7xl font-black text-white mb-6 uppercase tracking-tighter leading-none">
               Get In <span className="text-[#AB1F24]">Touch</span>
             </h1>
-            <p className="text-slate-400 text-lg md:text-xl max-w-2xl mx-auto font-light leading-relaxed">
-              Ada pertanyaan mengenai logistik atau butuh penawaran khusus? Tim kami siap membantu mencarikan solusi terbaik untuk Anda.
+            <p className="text-slate-200 text-lg md:text-xl max-w-2xl mx-auto font-light leading-relaxed">
+              Ada pertanyaan mengenai logistik atau butuh penawaran khusus? 
+              Tim kami siap membantu mencarikan solusi terbaik untuk Anda.
             </p>
           </motion.div>
         </Section>

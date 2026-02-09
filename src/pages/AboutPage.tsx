@@ -22,6 +22,8 @@ import { Section } from '../components/Section';
 import { CountUp } from '../components/CountUp';
 import heroImageAbout from '../images/cv-ulumusi-goodang@3x.jpg';
 import meetingImage from '../images/rapat2@3x.jpg';
+// --- BARU: Import Background Image untuk Timeline ---
+import ImageBG from '../images/ImageBG.jpg'; 
 
 // Data untuk Timeline Sejarah
 const milestones = [
@@ -52,20 +54,21 @@ const milestones = [
   {
     year: "2024",
     title: "Strategic BUMN Partnership",
-    desc: "Dipercaya oleh PT. Surveyor Indonesia untuk menangani distribusi logistik Express lintas wilayah (Banten - Jabar - Jakarta) secara berkelanjutan.", // Berdasarkan data Invoice [cite: 1, 2, 4, 6]
+    desc: "Dipercaya oleh PT. Surveyor Indonesia untuk menangani distribusi logistik Express lintas wilayah (Banten - Jabar - Jakarta) secara berkelanjutan.", 
     icon: ShieldCheck,
   },
   {
     year: "2025",
     title: "Service Excellence Expansion",
-    desc: "Memperluas jangkauan layanan Express hingga ke pelosok Sukabumi dan Pandeglang dengan tingkat presisi pengiriman harian yang tinggi.", // Berdasarkan data Invoice 2025 
+    desc: "Memperluas jangkauan layanan Express hingga ke pelosok Sukabumi dan Pandeglang dengan tingkat presisi pengiriman harian yang tinggi.", 
     icon: Rocket,
   },
 ];
 
 export const AboutPage = () => {
   const containerRef = useRef(null);
-  const timelineRef = useRef(null);
+  const timelineRef = useRef(null);       // Ref untuk garis merah (konten)
+  const timelineSectionRef = useRef(null); // Ref BARU untuk wrapper background parallax
   
   // Parallax Effect untuk Hero
   const { scrollYProgress: pageScroll } = useScroll({
@@ -75,7 +78,17 @@ export const AboutPage = () => {
   const y = useTransform(pageScroll, [0, 1], [0, -300]);
   const opacity = useTransform(pageScroll, [0, 0.5], [1, 0]);
 
-  // Progress Bar untuk Timeline Line
+  // --- BARU: Logic Parallax Background Timeline ---
+  const { scrollYProgress: timelineBgScroll } = useScroll({
+    target: timelineSectionRef,
+    offset: ["start end", "end start"] // Mulai animasi saat section masuk layar bawah, selesai saat keluar atas
+  });
+  
+  // Background bergerak lebih lambat dari scroll (efek parallax)
+  // Rentang -15% ke 15% memberikan efek smooth tanpa putus
+  const bgParallaxY = useTransform(timelineBgScroll, [0, 1], ["-15%", "15%"]);
+
+  // Progress Bar untuk Timeline Line (LOGIKA ASLI TETAP ADA)
   const { scrollYProgress: timelineScroll } = useScroll({
     target: timelineRef,
     offset: ["start center", "end center"]
@@ -91,7 +104,7 @@ export const AboutPage = () => {
       
       {/* --- HERO SECTION --- */}
       <section className="relative h-[80vh] flex items-center justify-center overflow-hidden">
-        {/* Background Parallax */}
+        {/* Background Parallax Hero */}
         <motion.div style={{ y, opacity }} className="absolute inset-0 z-0">
           <div className="absolute inset-0 bg-slate-900/70 z-10 mix-blend-multiply" />
           <div className="absolute inset-0 bg-gradient-to-b from-transparent to-slate-950/90 z-20" />
@@ -110,14 +123,12 @@ export const AboutPage = () => {
             transition={{ duration: 1, ease: "easeOut" }}
           >
             <div className="inline-flex items-center gap-2 px-4 py-2 mb-8 bg-white/10 backdrop-blur-md border border-white/20 rounded-full">
-              {/* UBAH: Dot pulse color */}
               <span className="w-2 h-2 rounded-full bg-[#AB1F24] animate-pulse"></span>
               <span className="text-xs font-bold tracking-[0.2em] uppercase text-white">Since 2014</span>
             </div>
             
             <h1 className="text-5xl md:text-8xl font-black text-white mb-6 tracking-tight leading-none">
               The Story of <br/>
-              {/* UBAH: Gradient Text Title */}
               <span className="text-transparent bg-clip-text bg-gradient-to-br from-[#AB1F24] to-red-500">ULUMUSI</span>
             </h1>
             
@@ -137,16 +148,13 @@ export const AboutPage = () => {
             viewport={{ once: true }}
             className="lg:col-span-5 relative"
           >
-            {/* UBAH: Border color outline image */}
             <div className="absolute top-10 left-10 w-full h-full border-2 border-[#AB1F24]/20 rounded-[3rem] z-0"></div>
             <img
               src={meetingImage}
               alt="Meeting"
               className="rounded-[3rem] shadow-2xl relative z-10 grayscale hover:grayscale-0 transition-all duration-700 object-cover h-[500px] w-full"
             />
-            {/* Float Card */}
             <div className="absolute -bottom-6 -right-6 bg-white dark:bg-slate-800 p-6 rounded-2xl shadow-xl z-20 border border-slate-100 dark:border-slate-700 max-w-[200px]">
-              {/* UBAH: Quote Icon Color */}
               <Quote className="text-[#AB1F24] mb-2" size={24} />
               <p className="text-sm font-medium text-slate-600 dark:text-slate-300 italic">"Trust is the currency of logistics."</p>
             </div>
@@ -159,10 +167,8 @@ export const AboutPage = () => {
             className="lg:col-span-7 space-y-8"
           >
             <div>
-              {/* UBAH: Subheading color */}
               <h2 className="text-[#AB1F24] font-bold text-xs uppercase tracking-[0.3em] mb-3">Our Narrative</h2>
               <h3 className="text-4xl lg:text-5xl font-black text-slate-900 dark:text-white leading-[1.1]">
-                {/* UBAH: Underline color */}
                 Kami Tidak Hanya Mengirim Barang, Kami Mengirim <span className="underline decoration-[#AB1F24] decoration-4 underline-offset-4">Kepastian</span>.
               </h3>
             </div>
@@ -177,7 +183,6 @@ export const AboutPage = () => {
                  { title: 'Tracking 24/7', desc: 'Monitoring real-time via satelit.' },
                  { title: 'Support Responsif', desc: 'CS siap membantu kendala Anda.' }
                ].map((item, i) => (
-                 // UBAH: Border kiri list
                  <div key={i} className="flex flex-col border-l-4 border-[#AB1F24]/30 dark:border-slate-800 pl-4 py-1">
                     <h4 className="font-bold text-slate-900 dark:text-white">{item.title}</h4>
                     <p className="text-sm text-slate-500 dark:text-slate-400">{item.desc}</p>
@@ -199,9 +204,9 @@ export const AboutPage = () => {
             </div>
             <div className="md:col-span-2 grid grid-cols-2 sm:grid-cols-3 gap-4">
               {[
-                { label: 'Rute Utama', val: 'Cilegon - Bogor' }, // Berdasarkan Destination Sentul Bogor [cite: 1, 2, 6]
-                { label: 'Layanan', val: '100% Express' }, // Berdasarkan Service Column [cite: 1, 2, 7]
-                { label: 'Klien Strategis', val: 'Surveyor Indonesia' }, // Berdasarkan Customer [cite: 1, 2]
+                { label: 'Rute Utama', val: 'Cilegon - Bogor' },
+                { label: 'Layanan', val: '100% Express' },
+                { label: 'Klien Strategis', val: 'Surveyor Indonesia' },
               ].map((item, i) => (
                 <div key={i} className="bg-white dark:bg-slate-800 p-5 rounded-2xl shadow-sm border border-slate-100 dark:border-slate-700">
                   <p className="text-[10px] text-slate-400 uppercase font-black mb-1">{item.label}</p>
@@ -213,25 +218,41 @@ export const AboutPage = () => {
         </div>
       </Section>
 
-      {/* --- TIMELINE HISTORY (Zig-Zag Animation) --- */}
-      <div className="bg-slate-50 dark:bg-slate-900/30 py-32 overflow-hidden border-y border-slate-200 dark:border-slate-900">
-        <Section>
+      {/* --- TIMELINE HISTORY (Parallax Image Background Version) --- */}
+      {/* Container utama dibuat relative dan overflow-hidden */}
+      <div ref={timelineSectionRef} className="relative w-full overflow-hidden py-32 border-y border-slate-200 dark:border-slate-900">
+        
+        {/* 1. BACKGROUND LAYER (Parallax Image) */}
+        <motion.div 
+          style={{ y: bgParallaxY }} 
+          className="absolute inset-0 w-full h-[120%] -top-[20%] z-0"
+        >
+          <img 
+            src={ImageBG} 
+            alt="Sejarah Ulumusi" 
+            className="w-full h-full object-cover filter blur-[1px] brightness-[0.4] dark:brightness-[0.3]" 
+            // Note: blur dan brightness diturunkan agar text di depannya tetap terbaca jelas (pop-up)
+          />
+        </motion.div>
+
+        {/* 2. OVERLAY GRADIENT (Agar transisi atas/bawah smooth ke section putih) */}
+        <div className="absolute inset-0 z-0 bg-gradient-to-b from-white via-white/40 to-white dark:from-slate-950 dark:via-slate-950/40 dark:to-slate-950 mix-blend-normal opacity-90" />
+
+        {/* 3. KONTEN TIMELINE (z-index lebih tinggi) */}
+        <Section className="relative z-10">
           <div className="text-center mb-24">
-            {/* UBAH: Subheading color */}
             <h2 className="text-[#AB1F24] font-black text-xs uppercase tracking-[0.3em] mb-4">Milestones</h2>
             <h3 className="text-4xl md:text-5xl font-black text-slate-900 dark:text-white">Jejak Langkah Kami</h3>
           </div>
 
           <div ref={timelineRef} className="relative max-w-6xl mx-auto">
             
-            {/* --- Center Line (Desktop) & Left Line (Mobile) --- */}
-            {/* Line Base (Abu-abu) */}
-            <div className="absolute left-8 md:left-1/2 transform md:-translate-x-1/2 w-1 h-full bg-slate-200 dark:bg-slate-800 rounded-full" />
+            {/* Center Line Base */}
+            <div className="absolute left-8 md:left-1/2 transform md:-translate-x-1/2 w-1 h-full bg-slate-200/50 dark:bg-slate-700/50 rounded-full" />
             
-            {/* Line Progress (Oranye -> Red Custom - Mengikuti Scroll) */}
+            {/* Center Line Progress (Red) */}
             <motion.div 
               style={{ scaleY, originY: 0 }} 
-              // UBAH: Gradient timeline dan shadow glow
               className="absolute left-8 md:left-1/2 transform md:-translate-x-1/2 w-1 h-full bg-gradient-to-b from-[#AB1F24] via-[#AB1F24] to-red-900 rounded-full shadow-[0_0_20px_rgba(171,31,36,0.6)] z-10" 
             />
 
@@ -241,7 +262,7 @@ export const AboutPage = () => {
                 return (
                   <div key={idx} className={`relative flex items-center md:justify-between ${isEven ? 'md:flex-row-reverse' : ''}`}>
                     
-                    {/* SPACER (Untuk membuat layout zig-zag di desktop) */}
+                    {/* SPACER */}
                     <div className="hidden md:block w-[45%]" />
 
                     {/* CENTRAL DOT / ICON */}
@@ -250,14 +271,12 @@ export const AboutPage = () => {
                       whileInView={{ scale: 1, rotate: 0 }}
                       viewport={{ once: true, margin: "-100px" }}
                       transition={{ type: "spring", stiffness: 200, damping: 15 }}
-                      // UBAH: Border dan Shadow dot
                       className="absolute left-8 md:left-1/2 transform -translate-x-1/2 z-20 w-12 h-12 md:w-16 md:h-16 bg-white dark:bg-slate-900 border-4 border-[#AB1F24] rounded-full flex items-center justify-center shadow-xl shadow-[#AB1F24]/20"
                     >
-                      {/* UBAH: Icon color */}
                       <item.icon className="text-[#AB1F24] w-5 h-5 md:w-7 md:h-7" strokeWidth={2} />
                     </motion.div>
 
-                    {/* CONTENT CARD */}
+                    {/* CONTENT CARD (Tambahkan backdrop-blur untuk estetika di atas gambar) */}
                     <motion.div 
                       initial={{ opacity: 0, x: isEven ? -100 : 100 }} 
                       whileInView={{ opacity: 1, x: 0 }}
@@ -266,25 +285,22 @@ export const AboutPage = () => {
                       className="w-full md:w-[45%] pl-20 md:pl-0"
                     >
                       <div className={`
-                          relative bg-white dark:bg-slate-900 p-8 rounded-[2rem] shadow-lg border border-slate-100 dark:border-slate-800 
-                          /* UBAH: Hover state border dan shadow */
+                          relative bg-white/95 dark:bg-slate-900/95 backdrop-blur-md p-8 rounded-[2rem] shadow-lg border border-slate-100 dark:border-slate-800 
                           hover:border-[#AB1F24] hover:shadow-2xl hover:shadow-[#AB1F24]/10 transition-all duration-300 group
                           ${isEven ? 'md:text-right' : 'md:text-left'}
-                       `}>
+                        `}>
                           {/* Arrow Connector */}
-                          <div className={`hidden md:block absolute top-1/2 -translate-y-1/2 w-4 h-4 bg-white dark:bg-slate-900 border-t border-r border-slate-100 dark:border-slate-800 rotate-45 
-                             /* UBAH: Arrow border hover */
-                             ${isEven ? '-right-2 border-l-0 border-b-0 group-hover:border-[#AB1F24]' : '-left-2 border-t-0 border-r-0 border-l border-b group-hover:border-[#AB1F24]'}
-                          `} />
+                          <div className={`hidden md:block absolute top-1/2 -translate-y-1/2 w-4 h-4 bg-white/95 dark:bg-slate-900/95 border-t border-r border-slate-100 dark:border-slate-800 rotate-45 
+                              ${isEven ? '-right-2 border-l-0 border-b-0 group-hover:border-[#AB1F24]' : '-left-2 border-t-0 border-r-0 border-l border-b group-hover:border-[#AB1F24]'}
+                            `} />
 
-                        {/* UBAH: Year Gradient Text */}
-                        <span className="block text-4xl font-black text-transparent bg-clip-text bg-gradient-to-r from-[#AB1F24] to-red-600 mb-2">
-                          {item.year}
-                        </span>
-                        <h4 className="text-xl font-bold text-slate-900 dark:text-white mb-3">{item.title}</h4>
-                        <p className="text-slate-500 dark:text-slate-400 text-sm md:text-base leading-relaxed">
-                          {item.desc}
-                        </p>
+                          <span className="block text-4xl font-black text-transparent bg-clip-text bg-gradient-to-r from-[#AB1F24] to-red-600 mb-2">
+                            {item.year}
+                          </span>
+                          <h4 className="text-xl font-bold text-slate-900 dark:text-white mb-3">{item.title}</h4>
+                          <p className="text-slate-500 dark:text-slate-400 text-sm md:text-base leading-relaxed">
+                            {item.desc}
+                          </p>
                       </div>
                     </motion.div>
 
@@ -296,11 +312,10 @@ export const AboutPage = () => {
         </Section>
       </div>
 
-      {/* --- OUR TRUSTED ROUTES (Visual Version) --- */}
+      {/* --- OUR TRUSTED ROUTES --- */}
       <Section className="py-24 bg-white dark:bg-slate-950">
         <div className="flex flex-col lg:flex-row gap-16 items-start">
           
-          {/* Kiri: Deskripsi & Partner */}
           <motion.div 
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -318,7 +333,6 @@ export const AboutPage = () => {
               Berdasarkan data operasional harian kami, rute-rute ini merupakan tulang punggung distribusi dokumen dan logistik kritikal bagi mitra strategis kami di wilayah Jawa Barat dan Banten.
             </p>
             
-            {/* Partner Card */}
             <div className="p-6 bg-slate-50 dark:bg-slate-900 rounded-[2rem] border border-slate-100 dark:border-slate-800 relative overflow-hidden group">
               <div className="absolute top-0 right-0 w-24 h-24 bg-[#AB1F24]/5 rounded-full -mr-10 -mt-10 group-hover:scale-150 transition-transform duration-700"></div>
               <p className="text-[10px] font-black text-slate-400 uppercase mb-3 tracking-widest">Main Strategic Partner</p>
@@ -334,7 +348,6 @@ export const AboutPage = () => {
             </div>
           </motion.div>
 
-          {/* Kanan: Route Cards dengan Visual Ikon */}
           <div className="lg:w-2/3 grid grid-cols-1 md:grid-cols-2 gap-4 w-full">
             {[
               { from: 'Cilegon', to: 'Sentul Bogor', icon: '🏭', desc: 'Industrial Hub' },
@@ -351,7 +364,6 @@ export const AboutPage = () => {
                 whileHover={{ y: -5 }}
                 className="group relative p-8 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-[2.5rem] overflow-hidden transition-all duration-300 hover:shadow-2xl hover:shadow-[#AB1F24]/10 hover:border-[#AB1F24]/30"
               >
-                {/* Ikon Kota sebagai Watermark */}
                 <div className="absolute -right-4 -bottom-4 text-8xl opacity-[0.03] dark:opacity-[0.05] group-hover:opacity-10 transition-opacity">
                   {route.icon}
                 </div>
@@ -368,7 +380,6 @@ export const AboutPage = () => {
                       <p className="text-xl font-bold text-slate-900 dark:text-white">{route.from}</p>
                     </div>
 
-                    {/* Animated Connector */}
                     <div className="flex items-center gap-3">
                       <div className="w-2 h-2 rounded-full bg-[#AB1F24]"></div>
                       <div className="flex-1 h-[1px] bg-gradient-to-r from-[#AB1F24] to-transparent relative">
@@ -398,17 +409,15 @@ export const AboutPage = () => {
         </div>
       </Section>
 
-      {/* --- VISION & MISSION (Modern Cards) --- */}
+      {/* --- VISION & MISSION --- */}
       <Section className="py-24">
           <div className="grid md:grid-cols-2 gap-8 lg:gap-12">
             <motion.div 
               whileHover={{ y: -10 }}
               className="bg-slate-900 dark:bg-slate-800 text-white p-10 lg:p-14 rounded-[3rem] shadow-2xl relative overflow-hidden"
             >
-              {/* UBAH: Background Blob */}
               <div className="absolute top-0 right-0 w-64 h-64 bg-[#AB1F24] rounded-full blur-[120px] opacity-40"></div>
               <div className="relative z-10">
-                {/* UBAH: Icon color */}
                 <Target size={48} className="text-[#AB1F24] mb-6" />
                 <h4 className="text-3xl font-black mb-6">Our Vision</h4>
                 <p className="text-xl text-slate-300 leading-relaxed font-light">
@@ -419,7 +428,6 @@ export const AboutPage = () => {
 
             <motion.div 
               whileHover={{ y: -10 }}
-              // UBAH: Background Card Mission (Main Color)
               className="bg-[#AB1F24] dark:bg-[#8a191d] text-white p-10 lg:p-14 rounded-[3rem] shadow-2xl relative overflow-hidden"
             >
                <div className="absolute bottom-0 left-0 w-64 h-64 bg-white rounded-full blur-[120px] opacity-20"></div>
@@ -427,7 +435,6 @@ export const AboutPage = () => {
                 <Rocket size={48} className="text-white mb-6" />
                 <h4 className="text-3xl font-black mb-6">Our Mission</h4>
                 <ul className="space-y-4">
-                  {/* UBAH: List text color menjadi agak merah/putih agar blend */}
                   <li className="flex items-start gap-4">
                     <span className="mt-1 p-1 bg-white/20 rounded-full"><CheckCircle2 size={14}/></span>
                     <span className="text-red-50 font-medium text-lg">Inovasi teknologi berkelanjutan.</span>
@@ -481,22 +488,18 @@ export const AboutPage = () => {
               },
             ].map((stat, i) => (
               <div key={i} className="group cursor-default">
-                {/* Icon dengan Glow Effect saat Hover */}
                 <div className="flex justify-center text-slate-600 group-hover:text-[#AB1F24] transition-all mb-4 transform group-hover:scale-110 duration-300">
                   <stat.icon size={36} className="group-hover:drop-shadow-[0_0_10px_rgba(171,31,36,0.5)]" />
                 </div>
                 
-                {/* Angka Utama */}
                 <div className="text-5xl md:text-6xl font-black text-white tracking-tighter mb-1">
                   <CountUp end={stat.end} duration={3} />{stat.suffix}
                 </div>
                 
-                {/* Label Utama */}
                 <p className="text-[#AB1F24] font-bold uppercase tracking-[0.2em] text-[10px] mb-2">
                   {stat.label}
                 </p>
                 
-                {/* Deskripsi Tambahan (Penjelasan dari data invoice) */}
                 <p className="text-slate-500 text-xs font-medium opacity-0 group-hover:opacity-100 transition-opacity duration-500">
                   {stat.desc}
                 </p>
@@ -510,7 +513,6 @@ export const AboutPage = () => {
       <Section className="py-24 pb-32">
         <div className="relative rounded-[3rem] overflow-hidden bg-slate-900">
            <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20"></div>
-           {/* UBAH: Blob CTA */}
            <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-[#AB1F24]/30 rounded-full blur-[100px] mix-blend-screen"></div>
            
            <div className="relative z-10 p-12 md:p-24 text-center">
