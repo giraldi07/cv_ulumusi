@@ -18,6 +18,15 @@ import { NewsDetailPage } from './pages/NewsDetailPage';
 const AppContent = () => {
   const { currentPage, serviceDetailId, newsDetailId } = useNavigation();
 
+  // FIX: Scroll ke atas setiap kali halaman berubah
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: 'instant' // Gunakan 'instant' agar user tidak melihat proses scrolling-nya (lebih natural untuk ganti halaman)
+    });
+  }, [currentPage, serviceDetailId, newsDetailId]); // Trigger jalan saat page atau ID detail berubah
+
   const renderPage = () => {
     switch (currentPage) {
       case 'home':
@@ -32,13 +41,16 @@ const AppContent = () => {
         return <ContactPage />;
       case 'shipping-rates':
         return <ShippingRatesPage />;
-      case 'career': // Case baru untuk Karir
+      case 'career':
         return <CareerPage />;
-      case 'news':   // Case baru untuk Berita
+      case 'news':
         return <NewsPage />;
-      case 'news-detail': return <NewsDetailPage articleId={newsDetailId ?? 1} />;
-      case 'privacy': return <LegalPage type="privacy" />; // Panggil komponen baru
-      case 'terms': return <LegalPage type="terms" />;     // Panggil komponen baru
+      case 'news-detail': 
+        return <NewsDetailPage articleId={newsDetailId ?? 1} />;
+      case 'privacy': 
+        return <LegalPage type="privacy" />;
+      case 'terms': 
+        return <LegalPage type="terms" />;
       default:
         return <HomePage />;
     }
