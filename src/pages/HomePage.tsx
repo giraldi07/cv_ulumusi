@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react'; // Tambah useRef
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   Search,
@@ -14,7 +14,10 @@ import {
   Zap,
   ShieldCheck,
   ChevronRight,
-  Star
+  ChevronLeft, // Tambah ChevronLeft
+  Star,
+  Calendar, // Tambah Calendar
+  User as UserIcon // Tambah UserIcon
 } from 'lucide-react';
 import { Section } from '../components/Section';
 import { TrackingResult } from '../components/TrackingResult';
@@ -23,6 +26,7 @@ import { CountUp } from '../components/CountUp';
 import { useNavigation } from '../contexts/NavigationContext';
 import { findShipmentByResi } from '../data/mockShipments';
 import { clients } from '../data/clients';
+import { newsArticles } from '../data/newsData'; // Import data berita
 import type { Shipment } from '../types/shipment';
 import ulumusiImage from '../images/gudang-ulumusi.png';
 
@@ -48,6 +52,17 @@ export const HomePage = () => {
   const [trackingResult, setTrackingResult] = useState<Shipment | null>(null);
   const [trackingError, setTrackingError] = useState('');
   const [isSearching, setIsSearching] = useState(false);
+
+  // Ref untuk Carousel Blog
+  const scrollRef = useRef<HTMLDivElement>(null);
+
+  const scroll = (direction: 'left' | 'right') => {
+    if (scrollRef.current) {
+      const { scrollLeft, clientWidth } = scrollRef.current;
+      const scrollTo = direction === 'left' ? scrollLeft - clientWidth : scrollLeft + clientWidth;
+      scrollRef.current.scrollTo({ left: scrollTo, behavior: 'smooth' });
+    }
+  };
 
   const handleTrackingSearch = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -379,6 +394,8 @@ export const HomePage = () => {
         </div>
       </div>
 
+
+
       {/* --- CTA SECTION (Modern) --- */}
       <div className="px-4 pb-20 pt-10 bg-white dark:bg-slate-950">
         {/* UBAH: CTA Gradient Background */}
@@ -405,7 +422,7 @@ export const HomePage = () => {
                   Hubungi Kami
                 </button>
                 <button 
-                  onClick={() => setCurrentPage('services')} 
+                  onClick={() => setCurrentPage('shipping-rates')} 
                   // UBAH: Button Secondary background
                   className="px-10 py-5 bg-red-900/40 backdrop-blur-sm border border-white/20 text-white font-bold rounded-2xl hover:bg-red-900/60 transition-all"
                 >
@@ -415,6 +432,129 @@ export const HomePage = () => {
            </div>
         </div>
       </div>
+
+      {/* --- BLOG & ARTICLES SECTION (SHOWCASE) --- */}
+      <Section className="py-24 bg-slate-50 dark:bg-slate-900/30 overflow-hidden">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
+            <div className="max-w-2xl">
+              <motion.div 
+                initial={{ opacity: 0, y: 10 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                className="flex items-center gap-2 mb-4"
+              >
+                <span className="w-8 h-[2px] bg-[#AB1F24]"></span>
+                <span className="text-[#AB1F24] font-black text-sm uppercase tracking-[0.3em]">Insights</span>
+              </motion.div>
+              <motion.h3 
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.1 }}
+                className="text-4xl md:text-6xl font-black text-slate-900 dark:text-white leading-[1.1]"
+              >
+                Edukasi & <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#AB1F24] to-red-500">Update Logistik.</span>
+              </motion.h3>
+            </div>
+            
+            {/* Carousel Navigation - Tetap ada untuk geser konten */}
+            <div className="flex gap-4">
+              <button 
+                onClick={() => scroll('left')}
+                className="group p-5 rounded-2xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-400 hover:text-[#AB1F24] transition-all shadow-sm active:scale-90"
+              >
+                <ChevronLeft size={28} className="group-hover:-translate-x-1 transition-transform" />
+              </button>
+              <button 
+                onClick={() => scroll('right')}
+                className="group p-5 rounded-2xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-400 hover:text-[#AB1F24] transition-all shadow-sm active:scale-90"
+              >
+                <ChevronRight size={28} className="group-hover:translate-x-1 transition-transform" />
+              </button>
+            </div>
+          </div>
+
+          {/* Carousel Container */}
+          <div 
+            ref={scrollRef}
+            className="flex gap-8 overflow-x-auto snap-x snap-mandatory scrollbar-hide pb-12 cursor-grab active:cursor-grabbing"
+            style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+          >
+            {newsArticles.map((article) => (
+              <div 
+                key={article.id}
+                className="min-w-[320px] md:min-w-[450px] snap-start"
+              >
+                {/* Card Design - Dibuat Statis (Non-Clickable) */}
+                <div className="bg-white dark:bg-slate-900 rounded-[3rem] p-4 border border-slate-100 dark:border-slate-800 shadow-xl shadow-slate-200/50 dark:shadow-none h-full flex flex-col">
+                  
+                  {/* Image Area */}
+                  <div className="relative h-72 rounded-[2.5rem] overflow-hidden mb-8">
+                    <img 
+                      src={article.image} 
+                      alt={article.title}
+                      className="w-full h-full object-cover select-none"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-slate-900/40 via-transparent to-transparent"></div>
+                    <div className="absolute bottom-6 left-6">
+                      <span className="px-5 py-2.5 bg-[#AB1F24] text-white rounded-2xl text-[10px] font-black uppercase tracking-widest shadow-lg">
+                        {article.category}
+                      </span>
+                    </div>
+                  </div>
+
+                  {/* Text Content Area */}
+                  <div className="px-4 pb-6 flex flex-col flex-grow">
+                    <div className="flex items-center gap-6 mb-6 text-[11px] font-bold text-slate-400 uppercase tracking-wider">
+                      <div className="flex items-center gap-2">
+                        <Calendar size={14} className="text-[#AB1F24]" />
+                        {article.date}
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <Clock size={14} className="text-[#AB1F24]" />
+                        {article.readTime}
+                      </div>
+                    </div>
+
+                    <h4 className="text-2xl font-black text-slate-900 dark:text-white mb-4 leading-tight">
+                      {article.title}
+                    </h4>
+                    
+                    <p className="text-slate-500 dark:text-slate-400 text-sm leading-relaxed mb-10 line-clamp-3 italic">
+                      "{article.excerpt}"
+                    </p>
+
+                    {/* Author Info - Static Info */}
+                    <div className="mt-auto flex items-center gap-4 p-4 rounded-3xl bg-slate-50 dark:bg-slate-800/50 border border-slate-100 dark:border-slate-700">
+                      <div className="h-12 w-12 rounded-2xl bg-gradient-to-br from-[#AB1F24] to-red-400 flex items-center justify-center text-white font-black shadow-inner">
+                        {article.author.charAt(0)}
+                      </div>
+                      <div>
+                        <p className="text-xs font-black text-slate-900 dark:text-white uppercase tracking-tighter">{article.author}</p>
+                        <p className="text-[10px] text-slate-500 dark:text-slate-400 font-medium italic">{article.authorRole}</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+          
+          {/* Main Action - Satu-satunya pintu keluar ke halaman News */}
+          <div className="mt-16 flex justify-center">
+             <motion.button 
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              onClick={() => setCurrentPage('news')}
+              className="group flex items-center gap-4 px-10 py-5 bg-slate-900 dark:bg-white text-white dark:text-slate-900 rounded-full font-black text-lg shadow-2xl transition-all"
+             >
+               Eksplorasi Semua Artikel
+               <div className="bg-[#AB1F24] p-1.5 rounded-full group-hover:rotate-45 transition-transform duration-500">
+                  <ArrowRight size={20} className="text-white" />
+               </div>
+             </motion.button>
+          </div>
+        </div>
+      </Section>
 
       {/* Tracking Modal */}
       {trackingResult && <TrackingResult shipment={trackingResult} onClose={handleCloseTracking} />}

@@ -7,7 +7,6 @@ import {
   Zap, 
   Users2, 
   Globe2, 
-  Award, 
   TrendingUp,
   ArrowRight,
   CheckCircle2,
