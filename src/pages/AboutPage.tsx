@@ -526,7 +526,7 @@ export const AboutPage = () => {
                     window.location.href = `mailto:cv.ulumusi@gmail.com?subject=${subject}&body=${body}`;
                   }}
                 >
-                  Hubungi Tim Sales <ArrowRight size={20}/>
+                  Download Company Profile <ArrowRight size={20}/>
                 </button>
              </div>
            </div>
