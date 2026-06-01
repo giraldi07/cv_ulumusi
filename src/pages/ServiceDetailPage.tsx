@@ -65,6 +65,22 @@ const services: ServiceDetails[] = [
     ]
   },
   {
+    title: 'Service Udara',
+    description: 'Layanan udara cepat untuk pengiriman dokumen dan kargo antar kota ataupun internasional.',
+    fullDescription: 'Tarif Udara menawarkan pengiriman udara yang cepat, aman, dan terjadwal untuk barang bernilai tinggi dan dokumen penting.',
+    longDescription: 'Service Udara CV. ULUMUSI menghadirkan solusi logistik udara dengan handling profesional, asuransi kargo, dan dokumentasi lengkap. Ideal untuk perusahaan yang membutuhkan kecepatan tanpa mengorbankan keamanan. Rute domestik dan internasional tersedia, dengan landing priority di bandara utama.',
+    features: ['Jadwal penerbangan prioritas', 'Asuransi kargo udara', 'Dokumentasi lengkap customs', 'Pickup & delivery door-to-door'],
+    benefits: ['Waktu transit paling singkat', 'Resiko minimal untuk barang berharga', 'Layanan tracking premium', 'Support 24/7 oleh tim udara'],
+    pricing: 'Mulai Rp 150.000',
+    estimatedTime: '1-2 Hari Kerja',
+    coverage: 'Bandara utama domestik & internasional',
+    images: [
+      'https://images.unsplash.com/photo-1517249361621-f1c2f7e0a6b7?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8',
+      'https://images.unsplash.com/photo-1517244825891-1dacc5d8f8a4?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8',
+      'https://images.unsplash.com/photo-1518117896735-6ca1c0ff52e5?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8'
+    ]
+  },
+  {
     title: 'Same Day Service',
     description: 'Layanan instan dalam kota hanya dalam hitungan jam.',
     fullDescription: 'Solusi tercepat untuk dokumen penting atau paket urgent intra-kota. Pickup langsung, antar langsung.',

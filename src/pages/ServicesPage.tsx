@@ -1,6 +1,6 @@
 ﻿import { motion } from 'framer-motion';
 import { 
-  Truck, Clock, Package, Globe, Users, ShieldCheck, 
+  Truck, Clock, Package, Globe, Users, ShieldCheck, Plane,
   ArrowRight, CheckCircle2, Star, Sparkles 
 } from 'lucide-react';
 import { Section } from '../components/Section';
@@ -48,6 +48,19 @@ const services: ServiceDetails[] = [
     estimatedTime: '24 jam kerja',
     coverage: 'Jangkauan ekspansi penuh',
     images: ['https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=800&q=80']
+  },
+  {
+    icon: Plane,
+    title: 'Service Udara',
+    color: 'sky',
+    description: 'Layanan ekspres udara untuk pengiriman cepat antar kota dan antar pulau.',
+    fullDescription: 'Solusi udara kami menjamin pengiriman yang cepat, aman, dan dengan tracking prioritas untuk barang bernilai tinggi.',
+    features: ['Penanganan kargo udara', 'Estimasi waktu ketat', 'Door-to-door service'],
+    benefits: ['Pengiriman super cepat', 'Ideal untuk barang bernilai', 'Sistem monitoring real-time'],
+    pricing: 'Mulai dari Rp 150.000',
+    estimatedTime: '1-2 Hari Kerja',
+    coverage: 'Rute dalam negeri & internasional',
+    images: ['https://images.unsplash.com/photo-1540569014015-19a5d5c49f1e?w=800&q=80']
   },
   {
     icon: Package,
@@ -235,8 +248,16 @@ export const ServicesPage = () => {
                 <p className="text-slate-400 text-sm font-medium">Layanan logistik dengan tingkat keamanan barang 99.9%.</p>
               </div>
             </div>
-            {/* UBAH: Button Hover Color */}
-            <button className="px-8 py-4 bg-white text-slate-900 font-black rounded-2xl hover:bg-[#AB1F24] hover:text-white transition-all active:scale-95 whitespace-nowrap">
+            {/* Button WhatsApp */}
+            <button
+              onClick={() =>
+                window.open(
+                  "https://wa.me/6281808530188",
+                  "_blank"
+                )
+              }
+              className="px-8 py-4 bg-white text-slate-900 font-black rounded-2xl hover:bg-[#AB1F24] hover:text-white transition-all active:scale-95 whitespace-nowrap"
+            >
               KONSULTASI GRATIS
             </button>
           </motion.div>
