@@ -6,7 +6,7 @@ import {
   Box, Globe, ShieldCheck, Sparkles,
   Filter, Star, TrendingUp, MapPinned, Layers,
   DollarSign, AlertCircle,
-  X, Navigation, Building2, Users
+  X, Navigation, Building2, Users, Lock
 } from 'lucide-react';
 import { Section } from '../components/Section';
 import { 
@@ -17,12 +17,39 @@ import {
   searchDestination 
 } from '../data/ongkir';
 
+// ===== FEATURE FLAG - Ubah ke true untuk lock fitur =====
+const IS_ONGKIR_DISABLED = true;
+// ========================================================
+
 // Komponen Loading Sederhana (Jika belum ada di file Anda)
 const LoadingState = () => (
   <div className="flex flex-col items-center justify-center py-20 space-y-4">
     <div className="w-16 h-16 border-4 border-[#AB1F24]/20 border-t-[#AB1F24] rounded-full animate-spin" />
     <p className="text-slate-500 font-bold animate-pulse">Menghitung Estimasi Terbaik...</p>
   </div>
+);
+
+// Komponen Overlay untuk fitur yang di-lock
+const FeatureLockedOverlay = () => (
+  <motion.div
+    initial={{ opacity: 0 }}
+    animate={{ opacity: 1 }}
+    exit={{ opacity: 0 }}
+    className="absolute inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm rounded-3xl"
+  >
+    <motion.div
+      initial={{ scale: 0.9, opacity: 0 }}
+      animate={{ scale: 1, opacity: 1 }}
+      transition={{ type: 'spring', stiffness: 100 }}
+      className="text-center space-y-4 px-6 py-8"
+    >
+      <div className="inline-flex items-center justify-center w-16 h-16 bg-white/20 rounded-full backdrop-blur-sm">
+        <Lock size={32} className="text-white" />
+      </div>
+      <h3 className="text-xl font-black text-white">Fitur Terkunci</h3>
+      <p className="text-base font-bold text-white/90">Fitur ini akan segera tersedia</p>
+    </motion.div>
+  </motion.div>
 );
 
 type ServiceFilter = 'all' | 'express' | 'sameDay' | 'nextDay' | 'reguler' | 'ekonomis' | 'cargo';
@@ -157,8 +184,46 @@ export const ShippingRatesPage = () => {
         <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-[0.03] dark:opacity-[0.1] invert dark:invert-0" />
       </div>
 
+      {/* OVERLAY KETIKA FITUR DISABLED */}
+      {IS_ONGKIR_DISABLED && (
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          className="fixed inset-0 z-40 bg-gradient-to-br from-slate-900/70 via-slate-800/60 to-slate-900/70 backdrop-blur-md flex items-center justify-center"
+        >
+          <motion.div
+            initial={{ scale: 0.9, opacity: 0, y: 10 }}
+            animate={{ scale: 1, opacity: 1, y: 0 }}
+            transition={{ type: 'spring', stiffness: 100, delay: 0.2 }}
+            className="text-center space-y-4 sm:space-y-6 px-4 sm:px-6 max-w-sm"
+          >
+            <motion.div
+              animate={{ rotate: 360 }}
+              transition={{ duration: 3, repeat: Infinity, ease: 'linear' }}
+              className="inline-flex items-center justify-center w-16 h-16 sm:w-24 sm:h-24 bg-gradient-to-br from-slate-700/50 to-slate-600/50 rounded-2xl sm:rounded-3xl backdrop-blur-xl border border-slate-500/30"
+            >
+              <Lock size={32} className="sm:block hidden text-slate-300" />
+              <Lock size={24} className="sm:hidden block text-slate-300" />
+            </motion.div>
+            <div className="space-y-2">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-black text-white leading-tight">Fitur Terkunci</h2>
+              <p className="text-sm sm:text-base md:text-lg text-slate-300 font-bold leading-snug">Fitur ini akan segera tersedia</p>
+            </div>
+            <div className="flex items-center justify-center gap-2 text-xs sm:text-sm text-slate-400 flex-wrap">
+              <motion.span
+                animate={{ opacity: [0.5, 1] }}
+                transition={{ duration: 1, repeat: Infinity }}
+              >
+                ⏳
+              </motion.span>
+              <span>Kami sedang mempersiapkan fitur terbaik untuk Anda</span>
+            </div>
+          </motion.div>
+        </motion.div>
+      )}
+
       <Section>
-        <div className="max-w-7xl mx-auto relative z-10 px-4">
+        <div className={`max-w-7xl mx-auto relative z-10 px-4 ${IS_ONGKIR_DISABLED ? 'pointer-events-none opacity-50' : ''}`}>
           
           {/* --- HEADER SECTION --- */}
           <div className="text-center mb-12 space-y-4">
